@@ -1,0 +1,10 @@
+function of handler "" and ''
+
+ex:
+minishell:> echo 'bcd $HOME'
+minishell:> bcd $HOME
+
+
+minishell:> echo "abc $HOME"
+minishell:> abc /home/user_name
+

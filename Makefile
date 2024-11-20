@@ -33,16 +33,22 @@ SRCS = $(main) $(s_builtin) #$(s_ctrl) $(s_his) $(s_pipe) $(s_quotes) $(s_rdrt)
 #objs
 OBJS = $(SRCS:.c=.o)
 
+#lib
+LIBS = ./libft/libft.a -L./libft -lft
+
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	gcc $(CFLAGS) -o $(NAME) $(OBJS)
+	@make -C libft/ --no-print-directory
+	gcc $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS)
+	@make clean --no-print-directory
 
 %.o: %.c
-	gcc $(CFLAGS) -c $< -o $@
+	@gcc $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -rf $(OBJS)
 
 fclean: clean
+	@make fclean -C libft/ --no-print-directory
 	rm -rf $(NAME)

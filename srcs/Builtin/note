@@ -1,0 +1,19 @@
+function of handler builtin function
+
+echo with -n
+-n = with out next line
+
+cd
+pwd
+
+export
+-set environment variables
+
+unset
+-unset environment variables
+
+env
+-list all environment variables
+
+exit
+-exit minishell

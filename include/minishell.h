@@ -1,9 +1,11 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include "../libft/libft.h"
+# include "../libft/ft_printf.h"
 # include <stdio.h>
 # include <unistd.h>
 
-int ft_strlen(char *s);
+void    hello(void);
 
 #endif

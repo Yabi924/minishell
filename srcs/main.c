@@ -5,7 +5,7 @@ int main(int argc, char **argv, char **env)
     (void)argc;
     (void)argv;
     (void)env;
-    printf("minishell>:");
-    
+    ft_printf("minishell>:");
+
     return 0;
 }
