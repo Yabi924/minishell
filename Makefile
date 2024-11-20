@@ -26,9 +26,9 @@ s_quotes = $(PATH_Quotes)
 
 s_rdrt = $(PATH_Redirection)
 
-test = ./srcs/test/test.c
+main= ./srcs/main.c
 
-SRCS = $(test) #$(s_builtin) $(s_ctrl) $(s_his) $(s_pipe) $(s_quotes) $(s_rdrt) 
+SRCS = $(main) $(s_builtin) #$(s_ctrl) $(s_his) $(s_pipe) $(s_quotes) $(s_rdrt) 
 
 #objs
 OBJS = $(SRCS:.c=.o)
