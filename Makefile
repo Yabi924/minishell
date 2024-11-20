@@ -14,7 +14,7 @@ PATH_Quotes = $(PATH_SRCS)Quotes_handling/
 PATH_Redirection = $(PATH_SRCS)Redirection/
 
 #src
-s_builtin = $(PATH_BUILTIN)strlen.c
+s_builtin = $(PATH_BUILTIN)
 
 s_ctrl = $(PATH_CTRL)
 
@@ -28,7 +28,7 @@ s_rdrt = $(PATH_Redirection)
 
 main= ./srcs/main.c
 
-SRCS = $(main) $(s_builtin) #$(s_ctrl) $(s_his) $(s_pipe) $(s_quotes) $(s_rdrt) 
+SRCS = $(main) #$(s_builtin) $(s_ctrl) $(s_his) $(s_pipe) $(s_quotes) $(s_rdrt) 
 
 #objs
 OBJS = $(SRCS:.c=.o)
@@ -40,15 +40,19 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@make -C libft/ --no-print-directory
-	gcc $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS)
+	@gcc $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS)
+	@echo Hi $(NAME)
 	@make clean --no-print-directory
+	@make clean -C libft/ --no-print-directory
 
 %.o: %.c
 	@gcc $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -rf $(OBJS)
+	@rm -rf $(OBJS)
+	@echo clean *.obj
 
 fclean: clean
 	@make fclean -C libft/ --no-print-directory
-	rm -rf $(NAME)
+	@rm -rf $(NAME)
+	@echo clean $(NAME)

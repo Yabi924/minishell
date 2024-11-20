@@ -6,7 +6,7 @@
 #    By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/08 02:58:16 by yyan-bin          #+#    #+#              #
-#    Updated: 2024/11/20 15:30:43 by yyan-bin         ###   ########.fr        #
+#    Updated: 2024/11/20 16:01:59 by yyan-bin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,10 +33,11 @@ OBJ_BONUS = $(BONUS:.c=.o)
 all: $(NAME)
 
 bonus: $(BONUS) $(OBJ_BONUS)
-	ar rcs $(NAME) $(OBJ_BONUS)
+	@ar rcs $(NAME) $(OBJ_BONUS)
 
 $(NAME): $(OBJ)
 	@ar rcs $(NAME) $(OBJ)
+	@echo Hi $(NAME)
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
@@ -46,5 +47,6 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
+	@echo clean $(NAME)
 
 re: fclean all
