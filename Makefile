@@ -1,17 +1,21 @@
+#flags
 CFLAGS = -Wall -Wextra -Werror
 
 #program name
 NAME = minishell
 
-#path
+#src path
 PATH_SRCS = ./srcs/
 
+#function path
 PATH_BUILTIN = $(PATH_SRCS)Builtin/
 PATH_CTRL = $(PATH_SRCS)CTRL/
 PATH_History = $(PATH_SRCS)History/
 PATH_Pipe = $(PATH_SRCS)Pipe/
 PATH_Quotes = $(PATH_SRCS)Quotes_handling/
 PATH_Redirection = $(PATH_SRCS)Redirection/
+PATH_utils = $(PATH_SRCS)utils/
+PATH_env = $(PATH_env)Env_Var/
 
 #src
 s_builtin = $(PATH_BUILTIN)
@@ -26,15 +30,19 @@ s_quotes = $(PATH_Quotes)
 
 s_rdrt = $(PATH_Redirection)
 
+s_env = $(PATH_env)
+
+s_utils = $(PATH_utils)utils.c
+
 main= ./srcs/main.c
 
-SRCS = $(main) #$(s_builtin) $(s_ctrl) $(s_his) $(s_pipe) $(s_quotes) $(s_rdrt) 
+SRCS = $(main) $(s_utils) #$(s_builtin) $(s_ctrl) $(s_his) $(s_pipe) $(s_quotes) $(s_rdrt) $(s_env)
 
 #objs
 OBJS = $(SRCS:.c=.o)
 
 #lib
-LIBS = ./libft/libft.a -L./libft -lft
+LIBS = ./libft/libft.a -L./libft -lft -L/usr/include -lreadline
 
 all: $(NAME)
 
