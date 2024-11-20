@@ -5,3 +5,5 @@ exit minishell
 
 ctrl+C
 do nothing just next line
+*maybe use sigaction function to handler
+
