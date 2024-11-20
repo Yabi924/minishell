@@ -4,7 +4,11 @@ echo with -n
 -n = with out next line
 
 cd
+minishell:> cd & minishell:> cd ~/
+no need to handler
+
 pwd
+print directory
 
 export
 -set environment variables
