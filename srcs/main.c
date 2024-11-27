@@ -7,7 +7,7 @@ int main(int argc, char **argv, char **env)
     (void)env;
     char *input;
 
-    //sigaction(ctrl+C);
+    //sigaction(ctrl+C); 
     while (1)
     {
         input = readline("🐚 Shell:> ");
