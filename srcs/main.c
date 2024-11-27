@@ -10,7 +10,7 @@ int main(int argc, char **argv, char **env)
     //sigaction(ctrl+C);
     while (1)
     {
-        input = readline("minishell:> ");
+        input = readline("🐚 Shell:> ");
         if (!input)
         {
             ft_printf("exit\n");
