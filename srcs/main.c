@@ -7,17 +7,16 @@ int main(int argc, char **argv, char **env)
     (void)env;
     char *input;
 
-    //sigaction(ctrl+C);
     while (1)
     {
-        input = readline("🐚 Shell:> ");
+        input = readline("🐚 Shell> ");
         if (!input)
         {
             ft_printf("exit\n");
             break ;
         }
-        else if (*input)
-            add_history(input);
+        // else if (*input)
+        //     add_history(input);
         input_handler(input, env);
         free(input);
     }
