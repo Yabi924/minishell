@@ -27,3 +27,5 @@ void    ft_split_input(t_token *token, char *src_input)
         classification_type(&token);//to do
     }
 }
+
+hello
