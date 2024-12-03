@@ -9,7 +9,7 @@ int main(int argc, char **argv, char **env)
 
     while (1)
     {
-        input = readline("🐚 Shell> ");
+        input = readline("Shell> ");
         if (!input)
         {
             ft_printf("exit\n");

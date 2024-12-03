@@ -23,9 +23,7 @@ void    ft_split_input(t_token *token, char *src_input)
             i = ft_quotes(i, input);
         if (i == -1)
             error_message(&token);//to do
-        token->token = ft_substr(input, j, i++ - j);
-        classification_type(&token);//to do
+        token->string = ft_substr(input, j, i++ - j);
+        // classification_type(&token);//to do
     }
 }
-
-hello
