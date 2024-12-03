@@ -16,7 +16,7 @@
 //type 3 redirection
 typedef struct s_token
 {
-    char *token;
+    char *string;
     int type;
     struct s_token *next;
 }   t_token;
@@ -31,6 +31,7 @@ int    skip_unprint(int i, char *str);
 //return -1 if single quotes
 int     ft_quotes(int i, char *str);
 
+//copy input
 //skip space and unprint charater before command
 //skip after '#'
 //return NULL if empty pointer
