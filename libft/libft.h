@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 02:57:34 by yyan-bin          #+#    #+#             */
-/*   Updated: 2024/12/03 19:47:43 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2024/12/03 20:02:11 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <limits.h>
-
+ 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
@@ -88,7 +88,5 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 //get next line
 char	*get_next_line(int fd);
-
-//printf
 
 #endif
