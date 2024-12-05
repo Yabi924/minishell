@@ -42,7 +42,7 @@ SRCS = $(main) $(s_utils) #$(s_builtin) $(s_ctrl) $(s_his) $(s_pipe) $(s_quotes)
 OBJS = $(SRCS:.c=.o)
 
 #lib
-LIBS = ./libft/libft.a -L./libft -lft -L/usr/include -lreadline
+LIBS = -lreadline ./libft/libft.a -L./libft -lft
 
 all: $(NAME)
 
