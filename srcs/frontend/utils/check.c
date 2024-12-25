@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/03 20:02:32 by yyan-bin          #+#    #+#             */
-/*   Updated: 2024/12/25 19:50:33 by yyan-bin         ###   ########.fr       */
+/*   Created: 2024/12/25 19:27:01 by yyan-bin          #+#    #+#             */
+/*   Updated: 2024/12/25 19:51:17 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../../include/minishell.h"
 
-int main(int argc, char **argv, char **env)
-{
-    (void)argc;
-    (void)argv;
-    (void)env;
-    t_data minishell_data;
+// int check_quotes(char *s)
+// {
+//     int i;
 
-    while (1)
-    {
-        input_handle(&minishell_data);
-    }
-    return (0);
-}
+//     i = 0;
+//     while (s[i])
+//     {
+//         while (s[i] && s[i] != '"')
+//     }
+// }
