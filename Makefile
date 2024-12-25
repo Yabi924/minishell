@@ -37,9 +37,11 @@ s_env = $(PATH_env)
 s_token = $(PATH_token)
 
 s_utils = $(PATH_utils)utils.c \
-		$(PATH_utils)readline.c
+		$(PATH_utils)readline.c \
+		$(PATH_utils)check.c
 
-s_input_handle = $(PATH_fn)input_handle.c
+s_input_handle = $(PATH_fn)input_handle.c \
+		$(PATH_fn)lexer.c
 
 main= ./srcs/main.c
 
