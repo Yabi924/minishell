@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   readline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/03 20:02:32 by yyan-bin          #+#    #+#             */
-/*   Updated: 2024/12/25 19:50:33 by yyan-bin         ###   ########.fr       */
+/*   Created: 2024/12/25 19:00:27 by yyan-bin          #+#    #+#             */
+/*   Updated: 2024/12/25 19:54:23 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../../include/minishell.h"
 
-int main(int argc, char **argv, char **env)
+void    print_prompt(t_data *data)
 {
-    (void)argc;
-    (void)argv;
-    (void)env;
-    t_data minishell_data;
-
-    while (1)
+    char    *input;
+    input = readline("Minishell > ");
+    if (!input)
     {
-        input_handle(&minishell_data);
+        ft_putstr_fd("exit", 1);
+        exit(0);//will update to free before exit
     }
-    return (0);
+    if (input && input[0])
+        add_history(input);
+    data->input = ft_strdup(input);
+    free(input);
 }
