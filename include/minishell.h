@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:38 by yyan-bin          #+#    #+#             */
-/*   Updated: 2024/12/25 19:53:47 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2024/12/25 21:41:00 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void    print_prompt(t_data *data);
 int     lexer(char *input);
 
 int check_quotes(char *s);
+int check_pipe(char *s);
 
 //use: skip unprint charater and scape
 //return: index of last unprint charater or space + 1
