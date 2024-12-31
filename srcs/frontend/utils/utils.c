@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:57 by yyan-bin          #+#    #+#             */
-/*   Updated: 2024/12/25 19:54:07 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2024/12/27 03:39:34 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,28 @@ void    skip_unprint(t_data *data)
     free(data->input);
     data->input = ft_strdup(copy);
     free(copy);
+}
+
+char    *ft_strjoin_free(char *s1, char *s2)
+{
+    char    *new;
+
+    if (!s1 || !s2)
+        return NULL;
+    new = ft_strjoin(s1, s2);
+    free(s1);
+    return (new);
+}
+
+int is_target(char c, char *target)
+{
+    int i;
+
+    i = -1;
+    while (target[++i])
+    {
+        if (c == target[i])
+            return (1);
+    }
+    return (0);
 }
