@@ -1,3 +1,2 @@
-Minishell > a"\"a|"
-hi
-a"\"a|"a |"
+Minishell > a<>a
+a <> a

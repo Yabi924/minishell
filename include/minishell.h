@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:38 by yyan-bin          #+#    #+#             */
-/*   Updated: 2024/12/27 03:39:37 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/02 14:06:13 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,27 +40,25 @@ typedef struct s_data
     t_command *command;
 }   t_data;
 
+
 void    print_prompt(t_data *data);
 int     lexer(char *input);
 void    parser(t_data *data);
 
+//check.c
 int     check_quotes(char *s);
 int     check_pipe(char *s);
 int     check_redrct_pipe(char *s);
 
+//add_space.c
+void    add_space(t_data *data);
+
+//utils.c
 int     is_target(char c, char *target);
 char    *ft_strjoin_free(char *s1, char *s2);
 int     skip_quotes(char *s, int positoin, char target);
 
-
-//use: skip unprint charater and scape
-//return: index of last unprint charater or space + 1
-//return -1 if empty pointer
 int    unprint_index(int i, char *str);
-
-//copy input
-//skip space and unprint charater before command
-//return NULL if empty pointer
 void    skip_unprint(t_data *data);
 
 int input_handle(t_data *data);

@@ -39,7 +39,8 @@ s_token = $(PATH_token)
 s_utils = $(PATH_utils)utils.c \
 		$(PATH_utils)readline.c \
 		$(PATH_utils)check.c \
-		$(PATH_utils)check_pipe.c
+		$(PATH_utils)check_pipe.c \
+		$(PATH_utils)add_space.c
 
 s_input_handle = $(PATH_fn)input_handle.c \
 		$(PATH_fn)lexer.c \
