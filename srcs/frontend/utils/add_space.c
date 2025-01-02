@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 14:04:18 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/02 14:04:45 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/02 21:49:24 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,25 @@ static int count_len(char *s, int p)
         if (s[p + i] && \
             (s[p + i] == '|' || s[p + i] == '<' || s[p + i] == '>'))
         {
-            if (s[p + i] && s[p + i - 1] != ' ')
+            if (s[p + i] && (s[p + i - 1] != ' ' && s[p + i - 1] != '<' \
+                && s[p + i - 1] != '>'))
                 count++;
-            if (s[p + i] && s[p + i + 1] != ' ')
+            if (s[p + i] && (s[p + i + 1] != ' ' && s[p + i + 1] != '<') \
+                && s[p + i + 1] != '>')
                 count++;
         }
         i++;
     }
     return (i + count);
+}
+
+void copy_wold_help(char *s, char *temp, int p, int *j)
+{
+    if (s[p - 1] && s[p - 1] != ' ' && !is_target(s[p - 1], "<>"))
+        temp[(*j)++] = ' ';
+    temp[(*j)++] = s[p];
+    if (s[p + 1] && s[p + 1] != ' ' && !is_target(s[p + 1], "<>"))
+        temp[(*j)++] = ' ';
 }
 
 int copy_wold(t_data *data, int p)
@@ -70,12 +81,11 @@ int copy_wold(t_data *data, int p)
     j = 0;
     while (data->input[p + i] && !is_target(data->input[p + i], "'\""))
     {
-        if (data->input[p + i - 1] != ' ' && is_target(data->input[p + i], "<>|"))
-            temp[j++] = ' ';
-        else if (data->input[p + i - 1] && data->input[p + i] && \
-            data->input[p + i] != ' ' && is_target(data->input[p + i - 1], "<>|"))
-            temp[j++] = ' ';
-        temp[j++] = data->input[p + i++];
+        if (is_target(data->input[p + i], "<>|"))
+            copy_wold_help(data->input, temp, p + i++, &j);
+        else
+            temp[j++] = data->input[p + i++];
+            
     }
     data->new_input = ft_strjoin_free(data->new_input, temp);
     free(temp);
