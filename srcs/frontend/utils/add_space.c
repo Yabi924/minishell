@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 14:04:18 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/02 21:49:24 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/07 16:31:12 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int copy_quotes(t_data *data, int position, char target)
     free(temp);
     return (len);
 }
- 
+
 static int count_len(char *s, int p)
 {
     int i;
@@ -59,7 +59,7 @@ static int count_len(char *s, int p)
     return (i + count);
 }
 
-void copy_wold_help(char *s, char *temp, int p, int *j)
+static void copy_wold_help(char *s, char *temp, int p, int *j)
 {
     if (s[p - 1] && s[p - 1] != ' ' && !is_target(s[p - 1], "<>"))
         temp[(*j)++] = ' ';
@@ -107,3 +107,4 @@ void    add_space(t_data *data)
         // printf("sp: %s$\n", data->new_input);
     }
 }
+
