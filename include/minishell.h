@@ -13,11 +13,21 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "../libft/libft.h"
-# include "../libft/ft_printf.h"
+# include <stdio.h>
+# include <unistd.h>
+# include <stddef.h>
+# include <stdlib.h>
+# include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/types.h>
+# include <dirent.h>
+# include <fcntl.h>
+# include <errno.h>
+# include <string.h>
 # include <signal.h>
+# include "../libft/libft.h"
+# include "../libft/ft_printf.h"
 
 # define SPACE_MINI ' '
 # define TAB_MINI '\t'
@@ -50,24 +60,6 @@ int     ft_quotes(int i, char *str);
 char    *copy_input(char *input);
 
 void    input_handler(const char *input, char **env);
-
-
-/*
-    Coder: Idriss
-    Start date: 5/12/2024
-    *****This is my part, do not touch anything!*****
-*/
-
-//Structure for storing cmd history
-typedef struct CommandHistory {
-    char *cmd;
-    struct CommandHistory *next;
-} CommandHistory;
-
-//Define a structure for history management
-typedef struct history {
-    CommandHistory *head;
-} history;
 
 
 
