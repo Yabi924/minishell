@@ -61,6 +61,4 @@ char    *copy_input(char *input);
 
 void    input_handler(const char *input, char **env);
 
-
-
 #endif
