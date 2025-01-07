@@ -34,7 +34,7 @@ s_rdrt = $(PATH_Redirection)
 
 s_env = $(PATH_env)
 
-s_token = $(PATH_token)tokenization.C
+s_token = $(PATH_token)tokenization.c
 
 s_utils = $(PATH_utils)utils.c \
 		$(PATH_utils)readline.c \

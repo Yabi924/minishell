@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:38 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/07 18:54:28 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/07 19:57:19 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int     is_target(char c, char *target);
 char    *ft_strjoin_free(char *s1, char *s2);
 int     skip_quotes(char *s, int positoin, char target);
 
-int    unprint_index(int i, char *str);
+int     unprint_index(int i, char *str);
 void    skip_unprint(t_data *data);
 
 int input_handle(t_data *data);
