@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   tokenization.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/03 20:02:32 by yyan-bin          #+#    #+#             */
-/*   Updated: 2024/12/25 19:50:33 by yyan-bin         ###   ########.fr       */
+/*   Created: 2025/01/02 13:51:20 by yyan-bin          #+#    #+#             */
+/*   Updated: 2025/01/02 13:52:18 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../../include/minishell.h"
 
-int main(int argc, char **argv, char **env)
+void    tokenization(t_data *data)
 {
-    (void)argc;
-    (void)argv;
-    (void)env;
-    t_data minishell_data;
-
-    while (1)
-    {
-        input_handle(&minishell_data);
-    }
-    return (0);
+    
 }

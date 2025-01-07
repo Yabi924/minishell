@@ -6,6 +6,7 @@ NAME = minishell
 
 #src path
 PATH_SRCS = ./srcs/
+PATH_fn = $(PATH_SRCS)frontend/
 
 #function path
 PATH_BUILTIN = $(PATH_SRCS)Builtin/
@@ -14,8 +15,9 @@ PATH_History = $(PATH_SRCS)History/
 PATH_Pipe = $(PATH_SRCS)Pipe/
 PATH_Quotes = $(PATH_SRCS)Quotes_handling/
 PATH_Redirection = $(PATH_SRCS)Redirection/
-PATH_utils = $(PATH_SRCS)utils/
-PATH_env = $(PATH_env)Env_Var/
+PATH_env = $(PATH_fn)Env_Var/
+PATH_token = $(PATH_fn)token/
+PATH_utils = $(PATH_fn)utils/
 
 #src
 s_builtin = $(PATH_BUILTIN)
@@ -32,17 +34,27 @@ s_rdrt = $(PATH_Redirection)
 
 s_env = $(PATH_env)
 
-s_utils = $(PATH_utils)utils.c
+s_token = $(PATH_token)
+
+s_utils = $(PATH_utils)utils.c \
+		$(PATH_utils)readline.c \
+		$(PATH_utils)check.c \
+		$(PATH_utils)check_pipe.c \
+		$(PATH_utils)add_space.c
+
+s_input_handle = $(PATH_fn)input_handle.c \
+		$(PATH_fn)lexer.c \
+		$(PATH_fn)parser.c
 
 main= ./srcs/main.c
 
-SRCS = $(main) $(s_utils) #$(s_builtin) $(s_ctrl) $(s_his) $(s_pipe) $(s_quotes) $(s_rdrt) $(s_env)
+SRCS = $(main) $(s_utils) $(s_input_handle) #$(s_builtin) $(s_ctrl) $(s_his) $(s_pipe) $(s_quotes) $(s_rdrt) $(s_env)
 
 #objs
 OBJS = $(SRCS:.c=.o)
 
 #lib
-LIBS = ./libft/libft.a -L./libft -lft -L/usr/include -lreadline
+LIBS = -lreadline ./libft/libft.a -L./libft -lft
 
 all: $(NAME)
 

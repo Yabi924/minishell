@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/03 20:02:32 by yyan-bin          #+#    #+#             */
-/*   Updated: 2024/12/25 19:50:33 by yyan-bin         ###   ########.fr       */
+/*   Created: 2024/12/25 18:53:57 by yyan-bin          #+#    #+#             */
+/*   Updated: 2024/12/26 19:14:30 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
-int main(int argc, char **argv, char **env)
+int lexer(char *input)
 {
-    (void)argc;
-    (void)argv;
-    (void)env;
-    t_data minishell_data;
-
-    while (1)
+    if (check_quotes(input))
     {
-        input_handle(&minishell_data);
+        ft_printf("quotes\n");
+        return (1);
+    }
+    if (check_pipe(input))
+    {
+        ft_printf("pipe\n");
+        return (1);
     }
     return (0);
 }

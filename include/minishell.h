@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:38 by yyan-bin          #+#    #+#             */
-/*   Updated: 2024/12/03 20:02:39 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/02 14:06:13 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,32 +33,44 @@
 # define TAB_MINI '\t'
 # define NEW_LINE_MINI '\n'
 
-//type 1 command
-//type 2 pipe
-//type 3 redirection
-typedef struct s_token
+typedef struct s_command
 {
-    char *string;
-    int type;
-    struct s_token *next;
-}   t_token;
+    char **command;
+    int fd[2];
+    int input;
+    int output;
+    struct s_command *next;
+}   t_command;
 
-//use: skip unprint charater and scape
-//return: index of last unprint charater or space + 1
-//return -1 if empty pointer
-int    skip_unprint(int i, char *str);
+typedef struct s_data
+{
+    char    **command_arr;
+    char    *input;
+    char    *new_input;
+    t_command *command;
+}   t_data;
 
-//use: fine next quotes index
-//return: index after double quotes
-//return -1 if single quotes
-int     ft_quotes(int i, char *str);
 
-//copy input
-//skip space and unprint charater before command
-//skip after '#'
-//return NULL if empty pointer
-char    *copy_input(char *input);
+void    print_prompt(t_data *data);
+int     lexer(char *input);
+void    parser(t_data *data);
 
-void    input_handler(const char *input, char **env);
+//check.c
+int     check_quotes(char *s);
+int     check_pipe(char *s);
+int     check_redrct_pipe(char *s);
+
+//add_space.c
+void    add_space(t_data *data);
+
+//utils.c
+int     is_target(char c, char *target);
+char    *ft_strjoin_free(char *s1, char *s2);
+int     skip_quotes(char *s, int positoin, char target);
+
+int    unprint_index(int i, char *str);
+void    skip_unprint(t_data *data);
+
+int input_handle(t_data *data);
 
 #endif

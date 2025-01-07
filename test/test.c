@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include "../include/minishell.h"
 
 
 //test readline function
@@ -29,18 +30,18 @@
 //     return 0;
 // }
 
-int main()
-{
-    char *s1 = "12345#12345";
+// int main()
+// {
+//     char *s1 = "12345#12345";
 
-    int i = skip_unprint(0, s1);
-    int j = 0;
-    while (s1[i + j])
-    {
-        if (s1[i + j] == '#')
-            break ;
-        j++;
-    }
-    printf("%s\n", ft_substr(s1, i, i + j));
-    return 0;
-}
+//     int i = skip_unprint(0, s1);
+//     int j = 0;
+//     while (s1[i + j])
+//     {
+//         if (s1[i + j] == '#')
+//             break ;
+//         j++;
+//     }
+//     printf("%s\n", ft_substr(s1, i, i + j));
+//     return 0;
+// }

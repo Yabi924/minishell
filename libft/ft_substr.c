@@ -6,13 +6,13 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 14:42:05 by yyan-bin          #+#    #+#             */
-/*   Updated: 2024/06/23 20:28:15 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2024/12/26 23:01:01 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	count(const char *s, unsigned int start, size_t len)
+static int	count(const char *s, unsigned int start, size_t len)
 {
 	int	actual_len;
 
