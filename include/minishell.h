@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:38 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/02 14:06:13 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/07 16:33:53 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,13 @@ typedef struct s_data
     t_command *command;
 }   t_data;
 
-
+//readline.c
 void    print_prompt(t_data *data);
+
+//lexer.c
 int     lexer(char *input);
+
+//parser.c
 void    parser(t_data *data);
 
 //check.c
