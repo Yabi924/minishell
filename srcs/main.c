@@ -12,6 +12,8 @@
 
 #include "../include/minishell.h"
 
+int get_signal_code = 0;
+
 int main(int argc, char **argv, char **env)
 {
     (void)argc;

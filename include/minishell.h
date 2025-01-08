@@ -56,6 +56,13 @@ typedef struct s_data
     t_command *command;
 }   t_data;
 
+typedef struct s_minishell
+{
+    char    *input;
+    int     cmd_exit_no;
+}   t_minishell;
+
+
 //readline.c
 void    print_prompt(t_data *data);
 
@@ -108,6 +115,5 @@ void    signal_quit(int signal_no);
 void    signal_int_child(int signal_no);
 void    signal_quit_child(int signal_no);
 void    heredoc(int signo);
-
 
 #endif
