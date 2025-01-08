@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:38 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/08 21:41:26 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/08 22:18:50 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_data
     char    **command_arr;
     char    *input;
     char    *new_input;
-    // t_list  *list;
+    t_list  *list;
 }   t_data;
 
 //readline.c
@@ -54,7 +54,7 @@ void    print_prompt(t_data *data);
 int     lexer(char *input);
 
 //parser.c
-void    parser(t_data *data, t_list **list);
+void    parser(t_data *data);
 
 //tokenization.c
 void    tokenization(t_data *data, t_list **list);
@@ -76,7 +76,12 @@ char    *ft_strjoin_free(char *s1, char *s2);
 int     skip_quotes(char *s, int positoin, char target);
 int     unprint_index(int i, char *str);
 void    skip_unprint(t_data *data);
-int     input_handle(t_data *data, t_list **list);
+int     input_handle(t_data *data);
+
+//test
+void    print_arr(char **s);
+void    pll(t_list *list);
+
 
 //get_stat.c and signal.c:
 /*

@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 13:51:20 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/08 21:39:21 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/08 22:27:18 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,6 @@ int ft_arrlen(char **arr)
     return (i);
 }
 
-void    print_arr(char **s)
-{
-    int i = -1;
-    while (s[++i])
-        printf("i:%d str:%s\n", i, s[i]);
-}
-
 void    tokenization(t_data *data, t_list **list)
 {
     int i;
@@ -38,11 +31,10 @@ void    tokenization(t_data *data, t_list **list)
     i = -1;
     j = -1;
     data->command_arr = split(data->new_input);
-    print_arr(data->command_arr);
+    // print_arr(data->command_arr);
     temp = malloc((ft_arrlen(data->command_arr) + 1) * sizeof(char *));
     while (data->command_arr[++i])
     {
-        printf("tknzn i:%d str:%s\n", i, data->command_arr[i]);
         if (!ft_strncmp(data->command_arr[i], "|\0", 2))
         {
             temp[++j] = NULL;
