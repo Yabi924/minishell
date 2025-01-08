@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:38 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/07 19:57:19 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/08 22:18:50 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,21 +39,12 @@
 //External variable to get the signal
 extern int  get_signal_code;
 
-typedef struct s_command
-{
-    char **command;
-    int fd[2];
-    int input;
-    int output;
-    struct s_command *next;
-}   t_command;
-
 typedef struct s_data
 {
     char    **command_arr;
     char    *input;
     char    *new_input;
-    t_command *command;
+    t_list  *list;
 }   t_data;
 
 //readline.c
@@ -66,6 +57,9 @@ int     lexer(char *input);
 void    parser(t_data *data);
 
 //tokenization.c
+void    tokenization(t_data *data, t_list **list);
+
+//split.c
 char    **split(char *s);
 
 //check.c
@@ -83,6 +77,11 @@ int     skip_quotes(char *s, int positoin, char target);
 int     unprint_index(int i, char *str);
 void    skip_unprint(t_data *data);
 int     input_handle(t_data *data);
+
+//test
+void    print_arr(char **s);
+void    pll(t_list *list);
+
 
 //get_stat.c and signal.c:
 /*
