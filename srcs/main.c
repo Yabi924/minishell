@@ -18,16 +18,17 @@ int main(int argc, char **argv, char **env)
 {
     (void)argc;
     (void)argv;
-    (void)env;
+    // (void)env;
     t_data minishell_data;
     minishell_data.list = NULL;
 
     while (1)
     {
-        input_handle(&minishell_data);
+        input_handle(&minishell_data, env);
     }
     return (0);
 }
+
 
 void    print_arr(char **s)
 {

@@ -7,6 +7,7 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:38 by yyan-bin          #+#    #+#             */
 /*   Updated: 2025/01/08 22:18:50 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/08 22:18:50 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +62,6 @@ typedef struct s_data
     t_list  *list;
 }   t_data;
 
-typedef struct s_minishell
-{
-    char    *input;
-    int     cmd_exit_no;
-}   t_minishell;
-
-
 //readline.c
 void    print_prompt(t_data *data);
 
@@ -78,6 +72,9 @@ int     lexer(char *input);
 void    parser(t_data *data);
 
 //tokenization.c
+void    tokenization(t_data *data, t_list **list);
+
+//split.c
 void    tokenization(t_data *data, t_list **list);
 
 //split.c
@@ -97,12 +94,16 @@ char    *ft_strjoin_free(char *s1, char *s2);
 int     skip_quotes(char *s, int positoin, char target);
 int     unprint_index(int i, char *str);
 void    skip_unprint(t_data *data);
-int     input_handle(t_data *data);
+int     input_handle(t_data *data, char **env);
 
 //test
 void    print_arr(char **s);
 void    pll(t_list *list);
 
+//Initialization
+void    init(t_data *data, char **env);
+char    *env_val(const char *key, char **env);
+void    update_env(const char *key, const char *value);
 
 //get_stat.c and signal.c:
 /*
