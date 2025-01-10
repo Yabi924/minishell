@@ -6,7 +6,7 @@
 #    By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/08 02:58:16 by yyan-bin          #+#    #+#              #
-#    Updated: 2025/01/08 20:57:10 by yyan-bin         ###   ########.fr        #
+#    Updated: 2025/01/11 00:33:26 by yyan-bin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRC = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 
 OBJ = $(SRC:.c=.o)
 
-BONUS = ft_lstnew.c ft_lstsize.c ft_lstadd_back.c 
+BONUS = ft_lstnew.c ft_lstsize.c ft_lstadd_back.c ft_lstdelone.c
 
 OBJ_BONUS = $(BONUS:.c=.o)
 
