@@ -12,6 +12,15 @@
 
 #include "../../include/minishell.h"
 
+void    parser(t_data *data)
+{
+    add_space(data);
+    // ft_printf("%s\n", data->new_input);
+    tokenization(data, &data->list);
+    // pll(data->list);
+}
+
+/*
 void    print_arr(char **s)
 {
     int i = -1;
@@ -27,3 +36,4 @@ void    parser(t_data *data)
     print_arr(data->command_arr);
     // tokenization(data);
 }
+*/
