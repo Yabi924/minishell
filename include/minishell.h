@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:38 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/10 20:28:32 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/10 20:37:48 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,15 +80,6 @@ int     unprint_index(int i, char *str);
 void    skip_unprint(t_data *data);
 // int     input_handle(t_data *data, char **env);
 int     input_handle(t_data *data);
-
-//test
-void    print_arr(char **s);
-void    pll(t_list *list);
-
-//Initialization
-void    init(t_data *data, char **env);
-char    *env_val(const char *key, char **env);
-void    update_env(const char *key, const char *value);
 
 //test
 void    print_arr(char **s);
