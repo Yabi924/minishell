@@ -6,10 +6,10 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:38 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/08 22:18:50 by yyan-bin         ###   ########.fr       */
-/*   Updated: 2025/01/08 22:18:50 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/10 20:28:32 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -40,25 +40,12 @@
 //External variable to get the signal
 extern int  get_signal_code;
 
-typedef struct s_command
-{
-    char **command;
-    int fd[2];
-    int input;
-    int output;
-    struct s_command *next;
-}   t_command;
-# define TRUE 1
-# define FALSE 0
-
-//External variable to get the signal
-extern int  get_signal_code;
-
 typedef struct s_data
 {
     char    **command_arr;
     char    *input;
     char    *new_input;
+    int     cmd_exit_no;
     t_list  *list;
 }   t_data;
 
@@ -91,7 +78,8 @@ char    *ft_strjoin_free(char *s1, char *s2);
 int     skip_quotes(char *s, int positoin, char target);
 int     unprint_index(int i, char *str);
 void    skip_unprint(t_data *data);
-int     input_handle(t_data *data, char **env);
+// int     input_handle(t_data *data, char **env);
+int     input_handle(t_data *data);
 
 //test
 void    print_arr(char **s);
@@ -101,7 +89,6 @@ void    pll(t_list *list);
 void    init(t_data *data, char **env);
 char    *env_val(const char *key, char **env);
 void    update_env(const char *key, const char *value);
-int     input_handle(t_data *data, char **env);
 
 //test
 void    print_arr(char **s);
