@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:38 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/10 20:37:48 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/10 23:38:12 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,13 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <stdio.h>
-# include <unistd.h>
 # include <stddef.h>
-# include <stdlib.h>
-# include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/types.h>
 # include <dirent.h>
 # include <fcntl.h>
 # include <errno.h>
-# include <string.h>
 # include <signal.h>
 # include "../libft/libft.h"
 # include "../libft/ft_printf.h"
@@ -43,6 +38,7 @@ extern int  get_signal_code;
 typedef struct s_data
 {
     char    **command_arr;
+    char    **env;
     char    *input;
     char    *new_input;
     int     cmd_exit_no;
@@ -78,6 +74,8 @@ char    *ft_strjoin_free(char *s1, char *s2);
 int     skip_quotes(char *s, int positoin, char target);
 int     unprint_index(int i, char *str);
 void    skip_unprint(t_data *data);
+int     ft_arrlen(char **arr);
+
 // int     input_handle(t_data *data, char **env);
 int     input_handle(t_data *data);
 
