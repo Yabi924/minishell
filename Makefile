@@ -38,7 +38,8 @@ s_rdrt = $(PATH_Redirection)
 
 s_env = $(PATH_env)
 
-s_token = $(PATH_token)tokenization.c
+s_token = $(PATH_token)tokenization.c \
+		$(PATH_token)split.c
 
 s_utils = $(PATH_utils)utils.c \
 		$(PATH_utils)readline.c \
@@ -64,6 +65,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@make -C libft/ --no-print-directory
+	@make bonus -C libft/ --no-print-directory
 	@gcc $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS)
 	@echo Hi $(NAME)
 	@make clean --no-print-directory
@@ -80,3 +82,5 @@ fclean: clean
 	@make fclean -C libft/ --no-print-directory
 	@rm -rf $(NAME)
 	@echo clean $(NAME)
+
+re: fclean all
