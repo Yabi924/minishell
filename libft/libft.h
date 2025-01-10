@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 02:57:34 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/08 20:57:42 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/10 20:31:28 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	ft_putnbr_fd(int n, int fd);
 
 //bonus
 //linked list
-t_list	*ft_lstnew(char **content);
+t_list	*ft_lstnew(char **command);
 int		ft_lstsize(t_list *lst);
 t_list	*ft_lstlast(t_list *lst);
 void	ft_lstadd_back(t_list **lst, t_list *new);

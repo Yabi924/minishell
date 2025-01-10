@@ -6,10 +6,10 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 13:51:20 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/08 22:27:18 by yyan-bin         ###   ########.fr       */
-/*   Updated: 2025/01/08 22:27:18 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/10 20:32:11 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../../include/minishell.h"
 
@@ -27,8 +27,7 @@ void    tokenization(t_data *data, t_list **list)
 {
     int i;
     int j;
-    int pp;
-    char    *temp;
+    char    **temp;
 
     i = -1;
     j = -1;
