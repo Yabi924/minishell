@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:44 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/10 20:27:05 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/10 23:42:45 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int input_handle(t_data *data)
     {
         //init(data, env);
         parser(data);
-        
     }
     //free linked list
     return (0);

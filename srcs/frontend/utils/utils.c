@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:57 by yyan-bin          #+#    #+#             */
-/*   Updated: 2024/12/27 03:39:34 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/10 23:42:22 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,14 @@ int is_target(char c, char *target)
             return (1);
     }
     return (0);
+}
+
+int ft_arrlen(char **arr)
+{
+    int i;
+
+    i = 0;
+    while (arr[i])
+        i++;
+    return (i);
 }

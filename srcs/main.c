@@ -6,27 +6,49 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:32 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/10 20:27:15 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/10 23:43:43 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
+char    **copy_env(char **env)
+{
+    int     i;
+    char    **new_env;
+
+    i = -1;
+    new_env = (char **)malloc((ft_arrlen(env) + 1) * sizeof(char *));    
+    if (!new_env)
+        return NULL;
+    while (env[++i])
+        new_env[i] = ft_strdup(env[i]);
+    new_env[i] = NULL;
+    return (new_env);
+}
+
+void    initminishell(t_data *data, char **env)
+{
+    data->env = copy_env(env);
+    // if (!data->env)
+        //error malloc
+    data->cmd_exit_no = 0;
+    data->list = NULL;
+}
+
 int main(int argc, char **argv, char **env)
 {
     (void)argc;
     (void)argv;
-    (void)env;
     t_data minishell_data;
-    minishell_data.list = NULL;
 
+    initminishell(&minishell_data, env);
     while (1)
     {
         input_handle(&minishell_data);
     }
     return (0);
 }
-
 
 void    print_arr(char **s)
 {
