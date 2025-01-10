@@ -7,6 +7,7 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 13:51:20 by yyan-bin          #+#    #+#             */
 /*   Updated: 2025/01/08 22:27:18 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/08 22:27:18 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +27,8 @@ void    tokenization(t_data *data, t_list **list)
 {
     int i;
     int j;
-    char    **temp;
+    int pp;
+    char    *temp;
 
     i = -1;
     j = -1;

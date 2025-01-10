@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
 
-int input_handle(t_data *data)
+int input_handle(t_data *data, char **env)
 {
     print_prompt(data);
     skip_unprint(data);
@@ -26,7 +26,7 @@ int input_handle(t_data *data)
     }
     else
     {
-        // ft_printf("hi\n");
+        //init(data, env);
         parser(data);
         
     }

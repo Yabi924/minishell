@@ -7,6 +7,7 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:38 by yyan-bin          #+#    #+#             */
 /*   Updated: 2025/01/08 22:18:50 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/08 22:18:50 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +34,20 @@
 # define SPACE_MINI ' '
 # define TAB_MINI '\t'
 # define NEW_LINE_MINI '\n'
+# define TRUE 1
+# define FALSE 0
+
+//External variable to get the signal
+extern int  get_signal_code;
+
+typedef struct s_command
+{
+    char **command;
+    int fd[2];
+    int input;
+    int output;
+    struct s_command *next;
+}   t_command;
 # define TRUE 1
 # define FALSE 0
 
@@ -76,12 +91,26 @@ char    *ft_strjoin_free(char *s1, char *s2);
 int     skip_quotes(char *s, int positoin, char target);
 int     unprint_index(int i, char *str);
 void    skip_unprint(t_data *data);
-int     input_handle(t_data *data);
+int     input_handle(t_data *data, char **env);
 
 //test
 void    print_arr(char **s);
 void    pll(t_list *list);
 
+//Initialization
+void    init(t_data *data, char **env);
+char    *env_val(const char *key, char **env);
+void    update_env(const char *key, const char *value);
+int     input_handle(t_data *data, char **env);
+
+//test
+void    print_arr(char **s);
+void    pll(t_list *list);
+
+//Initialization
+void    init(t_data *data, char **env);
+char    *env_val(const char *key, char **env);
+void    update_env(const char *key, const char *value);
 
 //get_stat.c and signal.c:
 /*
