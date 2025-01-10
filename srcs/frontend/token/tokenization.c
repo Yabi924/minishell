@@ -14,32 +14,22 @@
 #include "../../../include/minishell.h"
 
 int ft_arrlen(char **arr)
-int ft_arrlen(char **arr)
 {
     int i;
 
     i = 0;
     while (arr[i])
-    while (arr[i])
         i++;
-    return (i);
     return (i);
 }
 
 void    tokenization(t_data *data, t_list **list)
-void    tokenization(t_data *data, t_list **list)
 {
     int i;
     int j;
-    char    **temp;
-    char    **temp;
+    int pp;
+    char    *temp;
 
-    i = -1;
-    j = -1;
-    data->command_arr = split(data->new_input);
-    // print_arr(data->command_arr);
-    temp = malloc((ft_arrlen(data->command_arr) + 1) * sizeof(char *));
-    while (data->command_arr[++i])
     i = -1;
     j = -1;
     data->command_arr = split(data->new_input);
@@ -47,15 +37,6 @@ void    tokenization(t_data *data, t_list **list)
     temp = malloc((ft_arrlen(data->command_arr) + 1) * sizeof(char *));
     while (data->command_arr[++i])
     {
-        if (!ft_strncmp(data->command_arr[i], "|\0", 2))
-        {
-            temp[++j] = NULL;
-            ft_lstadd_back(list, ft_lstnew(temp));
-            temp = malloc((ft_arrlen(data->command_arr) + 1) * sizeof(char *));
-            j = -1;
-        }
-        else
-            temp[++j] = ft_strdup(data->command_arr[i]);
         if (!ft_strncmp(data->command_arr[i], "|\0", 2))
         {
             temp[++j] = NULL;

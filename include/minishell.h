@@ -75,9 +75,6 @@ void    parser(t_data *data);
 void    tokenization(t_data *data, t_list **list);
 
 //split.c
-void    tokenization(t_data *data, t_list **list);
-
-//split.c
 char    **split(char *s);
 
 //check.c
@@ -94,6 +91,16 @@ char    *ft_strjoin_free(char *s1, char *s2);
 int     skip_quotes(char *s, int positoin, char target);
 int     unprint_index(int i, char *str);
 void    skip_unprint(t_data *data);
+int     input_handle(t_data *data, char **env);
+
+//test
+void    print_arr(char **s);
+void    pll(t_list *list);
+
+//Initialization
+void    init(t_data *data, char **env);
+char    *env_val(const char *key, char **env);
+void    update_env(const char *key, const char *value);
 int     input_handle(t_data *data, char **env);
 
 //test
