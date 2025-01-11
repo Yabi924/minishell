@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 18:58:54 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/11 21:45:49 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/12 01:36:33 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int is_env(char *s, char *env)
     i = 0;
     j = 0;
     k = 0;
-    while (s[i] && (s[i] != ' ' || s[i] != '"'))
+    while (s[i] && s[i] != ' ' && s[i] != '"')
         i++;
     while (env[j] && env[j] != '=')
         j++;
@@ -51,7 +51,6 @@ int is_env(char *s, char *env)
         k++;
     if (env[k] == '=' && k == i)
         return (1);
-    // printf("%d\n", i);
     return (0);
 }
 
@@ -68,7 +67,7 @@ static int  find_env_length(char *s, int p, char **env, int *step)
     while (env[++j])
         if (is_env(s + p, env[j]))
         {
-            printf("hi\n");
+            // printf("hi\n");
             return (ft_strlen(env[j]) - i - 1);
         }
     return (0);
@@ -82,10 +81,10 @@ static int  count(char *s, char **env)
     
     i = 0;
     len = 0;
-    printf("%ld\n", ft_strlen(s));
+    // printf("%ld\n", ft_strlen(s));
     while (s[i])
     {
-        printf("%c %d\n", s[i], len);
+        // printf("%c %d\n", s[i], len);
         if (s[i] == '\'')
             i += skip_quotes(s, i + 1, '\'') + 1;
         else if (s[i] == '$' && s[i + 1] && s[i + 1] != ' ')
