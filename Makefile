@@ -13,7 +13,7 @@ PATH_BUILTIN = $(PATH_SRCS)builtins/
 PATH_CTRL = $(PATH_SRCS)CTRL/
 PATH_History = $(PATH_SRCS)History/
 PATH_Pipe = $(PATH_SRCS)Pipe/
-PATH_Quotes = $(PATH_SRCS)Quotes_handling/
+PATH_Quotes = $(PATH_fn)Quotes_handling/
 PATH_Redirection = $(PATH_SRCS)Redirection/
 PATH_env = $(PATH_fn)Env_Var/
 PATH_token = $(PATH_fn)token/
@@ -46,7 +46,8 @@ s_utils = $(PATH_utils)utils.c \
 s_input_handle = $(PATH_fn)input_handle.c \
 		$(PATH_fn)lexer.c \
 		$(PATH_fn)parser.c \
-		$(PATH_fn)init.c 
+		$(PATH_fn)dollar_sign.c \
+		#$(PATH_fn)init.c 
 
 main= ./srcs/main.c
 

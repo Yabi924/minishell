@@ -1,0 +1,114 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dollar_sign.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/11 18:58:54 by yyan-bin          #+#    #+#             */
+/*   Updated: 2025/01/11 21:45:49 by yyan-bin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../include/minishell.h"
+
+static int quotes_len(char *s)
+{
+    int i;
+    int len;
+    int temp;
+
+    i = 0;
+    len = 0;
+    while (s[i])
+    {
+        if (s[i] == '\'')
+        {
+            temp = skip_quotes(s, i + 1, '\'') + 1;
+            len += temp;
+            i += temp;
+        }
+        else
+            i++;
+    }
+    return (len);
+}
+
+int is_env(char *s, char *env)
+{
+    int i;
+    int j;
+    int k;
+
+    i = 0;
+    j = 0;
+    k = 0;
+    while (s[i] && (s[i] != ' ' || s[i] != '"'))
+        i++;
+    while (env[j] && env[j] != '=')
+        j++;
+    while (s[k] && env[k] && s[k] == env[k] && (s[k] != ' ' || s[k] != '"'))
+        k++;
+    if (env[k] == '=' && k == i)
+        return (1);
+    // printf("%d\n", i);
+    return (0);
+}
+
+static int  find_env_length(char *s, int p, char **env, int *step)
+{
+    int i;
+    int j;
+
+    i = 0;
+    j = -1;
+    while (s[p + i] && s[p + i] != ' ' && s[p + i] != '$' && s[p + i] != '"')
+        i++;
+    *step = i;
+    while (env[++j])
+        if (is_env(s + p, env[j]))
+        {
+            printf("hi\n");
+            return (ft_strlen(env[j]) - i - 1);
+        }
+    return (0);
+}
+
+static int  count(char *s, char **env)
+{
+    int i;
+    int len;
+    int step;
+    
+    i = 0;
+    len = 0;
+    printf("%ld\n", ft_strlen(s));
+    while (s[i])
+    {
+        printf("%c %d\n", s[i], len);
+        if (s[i] == '\'')
+            i += skip_quotes(s, i + 1, '\'') + 1;
+        else if (s[i] == '$' && s[i + 1] && s[i + 1] != ' ')
+        {
+            len += find_env_length(s, i + 1, env, &step);
+            i += step + 1;
+        }
+        else
+        {
+            i++;
+            len++;
+        }
+    }
+    return (len + quotes_len(s));
+}
+void    explan_dollar_sign(char *s, char **env)
+{
+    printf("%s %d\n", s, count(s, env));
+    // int i;
+
+    // i = 0;
+    // while (s[i])
+    // {
+    //     if 
+    // }
+}
