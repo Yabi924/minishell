@@ -24,19 +24,21 @@ void    signal_int(int signal_no)
 void    signal_quit(int signal_no)
 {
     (void)signal_no;
-    ft_printf("Quit\n");
+    //ft_printf("Quit\n");
 }
 
 void    signal_int_child(int signal_no)
 {
     (void)signal_no;
-    ft_printf("Quit\n");
+    ft_printf("\n");
+    exit(130);
 }
 
 void    signal_quit_child(int signal_no)
 {
     (void)signal_no;
-    ft_printf("\n");
+    ft_printf("\nQuit (core dumped)\n");
+    exit(131);
 }
 
 void    heredoc(int signal_no)

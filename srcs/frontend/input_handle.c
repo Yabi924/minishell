@@ -16,19 +16,17 @@ int input_handle(t_data *data)
 {
     print_prompt(data);
     skip_unprint(data);
-    // ft_printf("%s\n", data->input);
+
     if (lexer(data->input))
     {
-        //free data
         ft_putstr_fd("Syntax error\n", 2);
-        //set exit code
         return (1);
     }
     else
     {
+        free(data->env); // Free existing environment
         //init(data, env);
         parser(data);
     }
-    //free linked list
     return (0);
 }

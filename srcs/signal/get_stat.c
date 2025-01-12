@@ -26,11 +26,13 @@ int get_stat(int stat)
     if (WIFSIGNALED(stat))
     {
         exit_code = WTERMSIG(stat);
-        if (exit_code == 2) //Refer to signal interrupt
+        if (exit_code == SIGINT) //Refer to signal interrupt
             get_signal_code = TRUE;
         return (exit_code + 128);
     }
-    return (WEXITSTATUS(stat));
+    if (WIFEXITED(stat))
+        return (WIFEXITSTATUS(stat));
+    return (1);
 }
 
 /*

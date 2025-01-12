@@ -27,6 +27,7 @@
 typedef struct s_list
 {
     char			**command;
+    char            *delimiter;
     int				fd[2];
     int				input;
     int				output;

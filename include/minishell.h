@@ -39,8 +39,13 @@ typedef struct s_data
     char    **command_arr;
     char    **env;
     char    *input;
+    char    cwd[1042];
     char    *new_input;
     int     cmd_exit_no;
+    int     heredoc;
+    int     in_fd;
+    int     out_fd;
+    int     flag;
     t_list  *list;
 }   t_data;
 
@@ -85,8 +90,16 @@ void    free_arr(char **arr);
 
 //Initialization
 void    init(t_data *data, char **env);
-char    *env_val(const char *key, char **env);
-void    update_env(const char *key, const char *value);
+// create_env.c
+char    **copy_env(char **env);
+void    setup_env(t_data *data, char **env);
+// Function Prototypes
+void free_env(char **env);
+void setup_env(t_data *data, char **env);
+void update_env(const char *key, const char *value, char **env);
+
+char *env_val(const char *key, char **env);
+
 
 //test
 void    print_arr(char **s);

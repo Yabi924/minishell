@@ -1,5 +1,5 @@
 #flags
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 
 #program name
 NAME = minishell
@@ -46,7 +46,8 @@ s_utils = $(PATH_utils)utils.c \
 s_input_handle = $(PATH_fn)input_handle.c \
 		$(PATH_fn)lexer.c \
 		$(PATH_fn)parser.c \
-		$(PATH_fn)init.c 
+		$(PATH_fn)init.c \
+		$(PATH_fn)create_env.c
 
 main= ./srcs/main.c
 
