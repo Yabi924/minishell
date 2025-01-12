@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dollar_sign.c                                      :+:      :+:    :+:   */
+/*   count.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/11 18:58:54 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/12 01:36:33 by yyan-bin         ###   ########.fr       */
+/*   Created: 2025/01/12 12:43:46 by yyan-bin          #+#    #+#             */
+/*   Updated: 2025/01/12 15:01:23 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
 static int quotes_len(char *s)
 {
@@ -43,7 +43,7 @@ int is_env(char *s, char *env)
     i = 0;
     j = 0;
     k = 0;
-    while (s[i] && s[i] != ' ' && s[i] != '"')
+    while (s[i] && s[i] != ' ' && s[i] != '"' && s[i] != '$')
         i++;
     while (env[j] && env[j] != '=')
         j++;
@@ -73,7 +73,7 @@ static int  find_env_length(char *s, int p, char **env, int *step)
     return (0);
 }
 
-static int  count(char *s, char **env)
+int  calculate_len(char *s, char **env)
 {
     int i;
     int len;
@@ -99,15 +99,4 @@ static int  count(char *s, char **env)
         }
     }
     return (len + quotes_len(s));
-}
-void    explan_dollar_sign(char *s, char **env)
-{
-    printf("%s %d\n", s, count(s, env));
-    // int i;
-
-    // i = 0;
-    // while (s[i])
-    // {
-    //     if 
-    // }
 }

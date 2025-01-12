@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:12:26 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/11 17:03:03 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/12 14:07:05 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static char    *copy(char *s, int *p)
     return (new);
 }
 
-static char    *copy_quotes(char *s, int *p)
+static char    *copy_quotes2(char *s, int *p)
 {
     int     i;
     int     pp;
@@ -95,7 +95,7 @@ char    **split(char *s)
         while (s[i] == ' ')
             i++;
         if (s[i] == '\'')
-            arr[j++] = copy_quotes(s, &i);
+            arr[j++] = copy_quotes2(s, &i);
     }
     arr[j] = NULL;
     return (arr);
