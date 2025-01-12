@@ -31,6 +31,7 @@ typedef struct s_list
     int				fd[2];
     int				input;
     int				output;
+    int             append;
 	struct s_list	*next;
 }		t_list;
 

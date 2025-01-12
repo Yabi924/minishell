@@ -107,13 +107,25 @@ void    init(t_data *data, char **env);
 // create_env.c
 char    **copy_env(char **env);
 void    setup_env(t_data *data, char **env);
+
 // Function Prototypes
 void free_env(char **env);
 void setup_env(t_data *data, char **env);
-void update_env(const char *key, const char *value, char **env);
-
+void update_env(const char *key, const char *value);
 char *env_val(const char *key, char **env);
 
+//builtins
+void    ft_exit(t_data *shell, t_list *list);
+
+//Child process
+void child_process(t_data *mshell, t_list *lst);
+
+//run_exe.c
+void    builtins(t_data *shell, t_list *list);
+void    kindergarten(t_data *shell, t_list *list, pid_t *child);
+void    only_builtins(t_data *shell, t_list *list);
+void    exec_fd_setup(t_data *shell);
+void    execution(t_data *shell, t_list *list);
 
 //test
 void    print_arr(char **s);

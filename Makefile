@@ -10,6 +10,7 @@ PATH_fn = $(PATH_SRCS)frontend/
 
 #function path
 PATH_BUILTIN = $(PATH_SRCS)builtins/
+PATH_EXECUTE = $(PATH_SRCS)execute/
 PATH_CTRL = $(PATH_SRCS)CTRL/
 PATH_History = $(PATH_SRCS)History/
 PATH_Pipe = $(PATH_SRCS)Pipe/
@@ -21,7 +22,9 @@ PATH_utils = $(PATH_fn)utils/
 PATH_signal = $(PATH_SRCS)signal/
 
 #src
-s_builtin = $(PATH_BUILTIN)
+s_builtin = $(PATH_BUILTIN)ft_exit.c
+
+s_execute = $(PATH_EXECUTE)run_exe.c
 
 s_ctrl = $(PATH_CTRL)
 
@@ -48,7 +51,7 @@ s_utils = $(PATH_utils)utils.c \
 s_input_handle = $(PATH_fn)input_handle.c \
 		$(PATH_fn)lexer.c \
 		$(PATH_fn)parser.c \
-		#$(PATH_fn)init.c 
+		$(PATH_fn)init.c 
 
 s_signal = $(PATH_signal)signal.c
 

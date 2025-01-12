@@ -23,8 +23,7 @@ int input_handle(t_data *data)
     }
     else
     {
-        // free(data->env); // Free existing environment
-        //init(data, env);
+        free(data->env); // Free existing environment
         parser(data);
     }
     tcsetattr(STDIN_FILENO, TCSANOW, &data->ori_terminal);

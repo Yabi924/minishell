@@ -12,7 +12,8 @@ void    builtins(t_data *shell, t_list *list)
         shell->cmd_exit_no = 0;
     }
     else if (!ft_strncmp(list->command[0], "exit\0", 5))
-        //ft_exit(shell, list);
+        ft_exit(shell, list);
+    /*
     else if (!ft_strncmp(list->command[0], "env\0", 4))
         //ft_env(shell, list);
     else if (!ft_strncmp(list->command[0], "cd\0", 3))
@@ -26,6 +27,7 @@ void    builtins(t_data *shell, t_list *list)
     else if (!ft_strncmp(list->command[0], "./", 2) || \
                     !ft_strncmp(list->command[0], "/", 1))
             //ft_executable(shell, list);
+    */
 }
 
 void    kindergarten(t_data *shell, t_list *list, pid_t *child)
@@ -37,8 +39,8 @@ void    kindergarten(t_data *shell, t_list *list, pid_t *child)
     {
         if (list->next)
             pipe(list->next->fd);
-        if (list->delimiter)
-            heredoc(shell, list);
+        //if (list->delimiter)
+       //     heredoc(shell, list);
         child[++i] = fork();
         if (child[i] == 0)
         {
@@ -78,24 +80,30 @@ void    exec_fd_setup(t_data *shell)
     shell->out_fd = 1;
 }
 
-void    execution(t_data *shell, t_list *list)
+void execution(t_data *shell, t_list *list)
 {
-    pid_t   *child;
+    pid_t *child;
 
     if (!list || !list->command)
-        return ;
+        return;
+
     exec_fd_setup(shell);
+
     child = malloc((ft_lstsize(list) + 1) * sizeof(pid_t));
     if (!child)
-        return ;
+    {
+        perror("malloc");
+        return;
+    }
+
     if (list->next == NULL && check_built_in(list))
         only_builtins(shell, list);
     else
         kindergarten(shell, list, child);
-    dup2(shell->in_fd, 0);
-    dup2(shell->out_fd, 1);
+
+    dup2(shell->in_fd, STDIN_FILENO); // Restore standard input
+    dup2(shell->out_fd, STDOUT_FILENO); // Restore standard output
     close(shell->in_fd);
     close(shell->out_fd);
-    unlink(".tmp");
     free(child);
 }
