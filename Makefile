@@ -13,7 +13,7 @@ PATH_BUILTIN = $(PATH_SRCS)builtins/
 PATH_CTRL = $(PATH_SRCS)CTRL/
 PATH_History = $(PATH_SRCS)History/
 PATH_Pipe = $(PATH_SRCS)Pipe/
-PATH_Quotes = $(PATH_SRCS)Quotes_handling/
+PATH_dollar = $(PATH_fn)dollar_sign/
 PATH_Redirection = $(PATH_SRCS)Redirection/
 PATH_env = $(PATH_fn)Env_Var/
 PATH_token = $(PATH_fn)token/
@@ -28,7 +28,8 @@ s_his = $(PATH_History)
 
 s_pipe = $(PATH_Pipe)
 
-s_quotes = $(PATH_Quotes)
+s_dollar = $(PATH_dollar)dollar_sign.c \
+		$(PATH_dollar)count.c
 
 s_rdrt = $(PATH_Redirection)
 
@@ -46,11 +47,11 @@ s_utils = $(PATH_utils)utils.c \
 s_input_handle = $(PATH_fn)input_handle.c \
 		$(PATH_fn)lexer.c \
 		$(PATH_fn)parser.c \
-		$(PATH_fn)init.c 
+		#$(PATH_fn)init.c 
 
 main= ./srcs/main.c
 
-SRCS = $(main) $(s_utils) $(s_input_handle) $(s_token) #$(s_builtin) $(s_ctrl) $(s_his) $(s_pipe) $(s_quotes) $(s_rdrt) $(s_env)
+SRCS = $(main) $(s_utils) $(s_input_handle) $(s_token) $(s_dollar) #$(s_builtin) $(s_ctrl) $(s_his) $(s_pipe) $(s_quotes) $(s_rdrt) $(s_env)
 
 #objs
 OBJS = $(SRCS:.c=.o)
