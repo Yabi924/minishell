@@ -49,7 +49,8 @@ s_input_handle = $(PATH_fn)input_handle.c \
 		$(PATH_fn)parser.c \
 		#$(PATH_fn)init.c 
 
-main= ./srcs/main.c
+main= ./srcs/main.c \
+	./srcs/free.c
 
 SRCS = $(main) $(s_utils) $(s_input_handle) $(s_token) $(s_dollar) #$(s_builtin) $(s_ctrl) $(s_his) $(s_pipe) $(s_quotes) $(s_rdrt) $(s_env)
 

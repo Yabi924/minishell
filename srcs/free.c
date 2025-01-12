@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 00:40:04 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/11 00:40:40 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/12 19:52:16 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@ void    free_arr(char **arr)
     i = 0;
     if (!arr)
         return ;
-    if (arr[i])
+    while (arr[i])
         free(arr[i++]);
-    free(arr);
+    if (arr)
+        free(arr);
 }
 
 void    free_linked_list(t_list **list)
@@ -36,12 +37,17 @@ void    free_linked_list(t_list **list)
         ft_lstdelone(p, &free_arr);
         p = temp;
     }
-    free(list);
     *list = NULL;
 }
 
 void    free_data(t_data *data)
 {
     free_arr(data->command_arr);
-    free_linked_list(data->list);
+    if (ft_lstsize(data->list) == 1)
+    {
+        ft_lstdelone(data->list, &free_arr);
+        data->list = NULL;
+    }
+    else 
+        free_linked_list(&data->list);
 }
