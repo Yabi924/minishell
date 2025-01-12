@@ -19,6 +19,7 @@ PATH_Redirection = $(PATH_SRCS)Redirection/
 PATH_env = $(PATH_fn)Env_Var/
 PATH_token = $(PATH_fn)token/
 PATH_utils = $(PATH_fn)utils/
+PATH_signal = $(PATH_SRCS)signal/
 
 #src
 s_builtin = $(PATH_BUILTIN)ft_exit.c
@@ -52,10 +53,12 @@ s_input_handle = $(PATH_fn)input_handle.c \
 		$(PATH_fn)parser.c \
 		$(PATH_fn)init.c 
 
+s_signal = $(PATH_signal)signal.c
+
 main= ./srcs/main.c \
 	./srcs/free.c
 
-SRCS = $(main) $(s_utils) $(s_input_handle) $(s_token) $(s_dollar) $(s_builtin) $(s_execute) #$(s_ctrl) $(s_his) $(s_pipe) $(s_quotes) $(s_rdrt) $(s_env)
+SRCS = $(main) $(s_utils) $(s_input_handle) $(s_token) $(s_dollar) $(s_signal) #$(s_builtin) $(s_ctrl) $(s_his) $(s_pipe) $(s_quotes) $(s_rdrt) $(s_env)
 
 #objs
 OBJS = $(SRCS:.c=.o)
