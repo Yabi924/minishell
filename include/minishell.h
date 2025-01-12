@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:38 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/12 14:34:28 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/12 20:34:23 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <signal.h>
+# include <termios.h>
 # include "../libft/libft.h"
 # include "../libft/ft_printf.h"
 
@@ -46,6 +47,8 @@ typedef struct s_data
     int     in_fd;
     int     out_fd;
     int     flag;
+    struct  termios ori_terminal;
+    struct  termios mod_terminal;
     t_list  *list;
 }   t_data;
 
@@ -90,6 +93,9 @@ int     ft_arrlen(char **arr);
 
 // int     input_handle(t_data *data, char **env);
 int     input_handle(t_data *data);
+
+//signal.c
+void    signal_int(int signal_no);
 
 //free.c
 void    free_data(t_data *data);
