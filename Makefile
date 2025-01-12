@@ -1,5 +1,5 @@
 #flags
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 
 #program name
 NAME = minishell

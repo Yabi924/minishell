@@ -10,4 +10,26 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../include/minishell.h"
 
+void    echo_builtin(char **args)
+{
+    int i = 1;
+    int no_newline = 0;
+
+    //Check for the "-n" option
+    if (args[1] && strcmp(args[1], "-n") == 0)
+    {
+        no_newline = 1;
+        i = 2;
+    }
+    while (args[i])
+    {
+        ft_putstr_fd(args[i], STDOUT_FILENO);
+        if (args[i + 1])
+            ft_putchar_fd(' ', STDOUT_FILENO);
+        i++;
+    }
+    if (!no_newline)
+        ft_putchar_fd('\n', STDOUT_FILENO);
+}
