@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wwan-ab- wwan-ab-@student.42kl.edu.my      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 17:51:58 by wwan-ab-          #+#    #+#             */
-/*   Updated: 2025/01/08 17:52:00 by wwan-ab-         ###   ########.fr       */
+/*   Updated: 2025/01/12 20:29:50 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void    signal_int(int signal_no)
     rl_on_new_line();
     rl_replace_line("", 0); //0 for standard input
     rl_redisplay();
+    get_signal_code = 130;
 }
 
 void    signal_quit(int signal_no)

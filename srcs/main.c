@@ -6,11 +6,13 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:32 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/12 20:15:42 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/12 20:37:51 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+int  get_signal_code = 0;
 
 char    **copy_env(char **env)
 {
@@ -49,6 +51,8 @@ int main(int argc, char **argv, char **env)
     initminishell(&minishell_data, env);
     while (1)
     {
+        signal(SIGINT, signal_int);
+        signal(SIGQUIT, SIG_IGN);
         input_handle(&minishell_data);
         tcsetattr(STDIN_FILENO, TCSANOW, &minishell_data.mod_terminal);
     }
