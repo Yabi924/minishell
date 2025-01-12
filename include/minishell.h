@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:38 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/11 00:41:26 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/12 14:34:28 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,14 @@ int     check_redrct_pipe(char *s);
 
 //add_space.c
 void    add_space(t_data *data);
+int     copy_quotes(char **new_input, char *input, int position, char target);
+
+//dollar_sign.c
+char    *explan_dollar_sign(char *s, char **env);
+
+//count.c
+int     calculate_len(char *s, char **env);
+int     is_env(char *s, char *env);
 
 //utils.c
 int     is_target(char c, char *target);

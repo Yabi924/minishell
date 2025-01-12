@@ -6,13 +6,13 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 14:04:18 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/07 16:31:12 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/12 14:36:54 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-int copy_quotes(t_data *data, int position, char target)
+int copy_quotes(char **new_input, char *input, int position, char target)
 {
     int     i;
     int     len;
@@ -21,17 +21,18 @@ int copy_quotes(t_data *data, int position, char target)
 
     i = 0;
     q = 0;
-    len = skip_quotes(data->input, position + 1, target) + 1;
+    len = skip_quotes(input, position + 1, target) + 1;
     temp = ft_calloc(len + 1, sizeof(char));
-    while (data->input[position + i] && q != 2)
+    while (input[position + i] && q != 2)
     {
-        temp[i] = data->input[position + i];
-        if (data->input[position + i] == target)
-            q++ ;
+        temp[i] = input[position + i];
+        if (input[position + i] == target)
+            q++;
         i++;
     }
-    data->new_input = ft_strjoin_free(data->new_input, temp);
-    free(temp);
+    *new_input = ft_strjoin_free(*new_input, temp);
+    if (temp)
+        free(temp);
     return (len);
 }
 
@@ -101,7 +102,7 @@ void    add_space(t_data *data)
     while (data->input[i])
     {
         if (data->input[i] == '"' || data->input[i] == '\'')
-            i += copy_quotes(data, i, data->input[i]);
+            i += copy_quotes(&data->new_input, data->input, i, data->input[i]);
         else
             i += copy_wold(data, i);
         // printf("sp: %s$\n", data->new_input);

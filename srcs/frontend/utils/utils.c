@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:57 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/10 23:42:22 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/12 14:41:47 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ char    *ft_strjoin_free(char *s1, char *s2)
     if (!s1 || !s2)
         return NULL;
     new = ft_strjoin(s1, s2);
-    free(s1);
+    if (s1)
+        free(s1);
     return (new);
 }
 
