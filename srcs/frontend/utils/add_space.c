@@ -108,4 +108,3 @@ void    add_space(t_data *data)
         // printf("sp: %s$\n", data->new_input);
     }
 }
-

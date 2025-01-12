@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:38 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/12 14:34:28 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/12 20:34:23 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <signal.h>
+# include <termios.h>
 # include "../libft/libft.h"
 # include "../libft/ft_printf.h"
 
@@ -46,6 +47,8 @@ typedef struct s_data
     int     in_fd;
     int     out_fd;
     int     flag;
+    struct  termios ori_terminal;
+    struct  termios mod_terminal;
     t_list  *list;
 }   t_data;
 
@@ -91,6 +94,9 @@ int     ft_arrlen(char **arr);
 // int     input_handle(t_data *data, char **env);
 int     input_handle(t_data *data);
 
+//signal.c
+void    signal_int(int signal_no);
+
 //free.c
 void    free_data(t_data *data);
 void    free_linked_list(t_list **list);
@@ -101,13 +107,25 @@ void    init(t_data *data, char **env);
 // create_env.c
 char    **copy_env(char **env);
 void    setup_env(t_data *data, char **env);
+
 // Function Prototypes
 void free_env(char **env);
 void setup_env(t_data *data, char **env);
-void update_env(const char *key, const char *value, char **env);
-
+void update_env(const char *key, const char *value);
 char *env_val(const char *key, char **env);
 
+//builtins
+void    ft_exit(t_data *shell, t_list *list);
+
+//Child process
+void child_process(t_data *mshell, t_list *lst);
+
+//run_exe.c
+void    builtins(t_data *shell, t_list *list);
+void    kindergarten(t_data *shell, t_list *list, pid_t *child);
+void    only_builtins(t_data *shell, t_list *list);
+void    exec_fd_setup(t_data *shell);
+void    execution(t_data *shell, t_list *list);
 
 //test
 void    print_arr(char **s);
