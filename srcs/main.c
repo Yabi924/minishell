@@ -38,7 +38,7 @@ void    initminishell(t_data *data, char **env)
     data->list = NULL;
     tcgetattr(STDIN_FILENO, &data->ori_terminal);
     data->mod_terminal = data->ori_terminal;
-    data->mod_terminal.c_lflag &= ~ECHOCTL;
+    //data->mod_terminal.c_lflag &= ~ECHOCTL;
     tcsetattr(STDIN_FILENO, TCSANOW, &data->mod_terminal);
 }
 
@@ -49,6 +49,7 @@ int main(int argc, char **argv, char **env)
     t_data minishell_data;
 
     initminishell(&minishell_data, env);
+    //init(env); //Test case
     while (1)
     {
         signal(SIGINT, signal_int);

@@ -26,3 +26,17 @@ int lexer(char *input)
     }
     return (0);
 }
+
+char    *strjoin_helper(char *str1, char *str2, int free1, int free2)
+{
+    char    *ret;
+
+    if (!str1 || !str2)
+        return (NULL);
+    ret = ft_strjoin(str1, str2);
+    if (free1)
+        free(str1);
+    if (free2)
+        free(str2);
+    return (ret);
+}

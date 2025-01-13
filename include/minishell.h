@@ -18,6 +18,7 @@
 # include <readline/history.h>
 # include <sys/types.h>
 # include <dirent.h>
+# include <stdbool.h>
 # include <fcntl.h>
 # include <errno.h>
 # include <signal.h>
@@ -48,25 +49,32 @@ typedef struct s_data
 {
     char    **command_arr;
     char    **env;
-    char    *input;
     char    cwd[1042];
+    char    *input;
     char    *new_input;
     int     cmd_exit_no;
     int     heredoc;
     int     in_fd;
     int     out_fd;
+    int     stdin; //Test case
+    int     stdout; //Test case
     int     flag;
     t_env   *env_ll;
+    char    **environ; //Test case
     struct  termios ori_terminal;
     struct  termios mod_terminal;
     t_list  *list;
 }   t_data;
+
+//Temporary global variable
+extern t_data g_minishell;
 
 //readline.c
 void    print_prompt(t_data *data);
 
 //lexer.c
 int     lexer(char *input);
+char    *strjoin_helper(char *str1, char *str2, int free1, int free2);
 
 //parser.c
 void    parser(t_data *data);
@@ -112,8 +120,21 @@ void    free_data(t_data *data);
 void    free_linked_list(t_list **list);
 void    free_arr(char **arr);
 
-//Initialization
-void    init(t_data *data, char **env);
+//init.c (Test case)
+void init(char **env);
+char	*ft_extract_key(char *str);
+char	*ft_extract_value(char *str);
+void	ft_init_envlst(void);
+int     ft_env(void);
+bool	ft_env_entry_exists(char *key);
+char	*ft_get_envlst_val(char *key);
+void	ft_envlst_back(t_env *new);
+void	ft_update_envlst(char *key, char *value, bool create);
+
+//exec_utils.c (Test case)
+void	*ft_garbage_collector(void *ptr, bool clean);
+bool	ft_is_delimiter(char *delimiter, char *str);
+
 // create_env.c
 char    **copy_env(char **env);
 void    setup_env(t_data *data, char **env);
