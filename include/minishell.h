@@ -35,6 +35,15 @@
 //External variable to get the signal
 extern int  get_signal_code;
 
+//link_list for env
+typedef struct s_env
+{
+	char			*key;
+	char			*value;
+	int				print;
+	struct s_env	*next;
+}	t_env;
+
 typedef struct s_data
 {
     char    **command_arr;
@@ -47,6 +56,7 @@ typedef struct s_data
     int     in_fd;
     int     out_fd;
     int     flag;
+    t_env   *env_ll;
     struct  termios ori_terminal;
     struct  termios mod_terminal;
     t_list  *list;
@@ -120,12 +130,23 @@ void    ft_exit(t_data *shell, t_list *list);
 //Child process
 void child_process(t_data *mshell, t_list *lst);
 
+//ft_echo.c
+int     check(char *str);
+char	*ret_line(char **arr);
+void	echo(t_data *mini);
+
+//directory.c
+void    get_pwd(void);
+void    assign_oldpwd(t_env *env_ll, char *pwd, t_data *mini);
+void	pwd_update(t_env *env_ll, char *new_pwd, t_data *mini);
+void    home(t_data *mini);
+void    change_dir(t_data *mini);
+
 //run_exe.c
-void    builtins(t_data *shell, t_list *list);
-void    kindergarten(t_data *shell, t_list *list, pid_t *child);
-void    only_builtins(t_data *shell, t_list *list);
-void    exec_fd_setup(t_data *shell);
-void    execution(t_data *shell, t_list *list);
+int     exit_num(char **in);
+void    command_handle(t_data *mini, int exit_if_zero);
+int     builtin_check(t_data *mini);
+void    array_dup(t_data *mini);
 
 //test
 void    print_arr(char **s);

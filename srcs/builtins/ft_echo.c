@@ -12,24 +12,57 @@
 
 #include "../../include/minishell.h"
 
-void    echo_builtin(char **args)
+int	check(char *str)
 {
-    int i = 1;
-    int no_newline = 0;
+	if (!ft_strncmp(str, "<", 2)
+		|| !ft_strncmp(str, "<<", 3)
+		|| !ft_strncmp(str, ">", 2)
+		|| !ft_strncmp(str, ">>", 3))
+		return (1);
+	return (0);
+}
 
-    //Check for the "-n" option
-    if (args[1] && strcmp(args[1], "-n") == 0)
-    {
-        no_newline = 1;
-        i = 2;
-    }
-    while (args[i])
-    {
-        ft_putstr_fd(args[i], STDOUT_FILENO);
-        if (args[i + 1])
-            ft_putchar_fd(' ', STDOUT_FILENO);
-        i++;
-    }
-    if (!no_newline)
-        ft_putchar_fd('\n', STDOUT_FILENO);
+char	*ret_line(char **arr)
+{
+	char	*tmp;
+	char	*line;
+	int		x;
+
+	x = 0;
+	line = ft_strdup("");
+	while (arr[++x])
+	{
+		if (!ft_strncmp(arr[x], "-n", 2))
+			continue ;
+		else if (check(arr[x]) == 1)
+			break ;
+		else if (arr[x] != 0)
+		{
+			tmp = strjoin_helper(line, arr[x], 1, 0);
+			if (!arr[x + 1])
+			{
+				line = ft_strdup(tmp);
+				free(tmp);
+			}
+			else
+				line = strjoin_helper(tmp, " ", 1, 0);
+		}
+	}
+	return (line);
+}
+
+void	echo(t_data *mini)
+{
+	char	*tmp;
+	char	*line;
+
+	line = ret_line(mini->command_arr);
+	if (ft_strncmp(mini->command_arr[1], "-n", 2))
+	{
+		tmp = strjoin_helper(line, "\n", 1, 0);
+		line = ft_strdup(tmp);
+		free(tmp);
+	}
+	write(1, line, ft_strlen(line));
+	free (line);
 }

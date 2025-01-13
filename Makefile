@@ -58,7 +58,7 @@ s_signal = $(PATH_signal)signal.c
 main= ./srcs/main.c \
 	./srcs/free.c
 
-SRCS = $(main) $(s_utils) $(s_input_handle) $(s_token) $(s_dollar) $(s_signal) #$(s_builtin) $(s_ctrl) $(s_his) $(s_pipe) $(s_quotes) $(s_rdrt) $(s_env)
+SRCS = $(main) $(s_utils) $(s_input_handle) $(s_token) $(s_dollar) $(s_signal) $(s_builtin) #$(s_ctrl) $(s_his) $(s_pipe) $(s_quotes) $(s_rdrt) $(s_env)
 
 #objs
 OBJS = $(SRCS:.c=.o)
