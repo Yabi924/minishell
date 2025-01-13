@@ -31,7 +31,7 @@ int get_stat(int stat)
         return (exit_code + 128);
     }
     if (WIFEXITED(stat))
-        return (WIFEXITSTATUS(stat));
+        return (WEXITSTATUS(stat));
     return (1);
 }
 

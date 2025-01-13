@@ -120,41 +120,17 @@ void    free_data(t_data *data);
 void    free_linked_list(t_list **list);
 void    free_arr(char **arr);
 
-//init.c (Test case)
-void init(char **env);
-char	*ft_extract_key(char *str);
-char	*ft_extract_value(char *str);
-void	ft_init_envlst(void);
-int     ft_env(void);
-bool	ft_env_entry_exists(char *key);
-char	*ft_get_envlst_val(char *key);
-void	ft_envlst_back(t_env *new);
-void	ft_update_envlst(char *key, char *value, bool create);
-
-//exec_utils.c (Test case)
-void	*ft_garbage_collector(void *ptr, bool clean);
-bool	ft_is_delimiter(char *delimiter, char *str);
-
-// create_env.c
-char    **copy_env(char **env);
-void    setup_env(t_data *data, char **env);
-
-// Function Prototypes
-void free_env(char **env);
-void setup_env(t_data *data, char **env);
-void update_env(const char *key, const char *value);
-char *env_val(const char *key, char **env);
-
-//builtins
+//builtins:
+//unset.c
 void    ft_exit(t_data *shell, t_list *list);
-
-//Child process
-void child_process(t_data *mshell, t_list *lst);
-
-//ft_echo.c
+int     ft_unset(char **argv, t_data *data);
+//echo.c
 int     check(char *str);
 char	*ret_line(char **arr);
 void	echo(t_data *mini);
+
+//Child process
+void child_process(t_data *mshell, t_list *lst);
 
 //directory.c
 void    get_pwd(void);

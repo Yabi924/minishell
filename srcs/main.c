@@ -38,7 +38,7 @@ void    initminishell(t_data *data, char **env)
     data->list = NULL;
     tcgetattr(STDIN_FILENO, &data->ori_terminal);
     data->mod_terminal = data->ori_terminal;
-    //data->mod_terminal.c_lflag &= ~ECHOCTL;
+    data->mod_terminal.c_lflag &= ~ECHOCTL;
     tcsetattr(STDIN_FILENO, TCSANOW, &data->mod_terminal);
 }
 
