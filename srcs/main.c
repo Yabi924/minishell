@@ -49,7 +49,6 @@ int main(int argc, char **argv, char **env)
     t_data minishell_data;
 
     initminishell(&minishell_data, env);
-    //init(&minishell_data, env); Got problem during initianlization
     while (1)
     {
         signal(SIGINT, signal_int);
