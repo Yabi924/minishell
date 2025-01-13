@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 00:40:04 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/12 19:52:16 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/12 21:02:17 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,17 @@ void    free_arr(char **arr)
 {
     int i;
 
-    i = 0;
+    i = -1;
     if (!arr)
         return ;
-    while (arr[i])
-        free(arr[i++]);
+    while (arr[++i])
+    {
+        free(arr[i]);
+        arr[i] == NULL;
+    }
     if (arr)
         free(arr);
+    arr = NULL;
 }
 
 void    free_linked_list(t_list **list)
@@ -30,6 +34,8 @@ void    free_linked_list(t_list **list)
     t_list *temp;
     t_list *p;
 
+    if (!list || !(*list))
+        return ;
     p = *list;
     while (p)
     {
