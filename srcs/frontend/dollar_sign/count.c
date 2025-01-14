@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 12:43:46 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/12 15:01:23 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/14 16:42:09 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,14 @@ static int  find_env_length(char *s, int p, char **env, int *step)
 
     i = 0;
     j = -1;
+    if (!s || !env || p < 0)
+        return (0);
     while (s[p + i] && s[p + i] != ' ' && s[p + i] != '$' && s[p + i] != '"')
         i++;
     *step = i;
     while (env[++j])
-        if (is_env(s + p, env[j]))
-        {
-            // printf("hi\n");
+        if (env[j] && is_env(s + p, env[j]))
             return (ft_strlen(env[j]) - i - 1);
-        }
     return (0);
 }
 
