@@ -92,3 +92,9 @@ fclean: clean
 	@echo clean $(NAME)
 
 re: fclean all
+
+r:
+	clear
+	valgrind --leak-check=full --track-origins=yes ./minishell
+
+rr: re r

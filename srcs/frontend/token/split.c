@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:12:26 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/12 18:04:18 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/14 14:07:19 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,16 @@ static int count(char *s)
     while (s[i])
     {
         if (is_target(s[i], "'\""))
+            i += skip_quotes(s, i + 1, s[i]) + 1 ;
+        else if (s[i] == ' ' && s[i + 1] && s[i + 1] != ' ')
         {
-            i += skip_quotes(s, i + 1, s[i]);
-            // printf("i:%d\n", i);
-        }
-        if (s[i] == ' ' && s[i + 1] && s[i + 1] != ' ')
+            i++;
             count++;
-        i++;
+        }
+        else
+            i++;
     }
-    return (count);
+    return (count + 1);
 }
 
 static char    *copy(char *s, int *p)
@@ -46,8 +47,9 @@ static char    *copy(char *s, int *p)
     while (s[pp + i] && s[pp + i] != ' ')
     {
         if (is_target(s[pp + i], "'\""))
-                i += skip_quotes(s, pp + i + 1, s[pp + i]);
-        i++;
+            i += skip_quotes(s, pp + i + 1, s[pp + i]);
+        else
+            i++;
     }
     new = ft_calloc(i + 1, sizeof(char));
     while (j < i)
@@ -87,15 +89,16 @@ char    **split(char *s)
 
     i = 0;
     j = 0;
-    arr = ft_calloc(count(s) + 1, sizeof(char *));
+    int counts = count(s);
+    arr = ft_calloc(counts + 1, sizeof(char *));
     while (s[i])
     {
-        if (s[i] != ' ')
-            arr[j++] = copy(s, &i);
         while (s[i] == ' ')
             i++;
         if (is_target(s[i], "'\""))
             arr[j++] = copy_quotes2(s, &i, s[i]);
+        else if (s[i])
+            arr[j++] = copy(s, &i);
     }
     arr[j] = NULL;
     return (arr);

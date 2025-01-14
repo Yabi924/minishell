@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 00:40:04 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/12 21:02:17 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/14 16:47:43 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ void    free_arr(char **arr)
     if (!arr)
         return ;
     while (arr[++i])
-    {
         free(arr[i]);
-        arr[i] == NULL;
-    }
     if (arr)
         free(arr);
     arr = NULL;
