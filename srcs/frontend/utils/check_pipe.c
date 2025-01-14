@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 18:57:06 by yyan-bin          #+#    #+#             */
-/*   Updated: 2024/12/26 19:12:37 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/14 13:45:16 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int skip_quotes(char *s, int positoin, char target)
     int i;
 
     i = 0;
+    if (!s || positoin < 0)
+        return (0);
     while (s[positoin + i] && s[positoin + i] != target)
         i++;
     return (i + 1);
