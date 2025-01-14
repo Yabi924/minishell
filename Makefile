@@ -97,4 +97,4 @@ r:
 	clear
 	valgrind --leak-check=full --track-origins=yes ./minishell
 
-rr: re run
+rr: re r

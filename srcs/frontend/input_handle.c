@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:44 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/12 20:22:17 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/14 16:46:34 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int input_handle(t_data *data)
     }
     else
     {
-        free(data->env); // Free existing environment
+        // free(data->env); // Free existing environment
         parser(data);
         //exec(); //Function that will execute the command
     }
