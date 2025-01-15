@@ -22,11 +22,12 @@ PATH_utils = $(PATH_fn)utils/
 PATH_signal = $(PATH_SRCS)signal/
 
 #src
-s_builtin = $(PATH_BUILTIN)exit.c\
+s_builtin = $(PATH_BUILTIN)pwd.c\
+			$(PATH_BUILTIN)exit.c\
 			$(PATH_BUILTIN)echo.c\
 			$(PATH_BUILTIN)unset.c
 
-s_execute = $(PATH_EXECUTE)
+s_execute = $(PATH_EXECUTE)exec.c
 
 s_ctrl = $(PATH_CTRL)
 
@@ -61,7 +62,7 @@ s_signal = $(PATH_signal)signal.c \
 main= ./srcs/main.c \
 	./srcs/free.c
 
-SRCS = $(main) $(s_utils) $(s_input_handle) $(s_token) $(s_dollar) $(s_signal) $(s_builtin) #$(s_execute)#$(s_ctrl) $(s_his) $(s_pipe) $(s_quotes) $(s_rdrt) $(s_env)
+SRCS = $(main) $(s_utils) $(s_input_handle) $(s_token) $(s_dollar) $(s_signal) $(s_builtin) $(s_execute) #$(s_ctrl) $(s_his) $(s_pipe) $(s_quotes) $(s_rdrt) $(s_env)
 
 #objs
 OBJS = $(SRCS:.c=.o)
