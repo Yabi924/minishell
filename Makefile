@@ -14,7 +14,6 @@ PATH_EXECUTE = $(PATH_SRCS)execute/
 PATH_CTRL = $(PATH_SRCS)CTRL/
 PATH_History = $(PATH_SRCS)History/
 PATH_Pipe = $(PATH_SRCS)Pipe/
-PATH_dollar = $(PATH_fn)dollar_sign/
 PATH_Redirection = $(PATH_SRCS)Redirection/
 PATH_env = $(PATH_fn)Env_Var/
 PATH_token = $(PATH_fn)token/
@@ -35,12 +34,10 @@ s_his = $(PATH_History)
 
 s_pipe = $(PATH_Pipe)
 
-s_dollar = $(PATH_dollar)dollar_sign.c \
-		$(PATH_dollar)count.c
-
 s_rdrt = $(PATH_Redirection)
 
-s_env = $(PATH_env)
+s_env = $(PATH_env)dollar_sign.c \
+		$(PATH_env)count.c
 
 s_token = $(PATH_token)tokenization.c \
 		$(PATH_token)split.c
@@ -62,7 +59,7 @@ s_signal = $(PATH_signal)signal.c \
 main= ./srcs/main.c \
 	./srcs/free.c
 
-SRCS = $(main) $(s_utils) $(s_input_handle) $(s_token) $(s_dollar) $(s_signal) $(s_builtin) $(s_execute) #$(s_ctrl) $(s_his) $(s_pipe) $(s_quotes) $(s_rdrt) $(s_env)
+SRCS = $(main) $(s_utils) $(s_input_handle) $(s_token) $(s_env) $(s_signal) $(s_builtin) $(s_execute) #$(s_ctrl) $(s_his) $(s_pipe) $(s_quotes) $(s_rdrt) $(s_env)
 
 #objs
 OBJS = $(SRCS:.c=.o)
