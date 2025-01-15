@@ -121,6 +121,19 @@ void    free_linked_list(t_list **list);
 void    free_arr(char **arr);
 
 //builtins:
+
+//cd.c
+void    get_pwd(void);
+void    assign_oldpwd(t_env *env_ll, char *pwd, t_data *mini);
+void    pwd_update(t_env *env_ll, char *new_pwd, t_data *mini);
+void    home(t_data *mini);
+void    change_dir(t_data *mini);
+
+//env.c
+
+//exec.c
+void    exec(t_data *data);
+
 //unset.c
 void    ft_exit(t_data *shell, t_list *list);
 int     ft_unset(char **argv, t_data *data);
@@ -138,6 +151,7 @@ void    assign_oldpwd(t_env *env_ll, char *pwd, t_data *mini);
 void	pwd_update(t_env *env_ll, char *new_pwd, t_data *mini);
 void    home(t_data *mini);
 void    change_dir(t_data *mini);
+
 
 //run_exe.c
 int     exit_num(char **in);
