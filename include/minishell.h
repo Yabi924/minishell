@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:38 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/12 20:34:23 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/16 21:30:47 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,8 +156,15 @@ void    env(t_data *data);
 void    exec(t_data *data);
 
 //unset.c
+char    **del_env(char **env, char *target);
+int     unset(char **argv, t_data *data);
+
+//export.c
+void    export(t_data *data, t_list *list);
+
+
 void    ft_exit(t_data *shell, t_list *list);
-int     ft_unset(char **argv, t_data *data);
+
 //echo.c
 int     check(char *str);
 char	*ret_line(char **arr);

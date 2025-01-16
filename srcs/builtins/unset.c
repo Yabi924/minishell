@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 17:23:41 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/16 19:44:22 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/16 21:29:42 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,8 @@ char    **del_env(char **env, char *target)
         return NULL;
     while (env[++i])
     {
-        if (is_env(target, env[i]))
-            i++;
-        new[j++] = ft_strdup(env[i]);
+        if (!is_env(target, env[i]))
+            new[j++] = ft_strdup(env[i]);
     }
     new[j] = NULL;
     free_arr(env);
