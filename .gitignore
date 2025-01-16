@@ -1,3 +1,6 @@
 *.a
 *.o
 experiment.c
+str_ll.c
+hell_env.c
+hello.py

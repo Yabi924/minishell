@@ -109,6 +109,18 @@ int     unprint_index(int i, char *str);
 void    skip_unprint(t_data *data);
 int     ft_arrlen(char **arr);
 
+//str_ll.c:
+t_env	*list_create( char *key, char *value);
+void	insert(t_env **link, t_env *newlist);
+t_env	*add_node_end(t_env *head, char *key, char *value, int print);
+void	remove_node(t_env **head, char *key);
+void	remove_head_node(t_env **head);
+
+//hell_env.c:
+t_env	*env_init(char **in);
+void	print_env(t_env *env_ll);
+char	*get_env(t_env *env_ll, char *what);
+
 // int     input_handle(t_data *data, char **env);
 int     input_handle(t_data *data);
 
@@ -120,16 +132,25 @@ void    free_data(t_data *data);
 void    free_linked_list(t_list **list);
 void    free_arr(char **arr);
 
+//Non builtins:
+int list_dir(t_data *mini, char *path);
+char    *path_array(t_data *mini, char *from_env);
+char    **command_make(t_data *mini);
+void    not_builtin(t_data *mini, char **cmd);
+
 //builtins:
 
 //cd.c
-void    get_pwd(void);
 void    assign_oldpwd(t_env *env_ll, char *pwd, t_data *mini);
 void    pwd_update(t_env *env_ll, char *new_pwd, t_data *mini);
 void    home(t_data *mini);
 void    change_dir(t_data *mini);
 
+//pwd.c
+void    get_pwd(void);
+
 //env.c
+void    env(t_data *data);
 
 //exec.c
 void    exec(t_data *data);
@@ -150,7 +171,6 @@ void    get_pwd(void);
 void    assign_oldpwd(t_env *env_ll, char *pwd, t_data *mini);
 void	pwd_update(t_env *env_ll, char *new_pwd, t_data *mini);
 void    home(t_data *mini);
-void    change_dir(t_data *mini);
 
 
 //run_exe.c

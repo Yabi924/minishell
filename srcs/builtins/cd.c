@@ -12,42 +12,78 @@
 
 #include "../../include/minishell.h"
 
-static void update_oldpwd(t_data *data)
-{
-    char    cwd[1024];
-    t_data  *current;
 
-    current = data->env;
-    if (getcwd(cwd, sizeof(cwd)) == NULL)
-        err_exit("getcwd", errno);
-    while (current)
+void    assign_oldpwd(t_env *env_ll, char *pwd, t_data *mini)
+{
+    char    *key;
+
+    while (env_ll != NULL)
     {
-        if (strcmp(current->env, "OLDPWD") == 0)
+        if (!strcmp(env_ll->key, "OLDPWD"))
         {
-            free(current->command_arr);
-            current->command_arr = ft_strdup(cwd);
+            free(env_ll->value);
+            env_ll->value = pwd;
             return ;
         }
-        current = current->command_arr;
+        env_ll = env_ll->next;
     }
+    key = ft_strdup("OLDPWD");
+    add_node_end(mini->env_ll, key, pwd, 0);
 }
 
-static void update_pwd(t_data *data)
+void    pwd_update(t_env *env_ll, char *new_pwd, t_data *mini)
 {
-    char    cwd[1024];
-    t_data  *current;
+    char    *key;
 
-    current = data->env;
-    if (getcwd(cwd, sizeof(cwd)) == NULL)
-        err_exit("getcwd", errno);
-    while (current)
+    while (env_ll != NULL)
     {
-        if (strcmp(current->env, "PWD") == 0)
+        if (!strcmp(env_ll->key, "PWD"))
         {
-            free(current->command_arr);
-            current->command_arr = ft_strdup(cwd);
+            free(env_ll->value);
+            env_ll->value = new_pwd;
             return ;
         }
-        current = current->command_arr;
+        env_ll = env_ll->next;
     }
+    key = ft_strdup("PWD");
+    add_node_end(mini->env_ll, key, new_pwd, 0);
+}
+
+void    home(t_data *mini)
+{
+    char    *new_dir;
+
+    new_dir = get_env(mini->env_ll, "HOME");
+    if (!new_dir[0])
+        ft_printf("bash: cd: HOME not set\n");
+    chdir(new_dir);
+}
+
+void    change_dir(t_data *mini)
+{
+    char    *new_dir;
+    char    *pwd;
+
+    pwd = getcwd(NULL, 1024);
+    if (!mini->command_arr[1])
+        home(mini);
+    else if (!ft_strncmp(mini->command_arr[1], "-", 2))
+        chdir(getenv("HOME"));
+    else if (!ft_strncmp(mini->command_arr[1], "-", 2))
+    {
+        new_dir = get_env(mini->env_ll, "OLDPWD");
+        if (chdir(new_dir) == -1 && !new_dir[0])
+                ft_printf("Minishell: cd: OLDPWD not set\n");
+        else
+                ft_printf("%s\n", new_dir);
+    }
+    else if (chdir(mini->command_arr[1]) == -1)
+    {
+        get_signal_code = 1;
+        ft_printf("Minishell: cd: %s: No such file or directory\n",
+                    mini->command_arr[1]);
+    }
+    assign_oldpwd(mini->env_ll, pwd, mini);
+    pwd = getcwd(NULL, 1024);
+    pwd_update(mini->env_ll, pwd, mini);
 }
