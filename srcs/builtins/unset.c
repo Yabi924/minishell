@@ -5,47 +5,50 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/08 20:24:01 by wwan-ab-          #+#    #+#             */
-/*   Updated: 2025/01/15 16:06:10 by yyan-bin         ###   ########.fr       */
+/*   Created: 2025/01/14 17:23:41 by yyan-bin          #+#    #+#             */
+/*   Updated: 2025/01/16 21:29:42 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static void free_env_node(t_env *env);
-
-int	ft_unset(char **args, t_data *data)
+char    **del_env(char **env, char *target)
 {
-	int		i;
-	t_env	*current;
-	t_env	*previous;
+    int     i;
+    int     j;
+    char    **new;
 
-	i = 0;
-	while (args[++i])
-	{
-		current = data->env_ll;
-		previous = NULL;
-		while (current)
-		{
-			if (strcmp(args[i], current->key) == 0)
-			{
-				if (previous)
-					previous->next = current->next;
-				else
-					data->env_ll = current->next;
-				free_env_node(current);
-				break ;
-			}
-			previous = current;
-			current = current->next;
-		}
-	}
-	return (EXIT_SUCCESS);
+    i = -1;
+    j = 0;
+    new = malloc(ft_arrlen(env) * sizeof(char *));
+    if (!new)
+        return NULL;
+    while (env[++i])
+    {
+        if (!is_env(target, env[i]))
+            new[j++] = ft_strdup(env[i]);
+    }
+    new[j] = NULL;
+    free_arr(env);
+    return (new);
 }
 
-static void free_env_node(t_env *env)
+void    unset(t_data *data, t_list *list, char **env)
 {
-    free(env->key);
-    free(env->value);
-    free(env);
+    int i;
+
+    i = 0;
+    (void)data;
+    if (!list->command[0] || !list->command[1])
+        return ;
+    while (env[i])
+    {
+        if (is_env(list->command[1], env[i]))
+        {
+            data->env = del_env(data->env, list->command[1]);
+            break ;
+        }
+        i++;
+    }
+    //set exit code;
 }
