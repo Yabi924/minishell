@@ -24,7 +24,9 @@ PATH_signal = $(PATH_SRCS)signal/
 s_builtin = $(PATH_BUILTIN)pwd.c\
 			$(PATH_BUILTIN)exit.c\
 			$(PATH_BUILTIN)echo.c\
-			$(PATH_BUILTIN)unset.c
+			$(PATH_BUILTIN)unset.c \
+			$(PATH_BUILTIN)env.c \
+			$(PATH_BUILTIN)cd.c
 
 s_execute = $(PATH_EXECUTE)exec.c
 
@@ -34,7 +36,7 @@ s_his = $(PATH_History)
 
 s_pipe = $(PATH_Pipe)
 
-s_rdrt = $(PATH_Redirection)
+s_rdrt = $(PATH_Redirection)redirection.c
 
 s_env = $(PATH_env)dollar_sign.c \
 		$(PATH_env)count.c
@@ -57,7 +59,9 @@ s_signal = $(PATH_signal)signal.c \
 		   $(PATH_signal)get_stat.c
 
 main= ./srcs/main.c \
-	./srcs/free.c
+	  ./srcs/free.c \
+	  ./srcs/str_ll.c \
+	  ./srcs/hell_env.c
 
 SRCS = $(main) $(s_utils) $(s_input_handle) $(s_token) $(s_env) $(s_signal) $(s_builtin) $(s_execute) #$(s_ctrl) $(s_his) $(s_pipe) $(s_quotes) $(s_rdrt) $(s_env)
 
