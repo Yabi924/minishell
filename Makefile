@@ -24,9 +24,10 @@ PATH_signal = $(PATH_SRCS)signal/
 s_builtin = $(PATH_BUILTIN)pwd.c\
 			$(PATH_BUILTIN)exit.c\
 			$(PATH_BUILTIN)echo.c\
-			$(PATH_BUILTIN)unset.c \
+			$(PATH_BUILTIN)cd.c \
 			$(PATH_BUILTIN)env.c \
-			$(PATH_BUILTIN)cd.c
+			$(PATH_BUILTIN)unset.c \
+			$(PATH_BUILTIN)export.c \
 
 s_execute = $(PATH_EXECUTE)exec.c
 
