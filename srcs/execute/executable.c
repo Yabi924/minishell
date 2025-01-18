@@ -54,7 +54,7 @@ void executable(t_data *shell, t_list *lst)
     if (!cmd_path) {
         ft_putstr_fd("Minishell: ", 2);
         perror(lst->command[0]);
-        shell->cmd_exit_no = 127;
+        g_exit_code = 127;
         return;
     }
 
@@ -69,6 +69,6 @@ void executable(t_data *shell, t_list *lst)
     } else {
         perror("fork");
     }
-
+    g_exit_code = 0;
     free(cmd_path);
 }

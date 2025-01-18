@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cd.c                                            :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wwan-ab- wwan-ab-@student.42kl.edu.my      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:22:56 by wwan-ab-          #+#    #+#             */
-/*   Updated: 2025/01/08 20:22:58 by wwan-ab-         ###   ########.fr       */
+/*   Updated: 2025/01/18 17:17:53 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void    change_dir(t_data *mini)
     }
     else if (chdir(mini->command_arr[1]) == -1)
     {
-        get_signal_code = 1;
+        g_exit_code = 1;
         ft_printf("Minishell: cd: %s: No such file or directory\n",
                     mini->command_arr[1]);
     }

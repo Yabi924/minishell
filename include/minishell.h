@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:38 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/16 21:36:55 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/18 17:17:53 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # define FALSE 0
 
 //External variable to get the signal
-extern int  get_signal_code;
+extern int  g_exit_code;
 
 //link_list for env
 typedef struct s_env

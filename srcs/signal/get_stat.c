@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_stat.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wwan-ab- wwan-ab-@student.42kl.edu.my      +#+  +:+       +#+        */
+/*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 18:16:08 by wwan-ab-          #+#    #+#             */
-/*   Updated: 2025/01/08 18:16:10 by wwan-ab-         ###   ########.fr       */
+/*   Updated: 2025/01/18 17:17:53 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int get_stat(int stat)
     {
         exit_code = WTERMSIG(stat);
         if (exit_code == SIGINT) //Refer to signal interrupt
-            get_signal_code = TRUE;
+            g_exit_code = TRUE;
         return (exit_code + 128);
     }
     if (WIFEXITED(stat))
