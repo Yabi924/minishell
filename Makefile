@@ -29,7 +29,8 @@ s_builtin = $(PATH_BUILTIN)pwd.c\
 			$(PATH_BUILTIN)unset.c \
 			$(PATH_BUILTIN)export.c \
 
-s_execute = $(PATH_EXECUTE)exec.c
+s_execute = $(PATH_EXECUTE)exec.c\
+			$(PATH_EXECUTE)executable.c
 
 s_ctrl = $(PATH_CTRL)
 
@@ -61,8 +62,6 @@ s_signal = $(PATH_signal)signal.c \
 
 main= ./srcs/main.c \
 	  ./srcs/free.c \
-	  ./srcs/str_ll.c \
-	  ./srcs/hell_env.c
 
 SRCS = $(main) $(s_utils) $(s_input_handle) $(s_token) $(s_env) $(s_signal) $(s_builtin) $(s_execute) #$(s_ctrl) $(s_his) $(s_pipe) $(s_quotes) $(s_rdrt) $(s_env)
 

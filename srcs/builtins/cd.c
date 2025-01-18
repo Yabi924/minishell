@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
 
-
+/*
 void    assign_oldpwd(t_env *env_ll, char *pwd, t_data *mini)
 {
     char    *key;
@@ -87,3 +87,4 @@ void    change_dir(t_data *mini)
     pwd = getcwd(NULL, 1024);
     pwd_update(mini->env_ll, pwd, mini);
 }
+*/
