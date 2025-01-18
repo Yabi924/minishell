@@ -69,6 +69,6 @@ void executable(t_data *shell, t_list *lst)
     } else {
         perror("fork");
     }
-
+    shell->cmd_exit_no = 0;
     free(cmd_path);
 }

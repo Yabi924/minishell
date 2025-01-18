@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 17:23:41 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/16 21:29:42 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/18 17:55:10 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,5 @@ void    unset(t_data *data, t_list *list, char **env)
         }
         i++;
     }
-    //set exit code;
+    data->cmd_exit_no = 0;
 }

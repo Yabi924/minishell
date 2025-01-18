@@ -8,7 +8,7 @@ int     right_redirect(t_data *mini, int x, char *valid)
     fd = open(mini->command_arr[x + 1], O_CREAT | O_WRONLY | O_TRUNC, 0644);
     if (fd < 0)
     {
-        get_signal_code = 258;
+        g_exit_code = 258;
         ft_putstr_fd("Minishell: syntax error near unexpected taken 'newline\n", 2);
         return (1);
     }
@@ -42,14 +42,14 @@ int     left_redirect(t_data *mini, int x, char *valid)
     file = get_file(mini->command_arr, x);
     if (x == 0)
     {
-        get_signal_code = 258;
+        g_exit_code = 258;
         ft_putstr_fd("Minishell: syntax error near unexpected taken 'newline\n", 2);
         return (1);
     }
     fd = open(file, O_RDONLY);
     if (fd < 0)
     {
-        get_signal_code = 1;
+        g_exit_code = 1;
         ft_printf("Minishell: no such file or directory: %s\n", file);
         return (1);
     }
