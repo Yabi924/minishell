@@ -8,7 +8,9 @@ void    exec(t_data *data)
         echo(data);
     else if (data->command_arr && !strcmp(data->command_arr[0], "pwd"))
         get_pwd();
-    else if (data->command_arr && !strcmp(data->command_arr[0], "env"))
+    else if (!ft_strncmp(data->list->command[0], "unset\0", 6))
+        unset(data, data->list, data->env);
+    else if (!ft_strncmp(data->list->command[0], "env\0", 4))
         env(data);
     else
         executable(data, data->list);
