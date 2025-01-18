@@ -17,6 +17,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/types.h>
+# include <sys/wait.h>
 # include <dirent.h>
 # include <stdbool.h>
 # include <fcntl.h>
@@ -110,16 +111,16 @@ void    skip_unprint(t_data *data);
 int     ft_arrlen(char **arr);
 
 //str_ll.c:
-t_env	*list_create( char *key, char *value);
-void	insert(t_env **link, t_env *newlist);
-t_env	*add_node_end(t_env *head, char *key, char *value, int print);
-void	remove_node(t_env **head, char *key);
-void	remove_head_node(t_env **head);
+// t_env	*list_create( char *key, char *value);
+// void	insert(t_env **link, t_env *newlist);
+// t_env	*add_node_end(t_env *head, char *key, char *value, int print);
+// void	remove_node(t_env **head, char *key);
+// void	remove_head_node(t_env **head);
 
 //hell_env.c:
-t_env	*env_init(char **in);
-void	print_env(t_env *env_ll);
-char	*get_env(t_env *env_ll, char *what);
+// t_env	*env_init(char **in);
+// void	print_env(t_env *env_ll);
+// char	*get_env(t_env *env_ll, char *what);
 
 // int     input_handle(t_data *data, char **env);
 int     input_handle(t_data *data);
@@ -162,8 +163,11 @@ void    export(t_data *data, t_list *list);
 
 //exec.c
 void    exec(t_data *data);
-
 void    ft_exit(t_data *shell, t_list *list);
+
+//executable.c
+void    executable(t_data *shell, t_list *lst);
+char    *resolve_path(char *cmd, char **env);
 
 //echo.c
 int     check(char *str);
