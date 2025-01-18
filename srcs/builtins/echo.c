@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:23:07 by wwan-ab-          #+#    #+#             */
-/*   Updated: 2025/01/18 17:21:02 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/18 17:54:29 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,5 @@ void	echo(t_data *mini)
 	}
 	write(1, line, ft_strlen(line));
 	free (line);
-	g_exit_code = 0;
+	mini->cmd_exit_no = 0;
 }

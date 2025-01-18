@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:32 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/18 17:17:53 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/18 17:53:14 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void    update_env(t_data *data)
     char    *no;
 
     i = 0;
-    no = ft_itoa(g_exit_code);
+    no = ft_itoa(data->cmd_exit_no);
     if (!no)
         return ;
     exit_code = ft_strjoin("?=", no);

@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 19:45:30 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/18 17:19:39 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/18 17:54:55 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,5 @@ void    export(t_data *data, t_list *list)
     if (del_same_env(data, list->command[1]))
         return ;
     data->env = add_env(data, list->command[1]);
-    g_exit_code = 0;
+    data->cmd_exit_no = 0;
 }

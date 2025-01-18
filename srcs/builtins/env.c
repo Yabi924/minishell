@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 17:57:24 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/18 17:19:01 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/18 17:54:09 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ void    env(t_data *data)
     }
     while (data->env[i])
         printf("%s\n", data->env[i++]);
-    g_exit_code = 0;
+    data->cmd_exit_no = 0;
 }
