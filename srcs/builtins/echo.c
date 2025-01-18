@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:23:07 by wwan-ab-          #+#    #+#             */
-/*   Updated: 2025/01/18 17:18:36 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/01/18 17:21:02 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,13 @@ void	echo(t_data *mini)
 	char	*tmp;
 	char	*line;
 
-	line = ret_line(mini->command_arr);
-	if (ft_strncmp(mini->command_arr[1], "-n", 2))
+	if (!mini->list->command[1])
+	{
+		write(1, "\n", 1);
+		return ;
+	}
+	line = ret_line(mini->list->command);
+	if (ft_strncmp(mini->list->command[1], "-n", 2))
 	{
 		tmp = strjoin_helper(line, "\n", 1, 0);
 		line = ft_strdup(tmp);
