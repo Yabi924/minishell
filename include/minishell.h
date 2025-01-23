@@ -161,6 +161,7 @@ void    export(t_data *data, t_list *list);
 //exec.c
 void    exec(t_data *data);
 void    ft_exit(t_data *shell, t_list *list);
+void    exit_shell(void);
 
 //executable.c
 void    executable(t_data *shell, t_list *lst);
