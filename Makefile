@@ -21,8 +21,7 @@ PATH_utils = $(PATH_fn)utils/
 PATH_signal = $(PATH_SRCS)signal/
 
 #src
-s_builtin = $(PATH_BUILTIN)pwd.c\
-			$(PATH_BUILTIN)exit.c\
+s_builtin = $(PATH_BUILTIN)exit.c\
 			$(PATH_BUILTIN)echo.c\
 			$(PATH_BUILTIN)cd.c \
 			$(PATH_BUILTIN)env.c \
@@ -62,6 +61,8 @@ s_signal = $(PATH_signal)signal.c \
 
 main= ./srcs/main.c \
 	  ./srcs/free.c \
+	  ./srcs/str_ll.c \
+	  ./srcs/hell_env.c
 
 SRCS = $(main) $(s_utils) $(s_input_handle) $(s_token) $(s_env) $(s_signal) $(s_builtin) $(s_execute) #$(s_ctrl) $(s_his) $(s_pipe) $(s_quotes) $(s_rdrt) $(s_env)
 
