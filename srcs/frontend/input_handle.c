@@ -12,18 +12,6 @@
 
 #include "../../include/minishell.h"
 
-// void    exe(t_data *data)
-// {
-//     if (!ft_strncmp(data->list->command[0], "unset\0", 6))
-//         unset(data, data->list, data->env);
-//     else if (!ft_strncmp(data->list->command[0], "env\0", 4))
-//         env(data);
-//     else if (!ft_strncmp(data->list->command[0], "export\0", 7))
-//         export(data, data->list);
-//     else
-//         printf("other\n");
-// }
-
 int input_handle(t_data *data)
 {
     print_prompt(data);
