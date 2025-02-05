@@ -49,6 +49,11 @@ void    errorMsg2(char *input, char *msg, int index)
     ft_putstr_fd("\n", 2);
 }
 
-/*
-    Got more things to handle
-*/
+void	errorMsg3(char *builtin, char *msg)
+{
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(builtin, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(msg, 2);
+	ft_putstr_fd("\n", 2);
+}

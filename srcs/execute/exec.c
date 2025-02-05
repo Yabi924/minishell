@@ -15,7 +15,7 @@ void    exec(t_data *data)
     else if (!ft_strncmp(data->list->command[0], "env\0", 4))
         env(data);
     else if (data->command_arr && !strcmp(data->command_arr[0], "cd"))
-        change_dir(data);
+        ft_cd(data);
     else
         executable(data, data->list);
 }
