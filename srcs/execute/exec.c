@@ -4,7 +4,9 @@
 
 void    exec(t_data *data)
 {
-    if (data->command_arr && !strcmp(data->command_arr[0], "echo"))
+    if (!data->command_arr[0])
+        return ;
+    if (data->command_arr && !strncmp(data->command_arr[0], "echo\0", 5))
         echo(data);
     else if (data->command_arr && !strcmp(data->command_arr[0], "pwd"))
         get_pwd();
