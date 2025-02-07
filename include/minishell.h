@@ -142,10 +142,16 @@ void    not_builtin(t_data *mini, char **cmd);
 //builtins:
 
 //cd.c
-void    assign_oldpwd(t_env *env_ll, char *pwd, t_data *mini);
-void    pwd_update(t_env *env_ll, char *new_pwd, t_data *mini);
-void    home(t_data *mini);
-void    change_dir(t_data *mini);
+void    get_pwd(void);
+void    errorMsg3(char *builtin, char *msg);
+void    err_exit(char *action, int code);
+char	*env_val(char *key, t_env *env);
+void    ft_cd(t_data *data);
+// void    assign_oldpwd(t_env *env_ll, char *pwd, t_data *mini);
+// void    pwd_update(t_env *env_ll, char *new_pwd, t_data *mini);
+// void    home(t_data *mini);
+// void    change_dir(t_data *mini);
+
 
 //env.c
 void    env(t_data *data);
@@ -176,7 +182,6 @@ void	echo(t_data *mini);
 void child_process(t_data *mshell, t_list *lst);
 
 //directory.c
-void    get_pwd(void);
 void	pwd_update(t_env *env_ll, char *new_pwd, t_data *mini);
 void    home(t_data *mini);
 
