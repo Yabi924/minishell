@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:57 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/11 18:22:24 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/11 19:54:43 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,27 +87,3 @@ int ft_arrlen(char **arr)
         i++;
     return (i);
 }
-
-// int explan(char **new, char *s, int p, char **env)
-// {
-//     int         i;
-//     int         j;
-//     char    *temp;
-
-//     i = 0;
-//     j = -1;
-//     while (s[p + i] && s[p + i] != ' ' && s[p + i] != '$' && s[p + i] != '"')
-//         i++;
-//     while (env[++j])
-//     {
-//         if (is_env(s + p, env[j]))
-//         {
-//             temp = ft_strdup(env[j] + i + 1);
-//             *new = ft_strjoin_free(*new, temp);
-//             if (temp)
-//                 free(temp);
-//             break ;
-//         }
-//     }
-//     return (i + 1);
-// }

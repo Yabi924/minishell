@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:32 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/18 18:11:09 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/11 18:37:10 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void    initminishell(t_data *data, char **env)
     data->env = copy_env(env);
     // if (!data->env)
         //error malloc
+    data->first_run_init_dollar = 0;
     data->cmd_exit_no = 0;
     data->list = NULL;
     tcgetattr(STDIN_FILENO, &data->ori_terminal);
