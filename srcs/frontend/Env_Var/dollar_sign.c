@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 18:58:54 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/11 17:58:50 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/11 18:27:54 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void init_dollar(t_data *data)
 {
     if (data->dollar.f)
         return ;
-    data->dollar.env = data->env;
-    data->dollar.input = data->new_input;
+    data->dollar.env = copy_env(data->env);
+    data->dollar.input = ft_strdup(data->new_input);
     data->dollar.new = NULL;
     data->dollar.temp = NULL;
     data->dollar.f = 1;
@@ -49,14 +49,20 @@ void    explan(t_dollar *d)
     i = 0;
     j = -1;
     d->i++;
-    while (d->input[d->i + i] && d->input[d->i + i] != ' ' && \
-        d->input[d->i + i] != '"' && d->input[d->i + i] != '$')
+    if (d->quotes)
+        while (d->input[d->i + i] && d->input[d->i + i] != ' ' && \
+            d->input[d->i + i] != '"' && d->input[d->i + i] != '$' && \
+            d->input[d->i + i] != '\'')
         i++;
+    else
+        while (d->input[d->i + i] && d->input[d->i + i] != ' ' && \
+            d->input[d->i + i] != '"' && d->input[d->i + i] != '$')
+            i++;
     while (d->env[++j])
     {
-        if (is_env(d->input[d->i], d->env[j]))
+        if (is_env(d->input + d->i, d->env[j]))
         {
-            temp = ft_strdup(d->env + i + 1);
+            temp = ft_strdup(d->env[j] + i + 1);
             d->new = ft_strjoin_free(d->new, temp);
             d->i += i;
             if (temp)
@@ -71,12 +77,25 @@ void    explan_dollar_sign(t_dollar *d)
     while (d->input[d->i])
     {
         if (d->input[d->i] && d->input[d->i] == '"')
-            d->quotes = 1;
+            d->quotes++;
         if ((d->input[d->i] && d->input[d->i] == '$') && \
             (d->input[d->i + 1] && d->input[d->i + 1] != ' '))
             explan(d);
         else if (d->input[d->i] && d->input[d->i] == '\'' && !d->quotes)
-            d->i += copy_quotes(&d->new, d->input, d->i + 1, '\'');
+            d->i += copy_quotes(&d->new, d->input, d->i, '\'');
+        else
+        {
+            d->temp = ft_substr(d->input, d->i, 1);
+            d->new = ft_strjoin_free(d->new, d->temp);
+            if (d->temp)
+            {
+                free(d->temp);
+                d->temp = NULL;
+            }
+            if (d->quotes == 2)
+                d->quotes = 0;
+            d->i++;
+        }
     }
 }
 
