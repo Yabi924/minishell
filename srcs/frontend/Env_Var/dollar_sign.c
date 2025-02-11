@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 18:58:54 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/11 17:48:01 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/11 17:53:23 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,25 @@ void    free_dollar(t_dollar *dollar)
 void    explan(t_dollar *d)
 {
     int i;
+    int j;
     char    *temp;
 
     i = 0;
+    j = -1;
     d->i++;
     while (d->input[d->i + i] && d->input[d->i + i] != ' ' && \
         d->input[d->i + i] != '"' && d->input[d->i + i] != '$')
         i++;
-    
+    while (d->env[++j])
+    {
+        if (is_env(d->input[d->i], d->env[j]))
+        {
+            temp = ft_strdup(d->env + i + 1);
+            d->new = ft_strjoin_free(d->new, temp);
+            d->i += i;
+            break ;
+        }
+    }
 }
 
 void    explan_dollar_sign(t_dollar *d)
