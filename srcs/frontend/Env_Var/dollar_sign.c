@@ -6,92 +6,61 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 18:58:54 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/12 15:07:34 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/11 17:39:15 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-// char    *copy_env(char *env, int len)
-// {
-//     int     i;
-//     char *temp;
-
-//     i = -1;
-//     temp = ft_calloc(len + 1, sizeof(char));
-//     while (env[++i])
-//         temp[i] = env[i];
-//     return (temp);
-// }
-
-int explan(char **new, char *s, int p, char **env)
+void init_dollar(t_data *data)
 {
-    int         i;
-    int         j;
-    char    *temp;
-
-    i = 0;
-    j = -1;
-    while (s[p + i] && s[p + i] != ' ' && s[p + i] != '$' && s[p + i] != '"')
-        i++;
-    while (env[++j])
-    {
-        if (is_env(s + p, env[j]))
-        {
-            temp = ft_strdup(env[j] + i + 1);
-            *new = ft_strjoin_free(*new, temp);
-            if (temp)
-                free(temp);
-            break ;
-        }
-    }
-    return (i + 1);
+    if (data->dollar.f)
+        return ;
+    data->dollar.env = data->env;
+    data->dollar.input = data->new_input;
+    data->dollar.new = NULL;
+    data->dollar.temp = NULL;
+    data->dollar.f = 1;
+    data->dollar.i = 0;
+    data->dollar.j = 0;
 }
 
-int copy(char **new, char *s, int p)
+void    free_dollar(t_dollar *dollar)
 {
-    int i;
-    int j;
-    char *temp;
-
-    i = 0;
-    j = 0;
-    if (s[p + i] == '$')
-        i = 1;
-    else
-        while (s[p + i] && s[p + i] != '$' && s[p + i] != '\'')
-            i++;
-    temp = ft_calloc(i + 1, sizeof(char));
-    while (j < i)
-    {
-        temp[j] = s[p + j];
-        j++;
-    }
-    *new = ft_strjoin_free(*new, temp);
-    if (temp)
-        free(temp);
-    return (i);
+    if (dollar->env)
+        dollar->env = NULL;
+    if (dollar->input)
+        dollar->input = NULL;
+    if (dollar->new)
+        free(dollar->new);
+    if (dollar->temp)
+        free(dollar->temp);
+    dollar->i = 0;
+    dollar->j = 0;
+    dollar->quotes = 0;
 }
 
-char    *explan_dollar_sign(char *s, char **env)
+void    explan(t_dollar *d)
 {
-    int i;
-    char    *new;
+    d->i++;
+    
+}
 
-    i = 0;
-    new = ft_calloc(calculate_len(s, env) + 1, sizeof(char));
-    while (s[i])
+void    explan_dollar_sign(t_dollar *d)
+{
+    while (d->input[d->i])
     {
-        if (s[i] == '\'')
-        {
-            i += copy_quotes(&new, s, i, '\'');
-        }
-        else if (s[i] == '$' && s[i + 1] && s[i + 1] != ' ')
-            i += explan(&new, s, i + 1, env);
-        else
-            i += copy(&new, s, i);
+        if (d->input[d->i] && d->input[d->i] == '"')
+            d->quotes = 1;
+        if ((d->input[d->i] && d->input[d->i] == '$') && \
+            (d->input[d->i + 1] && d->input[d->i + 1] != ' '))
+            explan(d);
     }
-    if (s)
-        free(s);
-    return (new);
+}
+
+void    dollar_sign(t_data *data)
+{
+    init_dollar(data);
+    explan_dollar_sign(&data->dollar);
+    free_dollar(&data->dollar);
 }

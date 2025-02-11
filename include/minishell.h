@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:38 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/18 17:17:53 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/11 17:35:12 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,18 @@ typedef struct s_env
 	struct s_env	*next;
 }	t_env;
 
+typedef struct s_dollar
+{
+    char    **env;
+    char    *input;
+    char    *temp;
+    char    *new;
+    int     i;
+    int     j;
+    int     f;
+    int     quotes;
+}   t_dollar;
+
 typedef struct s_data
 {
     char    **command_arr;
@@ -65,6 +77,7 @@ typedef struct s_data
     struct  termios ori_terminal;
     struct  termios mod_terminal;
     t_list  *list;
+    t_dollar dollar;
 }   t_data;
 
 //Temporary global variable
@@ -96,7 +109,7 @@ void    add_space(t_data *data);
 int     copy_quotes(char **new_input, char *input, int position, char target);
 
 //dollar_sign.c
-char    *explan_dollar_sign(char *s, char **env);
+void    dollar_sign(t_data *data);
 
 //count.c
 int     calculate_len(char *s, char **env);
