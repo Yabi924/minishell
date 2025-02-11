@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 18:58:54 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/11 17:53:23 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/11 17:58:50 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void    explan(t_dollar *d)
             temp = ft_strdup(d->env + i + 1);
             d->new = ft_strjoin_free(d->new, temp);
             d->i += i;
+            if (temp)
+                free(temp);
             break ;
         }
     }
@@ -73,6 +75,8 @@ void    explan_dollar_sign(t_dollar *d)
         if ((d->input[d->i] && d->input[d->i] == '$') && \
             (d->input[d->i + 1] && d->input[d->i + 1] != ' '))
             explan(d);
+        else if (d->input[d->i] && d->input[d->i] == '\'' && !d->quotes)
+            d->i += copy_quotes(&d->new, d->input, d->i + 1, '\'');
     }
 }
 
