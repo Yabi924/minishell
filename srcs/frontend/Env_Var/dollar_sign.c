@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 18:58:54 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/11 17:39:15 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/11 17:48:01 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,14 @@ void    free_dollar(t_dollar *dollar)
 
 void    explan(t_dollar *d)
 {
+    int i;
+    char    *temp;
+
+    i = 0;
     d->i++;
+    while (d->input[d->i + i] && d->input[d->i + i] != ' ' && \
+        d->input[d->i + i] != '"' && d->input[d->i + i] != '$')
+        i++;
     
 }
 
