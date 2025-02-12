@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 12:43:46 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/14 16:42:09 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/11 19:51:23 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ int is_env(char *s, char *env)
     i = 0;
     j = 0;
     k = 0;
-    while (s[i] && s[i] != ' ' && s[i] != '"' && s[i] != '$')
+    while (s[i] && s[i] != ' ' && !is_target(s[i], "'\"") && s[i] != '$')
         i++;
     while (env[j] && env[j] != '=')
         j++;
-    while (s[k] && env[k] && s[k] == env[k] && (s[k] != ' ' || s[k] != '"'))
+    while (s[k] && env[k] && s[k] == env[k] && (s[k] != ' ' || !is_target(s[k], "'\"")))
         k++;
     if (env[k] == '=' && k == i)
         return (1);
