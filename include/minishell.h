@@ -62,15 +62,20 @@ typedef struct s_data
     char    **command_arr;
     char    **env;
     char    cwd[1042];
+    char    **input_arr;
     char    *input;
     char    *new_input;
     int     cmd_exit_no;
     int     heredoc;
+    int     err_stat;
+    int     fd[2];
     int     in_fd;
     int     out_fd;
+    pid_t   fork;
     int     stdin; //Test case
     int     stdout; //Test case
     int     flag;
+    int     heredoc_zero_if_valid;
     t_env   *env_ll;
     char    **environ; //Test case
     struct  termios ori_terminal;
@@ -78,6 +83,7 @@ typedef struct s_data
     t_list  *list;
     t_dollar dollar;
     int     first_run_init_dollar;
+    struct  s_data  *next;
 }   t_data;
 
 //Temporary global variable
@@ -201,6 +207,13 @@ void child_process(t_data *mshell, t_list *lst);
 void	pwd_update(t_env *env_ll, char *new_pwd, t_data *mini);
 void    home(t_data *mini);
 
+//pipe.c
+char    **arr_dup(char **dup);
+void    cmd(t_data *mini, t_data *data, int exit_if_zero);
+void    run_dup(int *tmp_read, t_data *mini, t_data *data, t_data *first);
+void    run_heredoc(t_data *mini, t_data *data);
+void    run_pipes(t_data *mini, t_data *data, t_data *first);
+void    run(t_data *mini, t_data *data);
 
 //run_exe.c
 int     exit_num(char **in);
