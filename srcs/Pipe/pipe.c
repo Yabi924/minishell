@@ -27,7 +27,7 @@ void    cmd(t_data *mini, t_data *data, int exit_if_zero)
     if (builtin == 1)
         command_handle(mini, exit_if_zero);
     else
-        //run_bin(mini, commands, exit_if_zero);
+        run_bin(mini, commands, exit_if_zero);
     if (exit_if_zero == 0)
         exit(0);
     free_arr(commands);
@@ -70,10 +70,48 @@ void    run_heredoc(t_data *mini, t_data *data)
 
 void    run_pipes(t_data *mini, t_data *data, t_data *first)
 {
+    int tmp_read;
 
+    tmp_read = -2;
+    while (data != NULL)
+    {
+        pre_fork(mini, data);
+        data->fork = fork();
+        if (data->fork == 0)
+        {
+            run_dup(&tmp_read, mini, data, first);
+            exit(1);
+        }
+        else if (data->fork == -1)
+        {
+            ft_putstr_fd("Fork failed\n", 2);
+            exit(1);
+        }
+        waitpid(0, &mini->err_stat, -1);
+        if (data->next != NULL)
+            tmp_read = data->fd[0];
+        term_reset(data);
+        data = data->next;
+    }
 }
 
 void    run(t_data *mini, t_data *data)
 {
+    t_data  *head;
+    t_data  *first;
 
+    if (!run_no_pipes(mini, data))
+        return ;
+    first = data;
+    run_pipes(mini, data, first);
+    close_all_pipes(first);
+    head = first;
+    while (head != NULL)
+    {
+        waitpid(head->fork, &mini->err_stat, WUNTRACED);
+        g_exit_code = mini->err_stat % 255;
+        if (WIFSIGNALED(mini->err_stat))
+            g_exit_code = (WTERMSIG(mini->err_stat) + 128);
+        head = head->next;
+    }
 }

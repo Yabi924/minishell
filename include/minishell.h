@@ -67,9 +67,11 @@ typedef struct s_data
     char    *new_input;
     int     cmd_exit_no;
     int     heredoc;
+    int     err_stat;
     int     fd[2];
     int     in_fd;
     int     out_fd;
+    pid_t   fork;
     int     stdin; //Test case
     int     stdout; //Test case
     int     flag;
@@ -81,6 +83,7 @@ typedef struct s_data
     t_list  *list;
     t_dollar dollar;
     int     first_run_init_dollar;
+    struct  s_data  *next;
 }   t_data;
 
 //Temporary global variable
