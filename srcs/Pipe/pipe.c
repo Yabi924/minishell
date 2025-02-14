@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 void    cmd(t_data *mini, t_data *data, int exit_if_zero)
 {
@@ -40,7 +40,7 @@ void    run_dup(int *tmp_read, t_data *mini, t_data *data, t_data *first)
         dup2(data->fd[1], STDERR_FILENO);
     else if (data->next != NULL)
     {
-        if (!data->heredoc_zero_if_valid != NULL)
+        if (!data->heredoc_zero_if_valid)
             dup2(*tmp_read, STDIN_FILENO);
         dup2(data->fd[1], STDOUT_FILENO);
     }
@@ -49,7 +49,7 @@ void    run_dup(int *tmp_read, t_data *mini, t_data *data, t_data *first)
         if (!data->heredoc_zero_if_valid)
             dup2(*tmp_read, STDIN_FILENO);
     }
-    close(first);
+    close_all_pipes(first);
     cmd(mini, data, 0);
 }
 

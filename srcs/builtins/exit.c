@@ -14,26 +14,28 @@
 
 void builtin_exit(t_data *shell, t_list *list)
 {
-    printf("exit\n");
+    int i;
 
-    if (list->command[1] && list->command[2]) // Too many arguments
+    i = -1;
+    ft_printf("exit\n");
+    if (list->command[1] && !list->command[2])
     {
-        fprintf(stderr, "Minishell: exit: too many arguments\n");
-        shell->cmd_exit_no = 1;
-        return;
-    }
-    else if (list->command[1]) // Argument provided
-    {
-        for (int i = 0; list->command[1][i]; i++)
+        while (list->command[1][++i])
         {
             if (!ft_isdigit(list->command[1][i]))
             {
-                fprintf(stderr, "Minishell: exit: %s: numeric argument required\n", list->command[1]);
-                exit(2);
+                ft_printf("Testing1");
+                free(list->command);
+                exit(shell->cmd_exit_no);
             }
         }
-        shell->cmd_exit_no = ft_atoi(list->command[1]) % 256;
+        shell->cmd_exit_no = ft_atoi(list->command[1]);
+        shell->cmd_exit_no %= 256;
     }
+    else if (list->command[1] && list->command[2])
+        ft_printf("Testing2");
+    else
+        shell->cmd_exit_no = 0;
     exit(shell->cmd_exit_no);
 }
 

@@ -28,6 +28,8 @@ typedef struct s_list
 {
     char			**command;
     char            *delimiter;
+    char            *in_path;
+    char            *out_path;
     int				fd[2];
     int				input;
     int				output;
