@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 18:58:54 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/11 19:53:24 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/14 14:20:34 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void    free_dollar(t_dollar *dollar)
     dollar->quotes = 0;
 }
 
-void    explan(t_dollar *d)
+void    explan(t_dollar *d, int j)
 {
     int i;
 
@@ -64,11 +64,11 @@ void    explan(t_dollar *d)
         while (d->input[d->i + i] && d->input[d->i + i] != ' ' && \
             d->input[d->i + i] != '"' && d->input[d->i + i] != '$')
             i++;
-    while (d->env[++d->j])
+    while (d->env[++j])
     {
-        if (is_env(d->input + d->i, d->env[d->j]))
+        if (is_env(d->input + d->i, d->env[j]))
         {
-            d->temp = ft_strdup(d->env[d->j] + i + 1);
+            d->temp = ft_strdup(d->env[j] + i + 1);
             d->new = ft_strjoin_free(d->new, d->temp);
             if (d->temp)
                 free(d->temp);
@@ -86,7 +86,7 @@ void    explan_dollar_sign(t_dollar *d)
             d->quotes++;
         if ((d->input[d->i] && d->input[d->i] == '$') && \
             (d->input[d->i + 1] && d->input[d->i + 1] != ' '))
-            explan(d);
+            explan(d, d->j);
         else if (d->input[d->i] && d->input[d->i] == '\'' && !d->quotes)
             d->i += copy_quotes(&d->new, d->input, d->i, '\'');
         else
