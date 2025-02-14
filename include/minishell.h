@@ -71,6 +71,9 @@ typedef struct s_data
     int     fd[2];
     int     in_fd;
     int     out_fd;
+    int     term_in;
+    int     term_out;
+    int     *ll_len;
     pid_t   fork;
     int     stdin; //Test case
     int     stdout; //Test case
@@ -147,9 +150,6 @@ char	*get_env(t_env *env_ll, char *what);
 // int     input_handle(t_data *data, char **env);
 int     input_handle(t_data *data);
 
-//signal.c
-void    signal_int(int signal_no);
-
 //free.c
 void    free_data(t_data *data);
 void    free_linked_list(t_list **list);
@@ -169,14 +169,13 @@ void    errorMsg3(char *builtin, char *msg);
 void    err_exit(char *action, int code);
 char	*env_val(char *key, t_env *env);
 void    ft_cd(t_data *data);
-// void    assign_oldpwd(t_env *env_ll, char *pwd, t_data *mini);
-// void    pwd_update(t_env *env_ll, char *new_pwd, t_data *mini);
-// void    home(t_data *mini);
-// void    change_dir(t_data *mini);
-
 
 //env.c
 void    env(t_data *data);
+
+//env_2d.c
+int     count2(t_env *env);
+char    **env_2d(t_env *env);
 
 //unset.c
 char    **del_env(char **env, char *target);
@@ -189,7 +188,10 @@ void    export(t_data *data, t_list *list);
 //exec.c
 void    exec(t_data *data);
 void    ft_exit(t_data *shell, t_list *list);
-void    exit_shell(void);
+void    exit_shell(t_data *shell);
+
+//exit.c
+void builtin_exit(t_data *shell, t_list *list);
 
 //executable.c
 void    executable(t_data *shell, t_list *lst);
@@ -207,13 +209,35 @@ void child_process(t_data *mshell, t_list *lst);
 void	pwd_update(t_env *env_ll, char *new_pwd, t_data *mini);
 void    home(t_data *mini);
 
+//redirection.c
+void	here_doc2(t_data *mshell, t_list *lst, int fd, char *input);
+void	here_doc(t_data *mshell, t_list *lst);
+void	redirect_setup2(t_list *lst, int i, int status);
+void	redirect_setup(t_list *lst, int i, int status);
+int     redirection(t_data *mshell, t_list *lst);
+// int     right_redirect(t_data *mini, int x, char *valid);
+// char    *get_file(char **in, int x);
+// int     left_redirect(t_data *mini, int x, char *valid);
+// int     redirect_check(t_data *mini, char *valid);
+
+//heredoc.c
+int     heredoc_check(t_data *mini);
+void    heredoc_run(t_data *mini, char *str);
+int     heredoc2(t_data *mini, int x);
+char    **mal_dup(t_data *mini);
+int     is_redir(char *str);
+
 //pipe.c
-char    **arr_dup(char **dup);
 void    cmd(t_data *mini, t_data *data, int exit_if_zero);
 void    run_dup(int *tmp_read, t_data *mini, t_data *data, t_data *first);
 void    run_heredoc(t_data *mini, t_data *data);
 void    run_pipes(t_data *mini, t_data *data, t_data *first);
 void    run(t_data *mini, t_data *data);
+
+//pipe_utils.c
+
+//pipe_utils2.c
+
 
 //run_exe.c
 int     exit_num(char **in);
@@ -244,11 +268,15 @@ void    pll(t_list *list);
 */
 int     get_stat(int stat);
 
-void    signal_int(int signal_no);
-void    signal_quit(int signal_no);
-void    signal_int_child(int signal_no);
-void    signal_quit_child(int signal_no);
-void    heredoc(int signo);
+//signal.c
+void    quit_3(int sigquit);
+void    quit_subshell(int sigint);
+void    signal_int(int sigint);
+void    hd_action(int sigint);
+void    ft_signal(int flag);
+void    flag_0();
+void    flag_1();
+void    flag_2();
 
 
 #endif
