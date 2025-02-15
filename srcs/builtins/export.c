@@ -71,7 +71,7 @@ int del_same_env(t_data *data, char *target)
     return (0);
 }
 
-void    export(t_data *data, t_list *list)
+void    ft_export(t_data *data, t_list *list)
 {
     if (!list->command[0] || !list->command[1])
         return ;

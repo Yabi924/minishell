@@ -43,6 +43,7 @@ void    update_env(t_data *data)
     exit_code = ft_strjoin("?=", no);
     if (!exit_code)
         return ;
+    free(no);
     while (data->env[i])
     {
         if (is_env("?", data->env[i]))

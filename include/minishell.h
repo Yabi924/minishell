@@ -161,46 +161,50 @@ char    *path_array(t_data *mini, char *from_env);
 char    **command_make(t_data *mini);
 void    not_builtin(t_data *mini, char **cmd);
 
-//builtins:
+//env_2d.c
+int     count2(t_env *env);
+char    **env_2d(t_env *env);
+
+
+/*
+    Built in functions:
+*/
+//exit.c
+void    ft_exit(t_data *shell);
+//void    builtin_exit(t_data *shell, t_list *list);
+
+//env.c
+void    ft_env(t_data *data);
+
+//echo.c
+int     check(char *str);
+char	*ret_line(char **arr);
+void	ft_echo(t_data *data);
+
+//export.c
+void    ft_export(t_data *data, t_list *list);
+
+//unset.c
+char    **del_env(char **env, char *target);
+void    ft_unset(t_data *data, t_list *list, char **env);
 
 //cd.c
-void    get_pwd(void);
 void    errorMsg3(char *builtin, char *msg);
 void    err_exit(char *action, int code);
 char	*env_val(char *key, t_env *env);
 void    ft_cd(t_data *data);
 
-//env.c
-void    env(t_data *data);
+//pwd.c
+void    ft_pwd();
 
-//env_2d.c
-int     count2(t_env *env);
-char    **env_2d(t_env *env);
-
-//unset.c
-char    **del_env(char **env, char *target);
-void    unset(t_data *data, t_list *list, char **env);
-
-//export.c
-void    export(t_data *data, t_list *list);
-
-
-//exec.c
-void    exec(t_data *data);
-void    ft_exit(t_data *shell, t_list *list);
-void    exit_shell(t_data *shell);
-
-//exit.c
-void builtin_exit(t_data *shell, t_list *list);
-
+/*
+    Executable
+*/
 //executable.c
-void    executable(t_data *shell, t_list *lst);
+void    built_in(t_data *data);
+void    ft_execute(t_data *shell, t_list *lst);
 char    *resolve_path(char *cmd, char **env);
 
-//echo.c
-int     check(char *str);
-char	*ret_line(char **arr);
-void	echo(t_data *mini);
 
 //Child process
 void child_process(t_data *mshell, t_list *lst);

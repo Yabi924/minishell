@@ -1,5 +1,5 @@
 #flags
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address,undefined
 
 #program name
 NAME = minishell
@@ -21,15 +21,15 @@ PATH_utils = $(PATH_fn)utils/
 PATH_signal = $(PATH_SRCS)signal/
 
 #src
-s_builtin = $(PATH_BUILTIN)exit.c \
-			$(PATH_BUILTIN)echo.c \
+s_builtin = $(PATH_BUILTIN)echo.c \
 			$(PATH_BUILTIN)cd.c \
-			$(PATH_BUILTIN)env.c \
-			$(PATH_BUILTIN)unset.c \
+			$(PATH_BUILTIN)pwd.c \
 			$(PATH_BUILTIN)export.c \
+			$(PATH_BUILTIN)unset.c \
+			$(PATH_BUILTIN)env.c \
+			$(PATH_BUILTIN)exit.c \
 
-s_execute = $(PATH_EXECUTE)exec.c \
-			$(PATH_EXECUTE)executable.c \
+s_execute =	$(PATH_EXECUTE)executable.c \
 			$(PATH_EXECUTE)heredoc.c \
 
 s_ctrl = $(PATH_CTRL)

@@ -46,6 +46,8 @@ void    free_linked_list(t_list **list)
 void    free_data(t_data *data)
 {
     free_arr(data->command_arr);
+    free(data->input);
+    free(data->new_input);
     if (ft_lstsize(data->list) == 1)
     {
         ft_lstdelone(data->list, &free_arr);
@@ -53,4 +55,5 @@ void    free_data(t_data *data)
     }
     else 
         free_linked_list(&data->list);
+
 }

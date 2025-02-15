@@ -25,7 +25,7 @@ int input_handle(t_data *data)
     {
         // free(data->env); // Free existing environment
         parser(data);
-        exec(data); //Function that will execute the command
+        built_in(data); //Function that will execute the command
     }
     tcsetattr(STDIN_FILENO, TCSANOW, &data->ori_terminal);
     free_data(data);
