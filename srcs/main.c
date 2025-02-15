@@ -75,15 +75,17 @@ int	main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv;
 	t_data	minishell_data;
+	t_list	list;
 
 	initminishell(&minishell_data, env);
+	//list = NULL;
     //init(env); //Test case
 	while (1)
 	{
 		update_env(&minishell_data);
 		signal(SIGINT, signal_int);
 		signal(SIGQUIT, SIG_IGN);
-		input_handle(&minishell_data);
+		input_handle(&minishell_data, &list);
 		tcsetattr(STDIN_FILENO, TCSANOW, &minishell_data.mod_terminal);
 	}
 	return (0);

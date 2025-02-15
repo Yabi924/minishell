@@ -12,48 +12,21 @@
 
 #include "../include/minishell.h"
 
-/*
-    Display error message if change directory (cd) is not correct.
-
-    For example:
-    Shell> cd Home
-    cd: no such file or directory: Hello
-*/
-void    errorMsg1(char *built_in, char *args, char *msg)
+//Test
+void	err_msg(t_data *mshell, int exit_status, char *msg, char *arg)
 {
-    ft_putstr_fd(built_in, 2);
-    ft_putstr_fd(": ", 2);
-    ft_putstr_fd(args, 2);
-    ft_putstr_fd(": ", 2);
-    ft_putstr_fd(msg, 2);
-    ft_putstr_fd("\n", 2);
-}
+	int	i;
 
-/*
-    Tells user where the error at:
-         ↓
-    echo "Haha
-    Syntax error:
-*/
-void    errorMsg2(char *input, char *msg, int index)
-{
-    int i;
-
-    i = 0;
-    while (i++ < index)
-        ft_putstr_fd(" ", 2);
-    ft_putstr_fd("↓\n", 2);
-    ft_putstr_fd(input, 2);
-    ft_putstr_fd("\nminishell: syntax error: ", 2);
-    ft_putstr_fd(msg, 2);
-    ft_putstr_fd("\n", 2);
-}
-
-void	errorMsg3(char *builtin, char *msg)
-{
-	ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd(builtin, 2);
-	ft_putstr_fd(": ", 2);
-	ft_putstr_fd(msg, 2);
-	ft_putstr_fd("\n", 2);
+	i = -1;
+	while (msg[++i])
+	{
+		if (msg[i] == '%' && msg[i + 1] == 's' && arg)
+		{
+			ft_putstr_fd(arg, 2);
+			++i;
+			continue ;
+		}
+		ft_putchar_fd(msg[i], 2);
+	}
+	mshell->cmd_exit_no = exit_status;
 }

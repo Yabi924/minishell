@@ -12,36 +12,81 @@
 
 #include "../../include/minishell.h"
 
-/*built in*/
-void    built_in(t_data *data)
+void	kindergarden(t_data *mshell, t_list *lst, pid_t *childs)
 {
-    if (!data->command_arr[0])
-        return ;
-    /*echo*/
-    else if (data->command_arr && !ft_strncmp(data->command_arr[0], "echo\0", 5))
-        ft_echo(data);
-    /*cd*/
-    else if (data->command_arr && !ft_strncmp(data->command_arr[0], "cd\0", 3))
-        ft_cd(data);
-    /*pwd*/
-    else if (data->command_arr && !ft_strncmp(data->command_arr[0], "pwd\0", 4))
-        ft_pwd();
-    /*export*/
-    else if (!ft_strncmp(data->list->command[0], "export\0", 7))
-         ft_export(data, data->list);
-    /*unset*/
-    else if (!ft_strncmp(data->list->command[0], "unset\0", 4))
-        ft_unset(data, data->list, data->env);
-    /*env*/
-    else if (!ft_strncmp(data->list->command[0], "env\0", 4))
-        ft_env(data);
-    /*exit*/
-    else if (!ft_strncmp(data->list->command[0], "exit\0", 5))
-        ft_exit(data);
-    else
-        ft_execute(data, data->list);
+	int	i;
+
+	i = -1;
+	while (lst)
+	{
+		if (lst->next)
+			pipe(lst->next->fd);
+		if (lst->delimiter)
+			here_doc(mshell, lst);
+		childs[++i] = fork();
+		if (childs[i] == 0)
+		{
+			ft_signal(1);
+			child_process(mshell, lst);
+		}
+		else
+		{
+			if (lst->fd[0] != -1)
+				close(lst->fd[0]);
+			if (lst->next)
+				close(lst->next->fd[1]);
+			lst = lst->next;
+		}
+	}
+	kindergarden_end(childs, mshell);
 }
 
+void only_built_in(t_data *shell, t_list *list)
+{
+    int status;
+
+    status = input_setup(shell, list);
+    if (status)
+        return ;
+    if (shell->heredoc)
+        return ;
+    output_setup(shell, list);
+    built_in(shell, list);
+}    
+
+void execute_fd_init(t_data *shell)
+{
+    shell->in_first = dup(0);
+    shell->out_first = dup(1);
+    shell->in_fd = 0;
+    shell->out_fd = 1;
+}
+
+void    ft_execute(t_data *shell, t_list *list)
+{
+    pid_t   *children;
+
+    if (!list || !list->command)
+        return ;
+    execute_fd_init(shell);
+    children = malloc((ft_lstsize(list) + 1) * sizeof(pid_t));
+    if (!children)
+        return ;
+    children[ft_lstsize(list)] = -1;
+    ft_signal(1);
+    if (list->next == NULL && confirm_built_in(list))
+        only_built_in(shell, list);
+    else
+        kindergarden(shell, list, children);
+    dup2(shell->in_first, 0);
+    dup2(shell->out_first, 1);
+    close(shell->in_first);
+    close(shell->out_first);
+    unlink(".tmp");
+    free(children);
+}
+
+/*
 static char *find_command(char *cmd, char **env)
 {
     char *path_env = NULL;
@@ -107,34 +152,6 @@ void    ft_execute(t_data *shell, t_list *list)
     } else {
         perror("fork");
     }
-    free(cmd_path);
-}
-
-/*
-void executable(t_data *shell, t_list *lst)
-{
-    pid_t p_id;
-    char *cmd_path;
-
-    cmd_path = find_command(lst->command[0], shell->env);
-    if (!cmd_path) {
-        ft_putstr_fd("Minishell: ", 2);
-        perror(lst->command[0]);
-        shell->cmd_exit_no = 127;
-        return;
-    }
-    p_id = fork();
-    if (p_id == 0) { // Child process
-        execve(cmd_path, lst->command, shell->env);
-        perror("execve"); // If execve fails
-        exit(1);
-    } else if (p_id > 0) { // Parent process
-        waitpid(p_id, &shell->cmd_exit_no, 0);
-        shell->cmd_exit_no = WEXITSTATUS(shell->cmd_exit_no);
-    } else {
-        perror("fork");
-    }
-    shell->cmd_exit_no = 0;
     free(cmd_path);
 }
 */

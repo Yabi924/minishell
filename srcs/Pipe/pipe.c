@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
+/*
 void    cmd(t_data *mini, t_data *data, int exit_if_zero)
 {
     int     builtin;
@@ -115,3 +115,4 @@ void    run(t_data *mini, t_data *data)
         head = head->next;
     }
 }
+*/

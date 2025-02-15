@@ -69,6 +69,8 @@ typedef struct s_data
     int     heredoc;
     int     err_stat;
     int     fd[2];
+    int     in_first;
+    int     out_first;
     int     in_fd;
     int     out_fd;
     int     term_in;
@@ -135,21 +137,6 @@ int     unprint_index(int i, char *str);
 void    skip_unprint(t_data *data);
 int     ft_arrlen(char **arr);
 
-//str_ll.c:
-t_env	*list_create( char *key, char *value);
-void	insert(t_env **link, t_env *newlist);
-t_env	*add_node_end(t_env *head, char *key, char *value, int print);
-void	remove_node(t_env **head, char *key);
-void	remove_head_node(t_env **head);
-
-//hell_env.c:
-t_env	*env_init(char **in);
-void	print_env(t_env *env_ll);
-char	*get_env(t_env *env_ll, char *what);
-
-// int     input_handle(t_data *data, char **env);
-int     input_handle(t_data *data);
-
 //free.c
 void    free_data(t_data *data);
 void    free_linked_list(t_list **list);
@@ -165,6 +152,19 @@ void    not_builtin(t_data *mini, char **cmd);
 int     count2(t_env *env);
 char    **env_2d(t_env *env);
 
+/*
+    main function:
+    main.c
+*/
+char	**copy_env(char **env);
+void	update_env(t_data *data);
+void	initminishell(t_data *data, char **env);
+
+/*
+    Input handle:
+    input_handle.c
+*/
+int    input_handle(t_data *data, t_list *list);
 
 /*
     Built in functions:
@@ -201,24 +201,36 @@ void    ft_pwd();
     Executable
 */
 //executable.c
-void    built_in(t_data *data);
 void    ft_execute(t_data *shell, t_list *lst);
 char    *resolve_path(char *cmd, char **env);
+void	kindergarden(t_data *mshell, t_list *lst, pid_t *childs);
+void    only_built_in(t_data *shell, t_list *list);
+void    execute_fd_init(t_data *shell);
 
+//built_in.c
+void    built_in(t_data *data, t_list *list);
+int     confirm_built_in(t_list *list);
 
-//Child process
-void child_process(t_data *mshell, t_list *lst);
+//child_process.c
+int     input_setup(t_data *mshell, t_list *lst);
+void    output_setup(t_data *mshell, t_list *lst);
+void    kindergarden_end(pid_t *childs, t_data *mshell);
+void	cmd(t_data *mshell, t_list *lst);
+void	child_process(t_data *mshell, t_list *lst);
+char	*get_path(t_data *mshell, t_list *lst);
+char	*ft_getenv(t_data *mshell, char *evar);
+void	here_doc(t_data *mshell, t_list *lst);
+void	here_doc2(t_data *mshell, t_list *lst, int fd, char *input);
 
 //directory.c
 void	pwd_update(t_env *env_ll, char *new_pwd, t_data *mini);
 void    home(t_data *mini);
 
 //redirection.c
-void	here_doc2(t_data *mshell, t_list *lst, int fd, char *input);
-void	here_doc(t_data *mshell, t_list *lst);
-void	redirect_setup2(t_list *lst, int i, int status);
-void	redirect_setup(t_list *lst, int i, int status);
-int     redirection(t_data *mshell, t_list *lst);
+// void	here_doc(t_data *mshell, t_list *lst);
+// void	redirect_setup2(t_list *lst, int i, int status);
+// void	redirect_setup(t_list *lst, int i, int status);
+// int     redirection(t_data *mshell, t_list *lst);
 // int     right_redirect(t_data *mini, int x, char *valid);
 // char    *get_file(char **in, int x);
 // int     left_redirect(t_data *mini, int x, char *valid);
@@ -231,8 +243,14 @@ int     heredoc2(t_data *mini, int x);
 char    **mal_dup(t_data *mini);
 int     is_redir(char *str);
 
+/*
+    Error Message: Tell user what goes wrong
+    error_msg_1.c
+*/
+void	err_msg(t_data *mshell, int exit_status, char *msg, char *arg);
+
 //pipe.c
-void    cmd(t_data *mini, t_data *data, int exit_if_zero);
+//void    cmd(t_data *mini, t_data *data, int exit_if_zero);
 void    run_dup(int *tmp_read, t_data *mini, t_data *data, t_data *first);
 void    run_heredoc(t_data *mini, t_data *data);
 void    run_pipes(t_data *mini, t_data *data, t_data *first);

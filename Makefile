@@ -7,6 +7,7 @@ NAME = minishell
 #src path
 PATH_SRCS = ./srcs/
 PATH_fn = $(PATH_SRCS)frontend/
+PATH_error = ./error_handler/
 
 #function path
 PATH_BUILTIN = $(PATH_SRCS)builtins/
@@ -29,7 +30,9 @@ s_builtin = $(PATH_BUILTIN)echo.c \
 			$(PATH_BUILTIN)env.c \
 			$(PATH_BUILTIN)exit.c \
 
-s_execute =	$(PATH_EXECUTE)execute.c \
+s_execute =	$(PATH_EXECUTE)built_in.c \
+			$(PATH_EXECUTE)execute.c \
+			$(PATH_EXECUTE)child_process.c \
 
 s_ctrl = $(PATH_CTRL)
 
@@ -65,12 +68,14 @@ s_input_handle = $(PATH_fn)input_handle.c \
 s_signal = $(PATH_signal)signal.c \
 		   $(PATH_signal)get_stat.c
 
+s_error = $(PATH_error)error_msg_1.c \
+
 main= ./srcs/main.c \
 	  ./srcs/free.c \
 	#  ./srcs/str_ll.c \
 	#   ./srcs/hell_env.c
 
-SRCS = $(main) $(s_utils) $(s_input_handle) $(s_token) $(s_env) $(s_signal) $(s_builtin) $(s_execute) #$(s_rdrt)#$(s_pipe) $(s_rdrt) #$(s_ctrl) $(s_his) $(s_quotes) $(s_env)
+SRCS = $(main) $(s_utils) $(s_input_handle) $(s_token) $(s_env) $(s_signal) $(s_builtin) $(s_execute) $(s_error) #$(s_rdrt)#$(s_pipe) $(s_rdrt) #$(s_ctrl) $(s_his) $(s_quotes) $(s_env)
 
 #objs
 OBJS = $(SRCS:.c=.o)
