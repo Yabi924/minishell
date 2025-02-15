@@ -29,8 +29,7 @@ s_builtin = $(PATH_BUILTIN)echo.c \
 			$(PATH_BUILTIN)env.c \
 			$(PATH_BUILTIN)exit.c \
 
-s_execute =	$(PATH_EXECUTE)executable.c \
-			$(PATH_EXECUTE)heredoc.c \
+s_execute =	$(PATH_EXECUTE)execute.c \
 
 s_ctrl = $(PATH_CTRL)
 
@@ -43,7 +42,8 @@ s_pipe = $(PATH_Pipe)pipe.c \
 
 s_redirection = $(PATH_Redirection)
 
-s_rdrt = $(PATH_Redirection)redirection.c
+s_rdrt = $(PATH_Redirection)redirection.c \
+		 $(PATH_Redirection)heredoc.c \
 
 s_env = $(PATH_env)dollar_sign.c \
 		$(PATH_env)count.c
@@ -67,7 +67,7 @@ s_signal = $(PATH_signal)signal.c \
 
 main= ./srcs/main.c \
 	  ./srcs/free.c \
-	  ./srcs/str_ll.c \
+	#  ./srcs/str_ll.c \
 	#   ./srcs/hell_env.c
 
 SRCS = $(main) $(s_utils) $(s_input_handle) $(s_token) $(s_env) $(s_signal) $(s_builtin) $(s_execute) #$(s_rdrt)#$(s_pipe) $(s_rdrt) #$(s_ctrl) $(s_his) $(s_quotes) $(s_env)

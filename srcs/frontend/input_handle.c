@@ -6,13 +6,13 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:44 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/18 18:07:25 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/14 14:58:28 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int input_handle(t_data *data)
+int	input_handle(t_data *data)
 {
     print_prompt(data);
     skip_unprint(data);

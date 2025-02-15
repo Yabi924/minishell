@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:57 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/11 19:54:43 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/14 15:29:37 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,60 +30,60 @@
 //     return (i + 1);
 // }
 
-int unprint_index(int i, char *str)
+int	unprint_index(int i, char *str)
 {
-    if (!str)
-        return (-1);
-    while (str[i] && !(str[i] <= '~' && str[i] > ' '))
-        i++;
-    return (i);
+	if (!str)
+		return (-1);
+	while (str[i] && !(str[i] <= '~' && str[i] > ' '))
+		i++;
+	return (i);
 }
 
-void    skip_unprint(t_data *data)
+void	skip_unprint(t_data *data)
 {
-    int i;
-    char    *copy;
+	int		i;
+	char	*copy;
 
-    if (!data->input)
-        return ;
-    i = unprint_index(0, data->input);
-    copy = ft_substr(data->input, i, ft_strlen(data->input));
-    free(data->input);
-    data->input = ft_strdup(copy);
-    free(copy);
+	if (!data->input)
+		return ;
+	i = unprint_index(0, data->input);
+	copy = ft_substr(data->input, i, ft_strlen(data->input));
+	free(data->input);
+	data->input = ft_strdup(copy);
+	free(copy);
 }
 
-char    *ft_strjoin_free(char *s1, char *s2)
+char	*ft_strjoin_free(char *s1, char *s2)
 {
-    char    *new;
+	char	*new;
 
-    if (!s1 || !s2)
-        return NULL;
-    new = ft_strjoin(s1, s2);
-    if (s1)
-        free(s1);
-    return (new);
+	if (!s1 || !s2)
+		return (NULL);
+	new = ft_strjoin(s1, s2);
+	if (s1)
+		free(s1);
+	return (new);
 }
 
-int is_target(char c, char *target)
+int	is_target(char c, char *target)
 {
-    int i;
+	int	i;
 
-    i = -1;
-    while (target[++i])
-    {
-        if (c == target[i])
-            return (1);
-    }
-    return (0);
+	i = -1;
+	while (target[++i])
+	{
+		if (c == target[i])
+			return (1);
+	}
+	return (0);
 }
 
-int ft_arrlen(char **arr)
+int	ft_arrlen(char **arr)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (arr[i])
-        i++;
-    return (i);
+	i = 0;
+	while (arr[i])
+		i++;
+	return (i);
 }
