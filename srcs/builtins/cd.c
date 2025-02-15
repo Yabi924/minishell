@@ -12,15 +12,6 @@
 
 #include "../../include/minishell.h"
 
-void    get_pwd(void)
-{
-    char    *pwd;
-
-    pwd = getcwd(NULL, 1024);
-    ft_printf("%s\n", pwd);
-    free(pwd);
-}
-
 // Function to update OLDPWD in the environment
 static void update_oldpwd(t_data *data)
 {

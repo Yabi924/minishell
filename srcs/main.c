@@ -36,23 +36,24 @@ void	update_env(t_data *data)
 	char	*exit_code;
 	char	*no;
 
-	i = 0;
-	no = ft_itoa(data->cmd_exit_no);
-	if (!no)
-		return ;
-	exit_code = ft_strjoin("?=", no);
-	if (!exit_code)
-		return ;
-	while (data->env[i])
-	{
-		if (is_env("?", data->env[i]))
-		{
-			free(data->env[i]);
-			data->env[i] = ft_strdup(exit_code);
-			free(exit_code);
-		}
-		i++;
-	}
+    i = 0;
+    no = ft_itoa(data->cmd_exit_no);
+    if (!no)
+        return ;
+    exit_code = ft_strjoin("?=", no);
+    if (!exit_code)
+        return ;
+    free(no);
+    while (data->env[i])
+    {
+        if (is_env("?", data->env[i]))
+        {
+            free(data->env[i]);
+            data->env[i] = ft_strdup(exit_code);
+            free(exit_code);
+        }
+        i++;
+    }
 }
 
 void	initminishell(t_data *data, char **env)

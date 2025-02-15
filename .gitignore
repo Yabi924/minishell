@@ -1,6 +1,3 @@
 *.a
 *.o
-experiment.c
-hell_env.c
-hello.py
 minishell

@@ -33,7 +33,7 @@ char    **del_env(char **env, char *target)
     return (new);
 }
 
-void    unset(t_data *data, t_list *list, char **env)
+void    ft_unset(t_data *data, t_list *list, char **env)
 {
     int i;
 

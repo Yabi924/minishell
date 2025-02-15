@@ -14,20 +14,20 @@
 
 int	input_handle(t_data *data)
 {
-	print_prompt(data);
-	skip_unprint(data);
-	if (lexer(data->input))
-	{
-		ft_putstr_fd("Syntax error\n", 2);
-		return (1);
-	}
-	else
-	{
-// free(data->env); // Free existing environment
-		parser(data);
-		exec(data); //Function that will execute the command
-	}
-	tcsetattr(STDIN_FILENO, TCSANOW, &data->ori_terminal);
-	free_data(data);
-	return (0);
+    print_prompt(data);
+    skip_unprint(data);
+    if (lexer(data->input))
+    {
+        ft_putstr_fd("Syntax error\n", 2);
+        return (1);
+    }
+    else
+    {
+        // free(data->env); // Free existing environment
+        parser(data);
+        built_in(data); //Function that will execute the command
+    }
+    tcsetattr(STDIN_FILENO, TCSANOW, &data->ori_terminal);
+    free_data(data);
+    return (0);
 }

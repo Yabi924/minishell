@@ -12,7 +12,18 @@
 
 #include "../../include/minishell.h"
 
-void builtin_exit(t_data *shell, t_list *list)
+void    ft_exit(t_data *shell)
+{
+    // int i;
+
+    // i = -1;
+    // ft_printf("");
+    ft_printf("exit\n");
+    free_data(shell);
+    exit(0);
+}
+
+void    builtin_exit(t_data *shell, t_list *list)
 {
     int i;
 
@@ -38,4 +49,3 @@ void builtin_exit(t_data *shell, t_list *list)
         shell->cmd_exit_no = 0;
     exit(shell->cmd_exit_no);
 }
-

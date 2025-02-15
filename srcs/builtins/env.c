@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
 
-void    env(t_data *data)
+void    ft_env(t_data *data)
 {
     int     i;
 

@@ -51,7 +51,7 @@ char	*ret_line(char **arr)
 	return (line);
 }
 
-void	echo(t_data *mini)
+void	ft_echo(t_data *mini)
 {
 	char	*tmp;
 	char	*line;
