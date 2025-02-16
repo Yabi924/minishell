@@ -35,6 +35,7 @@ typedef struct s_list
     int				output;
     int             append;
 	struct s_list	*next;
+    void            *content;
 }		t_list;
 
 //check

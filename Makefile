@@ -33,6 +33,7 @@ s_builtin = $(PATH_BUILTIN)echo.c \
 s_execute =	$(PATH_EXECUTE)built_in.c \
 			$(PATH_EXECUTE)execute.c \
 			$(PATH_EXECUTE)child_process.c \
+			$(PATH_EXECUTE)exec_path.c \
 
 s_ctrl = $(PATH_CTRL)
 
@@ -46,6 +47,7 @@ s_pipe = $(PATH_Pipe)pipe.c \
 s_redirection = $(PATH_Redirection)
 
 s_rdrt = $(PATH_Redirection)redirection.c \
+		 $(PATH_Redirection)redirection2.c \
 		 $(PATH_Redirection)heredoc.c \
 
 s_env = $(PATH_env)dollar_sign.c \
@@ -72,10 +74,11 @@ s_error = $(PATH_error)error_msg_1.c \
 
 main= ./srcs/main.c \
 	  ./srcs/free.c \
+	#  ./srcs/init.c \
 	#  ./srcs/str_ll.c \
 	#   ./srcs/hell_env.c
 
-SRCS = $(main) $(s_utils) $(s_input_handle) $(s_token) $(s_env) $(s_signal) $(s_builtin) $(s_execute) $(s_error) #$(s_rdrt)#$(s_pipe) $(s_rdrt) #$(s_ctrl) $(s_his) $(s_quotes) $(s_env)
+SRCS = $(main) $(s_utils) $(s_input_handle) $(s_token) $(s_env) $(s_signal) $(s_builtin) $(s_execute) $(s_error) $(s_rdrt)#$(s_pipe) $(s_rdrt) #$(s_ctrl) $(s_his) $(s_quotes) $(s_env)
 
 #objs
 OBJS = $(SRCS:.c=.o)

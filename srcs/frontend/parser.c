@@ -12,10 +12,10 @@
 
 #include "../../include/minishell.h"
 
-void	parser(t_data *data)
+void	parser(t_data *data, t_list *list)
 {
 	add_space(data);
 	if (ft_strchr(data->new_input, '$'))
 		dollar_sign(data);
-	tokenization(data, &data->list);
+	tokenization(data, &list);
 }

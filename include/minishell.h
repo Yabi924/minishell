@@ -33,6 +33,7 @@
 # define NEW_LINE_MINI '\n'
 # define TRUE 1
 # define FALSE 0
+# define BUFFER 10000
 
 //External variable to get the signal
 extern int  g_exit_code;
@@ -65,6 +66,7 @@ typedef struct s_data
     char    **input_arr;
     char    *input;
     char    *new_input;
+    char    **token;
     int     cmd_exit_no;
     int     heredoc;
     int     err_stat;
@@ -80,15 +82,14 @@ typedef struct s_data
     int     stdin; //Test case
     int     stdout; //Test case
     int     flag;
+    int     quote;
     int     heredoc_zero_if_valid;
     t_env   *env_ll;
     char    **environ; //Test case
     struct  termios ori_terminal;
     struct  termios mod_terminal;
-    t_list  *list;
     t_dollar dollar;
     int     first_run_init_dollar;
-    struct  s_data  *next;
 }   t_data;
 
 //Temporary global variable
@@ -105,7 +106,7 @@ int     lexer(char *input);
 char    *strjoin_helper(char *str1, char *str2, int free1, int free2);
 
 //parser.c
-void    parser(t_data *data);
+void    parser(t_data *data, t_list *list);
 
 //tokenization.c
 void    tokenization(t_data *data, t_list **list);
@@ -138,9 +139,11 @@ void    skip_unprint(t_data *data);
 int     ft_arrlen(char **arr);
 
 //free.c
-void    free_data(t_data *data);
+// void    free_data(t_data *data);
+void    free_data(t_data *data, t_list *list);
 void    free_linked_list(t_list **list);
 void    free_arr(char **arr);
+void	free_lst(t_data *mshell, t_list **lst);
 
 //Non builtins:
 int list_dir(t_data *mini, char *path);
@@ -159,11 +162,13 @@ char    **env_2d(t_env *env);
 char	**copy_env(char **env);
 void	update_env(t_data *data);
 void	initminishell(t_data *data, char **env);
+void	split_command(t_list **lst, t_data *mshell);
 
 /*
     Input handle:
     input_handle.c
 */
+//int    input_handle(t_data *data, t_list *list);
 int    input_handle(t_data *data, t_list *list);
 
 /*
@@ -207,6 +212,9 @@ void	kindergarden(t_data *mshell, t_list *lst, pid_t *childs);
 void    only_built_in(t_data *shell, t_list *list);
 void    execute_fd_init(t_data *shell);
 
+//Path to execve
+void    path_to_execve(t_data *data, t_list *list);
+
 //built_in.c
 void    built_in(t_data *data, t_list *list);
 int     confirm_built_in(t_list *list);
@@ -219,22 +227,24 @@ void	cmd(t_data *mshell, t_list *lst);
 void	child_process(t_data *mshell, t_list *lst);
 char	*get_path(t_data *mshell, t_list *lst);
 char	*ft_getenv(t_data *mshell, char *evar);
-void	here_doc(t_data *mshell, t_list *lst);
-void	here_doc2(t_data *mshell, t_list *lst, int fd, char *input);
+// void	here_doc(t_data *mshell, t_list *lst);
+// void	here_doc2(t_data *mshell, t_list *lst, int fd, char *input);
 
 //directory.c
 void	pwd_update(t_env *env_ll, char *new_pwd, t_data *mini);
 void    home(t_data *mini);
 
 //redirection.c
-// void	here_doc(t_data *mshell, t_list *lst);
-// void	redirect_setup2(t_list *lst, int i, int status);
-// void	redirect_setup(t_list *lst, int i, int status);
-// int     redirection(t_data *mshell, t_list *lst);
-// int     right_redirect(t_data *mini, int x, char *valid);
-// char    *get_file(char **in, int x);
-// int     left_redirect(t_data *mini, int x, char *valid);
-// int     redirect_check(t_data *mini, char *valid);
+void	here_doc2(t_data *mshell, t_list *lst, int fd, char *input);
+void	here_doc(t_data *mshell, t_list *lst);
+void	redirect_setup2(t_list *lst, int i, int status);
+void	redirect_setup(t_list *lst, int i, int status);
+int     redirection(t_data *mshell, t_list *lst);
+void	command_update(t_list **lst, int i);
+
+//redirection2.c
+int     check_if_redirect(t_list *lst, int i);
+int     check_redirect_syntax(t_data *mshell, t_list *lst, int i);
 
 //heredoc.c
 int     heredoc_check(t_data *mini);

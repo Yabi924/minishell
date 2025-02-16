@@ -58,12 +58,14 @@ void	update_env(t_data *data)
 
 void	initminishell(t_data *data, char **env)
 {
-	data->env = copy_env(env);
-// if (!data->env)
-//error malloc
-	data->first_run_init_dollar = 0;
+	// data->env = copy_env(env);
+	// data->first_run_init_dollar = 0;
+	// data->cmd_exit_no = 0;
+	// data->list = NULL;
+	data->env = env;
+	data->quote = 0;
 	data->cmd_exit_no = 0;
-	data->list = NULL;
+	data->command_arr = NULL;
 	tcgetattr(STDIN_FILENO, &data->ori_terminal);
 	data->mod_terminal = data->ori_terminal;
 	data->mod_terminal.c_lflag &= ~ECHOCTL;
@@ -72,40 +74,20 @@ void	initminishell(t_data *data, char **env)
 
 int	main(int argc, char **argv, char **env)
 {
-	(void)argc;
-	(void)argv;
-	t_data	minishell_data;
-	t_list	list;
+	t_data	data;
+	t_list	*list;
 
-	initminishell(&minishell_data, env);
-	//list = NULL;
-    //init(env); //Test case
+	//data = malloc(sizeof(t_data));
+	list = NULL;
+	initminishell(&data, env);
+	if (argc > 1 || argv[1])
+		exit(1);
 	while (1)
 	{
-		update_env(&minishell_data);
-		signal(SIGINT, signal_int);
-		signal(SIGQUIT, SIG_IGN);
-		input_handle(&minishell_data, &list);
-		tcsetattr(STDIN_FILENO, TCSANOW, &minishell_data.mod_terminal);
+		update_env(&data);
+		ft_signal(0);
+		input_handle(&data, list);
+		tcsetattr(STDIN_FILENO, TCSANOW, &data.mod_terminal);
 	}
 	return (0);
 }
-
-// void    print_arr(char **s)
-// {
-//     int i = -1;
-//     while (s[++i])
-//         printf("i:%d str:%s\n", i + 1, s[i]);
-// }
-
-// void    pll(t_list *list)
-// {
-//     int i = 0;
-
-//     while (list)
-//     {
-//         printf("\nlinked list:%d\n", i++);
-//         print_arr(list->command);
-//         list = list->next;
-//     }
-// }

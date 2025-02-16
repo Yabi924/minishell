@@ -24,10 +24,11 @@ int	input_handle(t_data *data, t_list *list)
     else
     {
         // free(data->env); // Free existing environment
-        parser(data);
-        built_in(data, list); //Function that will execute the command
+        parser(data, list);
+        if (redirection(data, list))
+           ft_execute(data, list); //Function that will execute the command
     }
     tcsetattr(STDIN_FILENO, TCSANOW, &data->ori_terminal);
-    free_data(data);
+    free_lst(data, &list);
     return (0);
 }
