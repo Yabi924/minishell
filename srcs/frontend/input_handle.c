@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
 
-int	input_handle(t_data *data)
+int	input_handle(t_data *data, t_list *list)
 {
     print_prompt(data);
     skip_unprint(data);
@@ -24,10 +24,11 @@ int	input_handle(t_data *data)
     else
     {
         // free(data->env); // Free existing environment
-        parser(data);
-        built_in(data); //Function that will execute the command
+        parser(data, list);
+        if (redirection(data, list))
+           ft_execute(data, list); //Function that will execute the command
     }
     tcsetattr(STDIN_FILENO, TCSANOW, &data->ori_terminal);
-    free_data(data);
+    free_lst(data, &list);
     return (0);
 }

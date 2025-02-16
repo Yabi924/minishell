@@ -125,6 +125,26 @@ int	redirection(t_data *mshell, t_list *lst)
 	return (1);
 }
 
+void	command_update(t_list **lst, int i)
+{
+	t_list	*tmp;
+
+	free((*lst)->command[i]);
+	free((*lst)->command[i + 1]);
+	while ((*lst)->command[i + 2])
+	{
+		(*lst)->command[i] = (*lst)->command[i + 2];
+		++i;
+	}
+	(*lst)->command[i] = NULL;
+	if ((*lst)->command == NULL)
+	{
+		tmp = (*lst)->next;
+		free_arr((*lst)->command);
+		free(*lst);
+		*lst = tmp;
+	}
+}
 
 /*
 int     right_redirect(t_data *mini, int x, char *valid)
