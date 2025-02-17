@@ -12,63 +12,63 @@
 
 #include "../../include/minishell.h"
 
-int	check(char *str)
+int	check(char *data)
 {
-	if (!ft_strncmp(str, "<", 2)
-		|| !ft_strncmp(str, "<<", 3)
-		|| !ft_strncmp(str, ">", 2)
-		|| !ft_strncmp(str, ">>", 3))
+	if (!ft_strncmp(data, "<", 2)
+		|| !ft_strncmp(data, "<<", 3)
+		|| !ft_strncmp(data, ">", 2)
+		|| !ft_strncmp(data, ">>", 3))
 		return (1);
 	return (0);
 }
 
-char	*ret_line(char **arr)
+char	*retrieve_line(char **data)
 {
-	char	*tmp;
+	char	*temp;
 	char	*line;
-	int		x;
+	int		i;
 
-	x = 0;
+	i = 0;
 	line = ft_strdup("");
-	while (arr[++x])
+	while (data[++i])
 	{
-		if (!ft_strncmp(arr[x], "-n", 2))
+		if (!ft_strncmp(data[i], "-n", 2))
 			continue ;
-		else if (check(arr[x]) == 1)
+		else if (check(data[i]) == 1)
 			break ;
-		else if (arr[x] != 0)
+		else if (data[i] != 0)
 		{
-			tmp = strjoin_helper(line, arr[x], 1, 0);
-			if (!arr[x + 1])
+			temp = strjoin_helper(line, data[i], 1, 0);
+			if (!data[i + 1])
 			{
-				line = ft_strdup(tmp);
-				free(tmp);
+				line = ft_strdup(temp);
+				free(temp);
 			}
 			else
-				line = strjoin_helper(tmp, " ", 1, 0);
+				line = strjoin_helper(temp, " ", 1, 0);
 		}
 	}
 	return (line);
 }
 
-void	ft_echo(t_data *mini)
+void	ft_echo(t_data *data)
 {
-	char	*tmp;
+	char	*temp;
 	char	*line;
 
-	if (!mini->list->command[1])
+	if (!data->list->command[1])
 	{
 		write(1, "\n", 1);
 		return ;
 	}
-	line = ret_line(mini->list->command);
-	if (ft_strncmp(mini->list->command[1], "-n", 2))
+	line = retrieve_line(data->list->command);
+	if (ft_strncmp(data->list->command[1], "-n", 2))
 	{
-		tmp = strjoin_helper(line, "\n", 1, 0);
-		line = ft_strdup(tmp);
-		free(tmp);
+		temp = strjoin_helper(line, "\n", 1, 0);
+		line = ft_strdup(temp);
+		free(temp);
 	}
 	write(1, line, ft_strlen(line));
-	free (line);
-	mini->cmd_exit_no = 0;
+	free(line);
+	data->cmd_exit_no = 0;
 }

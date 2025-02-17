@@ -19,6 +19,6 @@ void    ft_pwd()
     // data->cmd_exit_no = 0;
     char    *pwd;
     pwd = getcwd(NULL, 1024);
-    printf("%s\n", pwd);
+    ft_printf("%s\n", pwd);
     free(pwd);
 }

@@ -183,8 +183,8 @@ void    ft_exit(t_data *data);
 void    ft_env(t_data *data);
 
 //echo.c
-int     check(char *str);
-char	*ret_line(char **arr);
+int     check(char *data);
+char	*retrieve_line(char **data);
 void	ft_echo(t_data *data);
 
 //export.c
@@ -214,7 +214,7 @@ void    only_built_in(t_data *shell, t_list *list);
 void    execute_fd_init(t_data *shell);
 
 //Path to execve
-void    path_to_execve(t_data *data);
+void    execve_command(t_data *data, t_list *list);
 
 //built_in.c
 // void    built_in(t_data *data);

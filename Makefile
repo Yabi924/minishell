@@ -26,14 +26,14 @@ s_builtin = $(PATH_BUILTIN)echo.c \
 			$(PATH_BUILTIN)pwd.c \
 			$(PATH_BUILTIN)env.c \
 			$(PATH_BUILTIN)exit.c \
-			#$(PATH_BUILTIN)cd.c \
+			$(PATH_BUILTIN)cd.c \
 			$(PATH_BUILTIN)export.c \
 			$(PATH_BUILTIN)unset.c \
 
 s_execute =	$(PATH_EXECUTE)built_in.c \
 			$(PATH_EXECUTE)execute.c \
 			$(PATH_EXECUTE)child_process.c \
-			$(PATH_EXECUTE)exec_path.c \
+			$(PATH_EXECUTE)execve_path.c \
 
 s_ctrl = $(PATH_CTRL)
 

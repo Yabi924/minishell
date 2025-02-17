@@ -17,7 +17,7 @@ void    built_in(t_data *data, t_list *list)
 {
     if (list == NULL || list->command == NULL || list->command[0] == NULL)
     {
-        ft_putstr_fd("Error: list or command is NULL\n", 2);
+        ft_putstr_fd("Error: list or command is NULL\n", 2); // For debug only
         return ;
     }
     /*echo*/
@@ -32,16 +32,17 @@ void    built_in(t_data *data, t_list *list)
     /*exit*/
     else if (!ft_strncmp(list->command[0], "exit\0", 5))
         ft_exit(data);
-    // /*cd*/
-    // else if (!ft_strncmp(list->command[0], "cd\0", 3))
-    //     ft_cd(data);
-    // /*export*/
-    // else if (!ft_strncmp(list->command[0], "export\0", 7))
-    //     ft_export(data, data->list);
-    // /*unset*/
-    // else if (!ft_strncmp(list->command[0], "unset\0", 4))
-    //     ft_unset(data, data->list, data->env);
-    // path_to_execve(data);
+    /*cd*/
+    else if (!ft_strncmp(list->command[0], "cd\0", 3))
+        ft_cd(data);
+    /*export*/
+    else if (!ft_strncmp(list->command[0], "export\0", 7))
+        ft_export(data, data->list);
+    /*unset*/
+    else if (!ft_strncmp(list->command[0], "unset\0", 4))
+        ft_unset(data, data->list, data->env);
+    else
+        execve_command(data, data->list);
 }
 
 /*

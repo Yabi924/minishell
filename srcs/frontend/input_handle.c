@@ -24,7 +24,7 @@ int	input_handle(t_data *data)
 	else
 	{
 		parser(data);
-		built_in(data, data->list);
+		built_in(data, data->list); //Launch the built-ins and non built-ins (execve)
 	}
 	tcsetattr(STDIN_FILENO, TCSANOW, &data->ori_terminal);
 	free_data(data);
