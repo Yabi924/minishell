@@ -36,36 +36,33 @@ void	update_env(t_data *data)
 	char	*exit_code;
 	char	*no;
 
-    i = 0;
-    no = ft_itoa(data->cmd_exit_no);
-    if (!no)
-        return ;
-    exit_code = ft_strjoin("?=", no);
-    if (!exit_code)
-        return ;
-    free(no);
-    while (data->env[i])
-    {
-        if (is_env("?", data->env[i]))
-        {
-            free(data->env[i]);
-            data->env[i] = ft_strdup(exit_code);
-            free(exit_code);
-        }
-        i++;
-    }
+	i = 0;
+	no = ft_itoa(data->cmd_exit_no);
+	if (!no)
+		return ;
+	exit_code = ft_strjoin("?=", no);
+	if (!exit_code)
+		return ;
+	while (data->env[i])
+	{
+		if (is_env("?", data->env[i]))
+		{
+			free(data->env[i]);
+			data->env[i] = ft_strdup(exit_code);
+			free(exit_code);
+		}
+		i++;
+	}
 }
 
-void	initminishell(t_data *data, char **env)
+void	init_data(t_data *data, char **env)
 {
-	// data->env = copy_env(env);
-	// data->first_run_init_dollar = 0;
-	// data->cmd_exit_no = 0;
-	// data->list = NULL;
-	data->env = env;
-	data->quote = 0;
+	data->env = copy_env(env);
+	// if (!data->env)
+	//error malloc
+	data->first_run_init_dollar = 0;
 	data->cmd_exit_no = 0;
-	data->command_arr = NULL;
+	data->list = NULL;
 	tcgetattr(STDIN_FILENO, &data->ori_terminal);
 	data->mod_terminal = data->ori_terminal;
 	data->mod_terminal.c_lflag &= ~ECHOCTL;
@@ -74,19 +71,16 @@ void	initminishell(t_data *data, char **env)
 
 int	main(int argc, char **argv, char **env)
 {
+	(void)argc;
+	(void)argv;
 	t_data	data;
-	t_list	*list;
 
-	//data = malloc(sizeof(t_data));
-	list = NULL;
-	initminishell(&data, env);
-	if (argc > 1 || argv[1])
-		exit(1);
+	init_data(&data, env);
 	while (1)
 	{
 		update_env(&data);
 		ft_signal(0);
-		input_handle(&data, list);
+		input_handle(&data);
 		tcsetattr(STDIN_FILENO, TCSANOW, &data.mod_terminal);
 	}
 	return (0);

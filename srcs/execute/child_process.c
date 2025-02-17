@@ -9,7 +9,7 @@
 /*   Updated: 2025/02/15 08:22:05 by wwan-ab-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+/*
 #include "../../include/minishell.h"
 
 //find the valid path based on args(lexem)
@@ -170,3 +170,4 @@ void	child_process(t_data *mshell, t_list *lst)
 		mshell->cmd_exit_no = 1;
 	exit(mshell->cmd_exit_no);
 }
+*/

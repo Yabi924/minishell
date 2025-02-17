@@ -12,10 +12,30 @@
 
 #include "../../include/minishell.h"
 
-void	parser(t_data *data, t_list *list)
+// void    print_arr(char **s)
+// {
+//     int i = -1;
+//     while (s[++i])
+//         printf("i:%d str:%s\n", i + 1, s[i]);
+// }
+
+// void    pll(t_list *list)
+// {
+//     int i = 0;
+
+//     while (list)
+//     {
+//         printf("\nlinked list:%d\n", i++);
+//         print_arr(list->command);
+//         list = list->next;
+//     }
+// }
+
+void	parser(t_data *data)
 {
 	add_space(data);
 	if (ft_strchr(data->new_input, '$'))
 		dollar_sign(data);
-	tokenization(data, &list);
+	tokenization(data, &data->list);
+	// pll(data->list);
 }

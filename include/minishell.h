@@ -62,7 +62,7 @@ typedef struct s_data
 {
     char    **command_arr;
     char    **env;
-    char    cwd[1042];
+    char    cwd[1024];
     char    **input_arr;
     char    *input;
     char    *new_input;
@@ -88,6 +88,7 @@ typedef struct s_data
     char    **environ; //Test case
     struct  termios ori_terminal;
     struct  termios mod_terminal;
+    t_list  *list;
     t_dollar dollar;
     int     first_run_init_dollar;
 }   t_data;
@@ -106,7 +107,7 @@ int     lexer(char *input);
 char    *strjoin_helper(char *str1, char *str2, int free1, int free2);
 
 //parser.c
-void    parser(t_data *data, t_list *list);
+void    parser(t_data *data);
 
 //tokenization.c
 void    tokenization(t_data *data, t_list **list);
@@ -140,7 +141,7 @@ int     ft_arrlen(char **arr);
 
 //free.c
 // void    free_data(t_data *data);
-void    free_data(t_data *data, t_list *list);
+void    free_data(t_data *data);
 void    free_linked_list(t_list **list);
 void    free_arr(char **arr);
 void	free_lst(t_data *mshell, t_list **lst);
@@ -161,21 +162,21 @@ char    **env_2d(t_env *env);
 */
 char	**copy_env(char **env);
 void	update_env(t_data *data);
-void	initminishell(t_data *data, char **env);
-void	split_command(t_list **lst, t_data *mshell);
+void	init_data(t_data *data, char **env);
+void    init_list(t_list *list);
 
 /*
     Input handle:
     input_handle.c
 */
-//int    input_handle(t_data *data, t_list *list);
-int    input_handle(t_data *data, t_list *list);
+int    input_handle(t_data *data);
+//int    input_handle(t_data *data);
 
 /*
-    Built in functions:
+    Built in functions: Without list
 */
 //exit.c
-void    ft_exit(t_data *shell);
+void    ft_exit(t_data *data);
 //void    builtin_exit(t_data *shell, t_list *list);
 
 //env.c
@@ -213,9 +214,10 @@ void    only_built_in(t_data *shell, t_list *list);
 void    execute_fd_init(t_data *shell);
 
 //Path to execve
-void    path_to_execve(t_data *data, t_list *list);
+void    path_to_execve(t_data *data);
 
 //built_in.c
+// void    built_in(t_data *data);
 void    built_in(t_data *data, t_list *list);
 int     confirm_built_in(t_list *list);
 

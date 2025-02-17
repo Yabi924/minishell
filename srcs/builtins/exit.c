@@ -12,14 +12,14 @@
 
 #include "../../include/minishell.h"
 
-void    ft_exit(t_data *shell)
+void    ft_exit(t_data *data)
 {
     // int i;
 
     // i = -1;
     // ft_printf("");
     ft_printf("exit\n");
-    //free_data(shell);
+    free_data(data);
     exit(0);
 }
 

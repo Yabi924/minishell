@@ -15,16 +15,10 @@
 
 void    ft_pwd()
 {
+    // ft_printf("%s\n", data->cwd);
+    // data->cmd_exit_no = 0;
     char    *pwd;
-
     pwd = getcwd(NULL, 1024);
-    ft_printf("%s\n", pwd);
+    printf("%s\n", pwd);
     free(pwd);
 }
-
-/*
-    pwd - print name of current/working directory
-
-    DESCRIPTION
-        Print the full filename of the current working directory.
-*/

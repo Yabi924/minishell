@@ -10,81 +10,81 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+// #include "../../include/minishell.h"
 
-void	kindergarden(t_data *mshell, t_list *lst, pid_t *childs)
-{
-	int	i;
+// void	kindergarden(t_data *mshell, t_list *lst, pid_t *childs)
+// {
+// 	int	i;
 
-	i = -1;
-	while (lst)
-	{
-		if (lst->next)
-			pipe(lst->next->fd);
-		if (lst->delimiter)
-			here_doc(mshell, lst);
-		childs[++i] = fork();
-		if (childs[i] == 0)
-		{
-			ft_signal(1);
-			child_process(mshell, lst);
-		}
-		else
-		{
-			if (lst->fd[0] != -1)
-				close(lst->fd[0]);
-			if (lst->next)
-				close(lst->next->fd[1]);
-			lst = lst->next;
-		}
-	}
-	kindergarden_end(childs, mshell);
-}
+// 	i = -1;
+// 	while (lst)
+// 	{
+// 		if (lst->next)
+// 			pipe(lst->next->fd);
+// 		if (lst->delimiter)
+// 			here_doc(mshell, lst);
+// 		childs[++i] = fork();
+// 		if (childs[i] == 0)
+// 		{
+// 			ft_signal(1);
+// 			child_process(mshell, lst);
+// 		}
+// 		else
+// 		{
+// 			if (lst->fd[0] != -1)
+// 				close(lst->fd[0]);
+// 			if (lst->next)
+// 				close(lst->next->fd[1]);
+// 			lst = lst->next;
+// 		}
+// 	}
+// 	kindergarden_end(childs, mshell);
+// }
 
-void only_built_in(t_data *shell, t_list *list)
-{
-    int status;
+// void only_built_in(t_data *shell, t_list *list)
+// {
+//     int status;
 
-    status = input_setup(shell, list);
-    if (status)
-        return ;
-    if (shell->heredoc)
-        return ;
-    output_setup(shell, list);
-    built_in(shell, list);
-}    
+//     status = input_setup(shell, list);
+//     if (status)
+//         return ;
+//     if (shell->heredoc)
+//         return ;
+//     output_setup(shell, list);
+//     built_in(shell, list);
+// }    
 
-void execute_fd_init(t_data *shell)
-{
-    shell->in_first = dup(0);
-    shell->out_first = dup(1);
-    shell->in_fd = 0;
-    shell->out_fd = 1;
-}
+// void execute_fd_init(t_data *shell)
+// {
+//     shell->in_first = dup(0);
+//     shell->out_first = dup(1);
+//     shell->in_fd = 0;
+//     shell->out_fd = 1;
+// }
 
-void    ft_execute(t_data *shell, t_list *list)
-{
-    pid_t   *children;
+// void    ft_execute(t_data *shell, t_list *list)
+// {
+//     pid_t   *children;
 
-    if (!list || !list->command)
-        return ;
-    execute_fd_init(shell);
-    children = malloc((ft_lstsize(list) + 1) * sizeof(pid_t));
-    if (!children)
-        return ;
-    children[ft_lstsize(list)] = -1;
-    ft_signal(1);
-    if (list->next == NULL && confirm_built_in(list))
-        only_built_in(shell, list);
-    else
-        kindergarden(shell, list, children);
-    dup2(shell->in_first, 0);
-    dup2(shell->out_first, 1);
-    close(shell->in_first);
-    close(shell->out_first);
-    unlink(".tmp");
-    free(children);
-}
+//     if (!list || !list->command)
+//         return ;
+//     execute_fd_init(shell);
+//     children = malloc((ft_lstsize(list) + 1) * sizeof(pid_t));
+//     if (!children)
+//         return ;
+//     children[ft_lstsize(list)] = -1;
+//     ft_signal(1);
+//     if (list->next == NULL && confirm_built_in(list))
+//         only_built_in(shell, list);
+//     else
+//         kindergarden(shell, list, children);
+//     dup2(shell->in_first, 0);
+//     dup2(shell->out_first, 1);
+//     close(shell->in_first);
+//     close(shell->out_first);
+//     unlink(".tmp");
+//     free(children);
+// }
 
 /*
 static char *find_command(char *cmd, char **env)

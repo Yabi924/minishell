@@ -12,23 +12,21 @@
 
 #include "../../include/minishell.h"
 
-int	input_handle(t_data *data, t_list *list)
+int	input_handle(t_data *data)
 {
-    print_prompt(data);
-    skip_unprint(data);
-    if (lexer(data->input))
-    {
-        ft_putstr_fd("Syntax error\n", 2);
-        return (1);
-    }
-    else
-    {
-        // free(data->env); // Free existing environment
-        parser(data, list);
-        if (redirection(data, list))
-           ft_execute(data, list); //Function that will execute the command
-    }
-    tcsetattr(STDIN_FILENO, TCSANOW, &data->ori_terminal);
-    free_lst(data, &list);
-    return (0);
+	print_prompt(data);
+	skip_unprint(data);
+	if (lexer(data->input))
+	{
+		ft_putstr_fd("Syntax error\n", 2);
+		return (1);
+	}
+	else
+	{
+		parser(data);
+		built_in(data, data->list);
+	}
+	tcsetattr(STDIN_FILENO, TCSANOW, &data->ori_terminal);
+	free_data(data);
+	return (0);
 }
