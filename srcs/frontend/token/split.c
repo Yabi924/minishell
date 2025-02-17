@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:12:26 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/14 15:05:42 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/17 22:05:14 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,73 +34,71 @@ static int	count(char *s)
 	return (count + 1);
 }
 
-static char	*copy(char *s, int *p)
+void	copy(t_split *split, char *input)
 {
-	int		i;
-	int		j;
-	int		pp;
-	char	*new;
+	int i;
+	int f;
 
 	i = 0;
-	j = 0;
-	pp = *p;
-	while (s[pp + i] && s[pp + i] != ' ')
+	f = 0;
+	if (is_target(input[split->i], "\""))
 	{
-		if (is_target(s[pp + i], "'\""))
-			i += skip_quotes(s, pp + i + 1, s[pp + i]);
+		f = 1;
+		split->i++;
+		while (input[split->i + i] && !is_target(input[split->i + i], "\""))
+			i++;
+	}
+	else
+		while (input[split->i + i] && !is_target(input[split->i + i], " \"'"))
+			i++;
+	if (i != 0)
+		split->temp = ft_substr(input, split->i, i);
+	split->i += i + f;
+}
+
+void	singel_quotes(t_split *split, char *input)
+{
+	int i;
+	
+	i = 0;
+	split->i++;
+	while (input[split->i + i] && !is_target(input[split->i + i], "'"))
+		i++;
+	if (i != 0)
+		split->temp = ft_substr(input, split->i, i);
+	split->i += i + 1;
+}
+
+void	end(t_split *split, char **arr, char *input)
+{
+	if (!input[split->i] || input[split->i] == ' ')
+		split->end++;
+	if (split->temp)
+		arr[split->j] = ft_strjoin_free(arr[split->j], split->temp);
+	if (split->temp)
+		free(split->temp);
+	split->temp = NULL;
+	if (split->end)
+	{
+		split->j++;
+		split->end = 0;
+	}
+}
+
+char	**split(t_split *split, char *input)
+{
+	char **arr;
+
+	arr = ft_calloc(count(input) + 1, sizeof(char *));
+	while (input[split->i])
+	{
+		if (input[split->i] && input[split->i] == ' ')
+			split->i++;
+		else if (!is_target(input[split->i], "'"))
+			copy(split, input);
 		else
-			i++;
+			singel_quotes(split, input);
+		end(split, arr, input);
 	}
-	new = ft_calloc(i + 1, sizeof(char));
-	while (j < i)
-	{
-		if (is_target(s[pp], "'\""))
-			pp++;
-		new[j++] = s[pp++];
-	}
-	*p = pp;
-	return (new);
-}
-
-static char	*copy_quotes2(char *s, int *p, char target)
-{
-	int		i;
-	int		pp;
-	char	*new;
-
-	i = 0;
-	pp = *p;
-	new = ft_calloc(ft_strlen(s) - 1, sizeof(char));
-	while (s[pp++])
-	{
-		if (s[pp] == target)
-			break ;
-		new[i++] = s[pp];
-	}
-	*p = pp + 1;
-	return (new);
-}
-
-char	**split(char *s)
-{
-	int		i;
-	int		j;
-	int		counts;
-	char	**arr;
-
-	i = 0;
-	j = 0;
-	counts = count(s);
-	arr = ft_calloc(counts + 1, sizeof(char *));
-	while (s[i])
-	{
-		while (s[i] == ' ')
-			i++;
-		if (is_target(s[i], "'\""))
-			arr[j++] = copy_quotes2(s, &i, s[i]);
-		else if (s[i])
-			arr[j++] = copy(s, &i);
-	}
-	arr[j] = NULL;
 	return (arr);
 }

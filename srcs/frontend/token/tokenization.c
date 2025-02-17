@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 13:51:20 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/14 15:07:17 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/17 18:26:03 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	tokenization(t_data *data, t_list **list)
 
 	i = -1;
 	j = -1;
-	data->command_arr = split(data->new_input);
 	temp = malloc((ft_arrlen(data->command_arr) + 1) * sizeof(char *));
 	while (data->command_arr[++i])
 	{

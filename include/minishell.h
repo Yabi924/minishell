@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:38 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/11 18:35:56 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/17 18:53:30 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,15 @@ typedef struct s_dollar
     int     quotes;
 }   t_dollar;
 
+typedef struct s_split
+{
+    int i;
+    int j;
+    int end;
+    char *temp;
+    int first;
+}   t_split;
+
 typedef struct s_data
 {
     char    **command_arr;
@@ -90,6 +99,7 @@ typedef struct s_data
     struct  termios mod_terminal;
     t_list  *list;
     t_dollar dollar;
+    t_split split;
     int     first_run_init_dollar;
 }   t_data;
 
@@ -113,7 +123,7 @@ void    parser(t_data *data);
 void    tokenization(t_data *data, t_list **list);
 
 //split.c
-char    **split(char *s);
+char    **split(t_split *split, char *input);
 
 //check.c
 int     check_quotes(char *s);
