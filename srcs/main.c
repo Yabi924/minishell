@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:32 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/14 14:51:56 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/17 21:15:34 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	init_data(t_data *data, char **env)
 	data->first_run_init_dollar = 0;
 	data->cmd_exit_no = 0;
 	data->list = NULL;
+	data->command_arr = NULL;
 	tcgetattr(STDIN_FILENO, &data->ori_terminal);
 	data->mod_terminal = data->ori_terminal;
 	data->mod_terminal.c_lflag &= ~ECHOCTL;
@@ -84,4 +85,23 @@ int	main(int argc, char **argv, char **env)
 		tcsetattr(STDIN_FILENO, TCSANOW, &data.mod_terminal);
 	}
 	return (0);
+}
+
+void    print_arr(char **s)
+{
+    int i = -1;
+    while (s[++i])
+        printf("i:%d str:%s\n", i + 1, s[i]);
+}
+
+void    pll(t_list *list)
+{
+    int i = 0;
+
+    while (list)
+    {
+        printf("\nlinked list:%d\n", i++);
+        print_arr(list->command);
+        list = list->next;
+    }
 }

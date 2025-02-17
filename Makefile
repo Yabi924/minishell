@@ -1,5 +1,5 @@
 #flags
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address,undefined
+CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address,undefined
 
 #program name
 NAME = minishell
@@ -93,8 +93,8 @@ $(NAME): $(OBJS)
 	@make bonus -C libft/ --no-print-directory
 	@gcc $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS)
 	@echo Hi $(NAME)
-	@make clean --no-print-directory
-	@make clean -C libft/ --no-print-directory
+#	@make clean --no-print-directory
+#	@make clean -C libft/ --no-print-directory
 
 %.o: %.c
 	@gcc $(CFLAGS) -c $< -o $@
