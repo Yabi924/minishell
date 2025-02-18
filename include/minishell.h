@@ -34,6 +34,7 @@
 # define TRUE 1
 # define FALSE 0
 # define BUFFER 10000
+# define PATH_VAL 4096
 
 //External variable to get the signal
 extern int  g_exit_code;
@@ -205,10 +206,8 @@ char    **del_env(char **env, char *target);
 void    ft_unset(t_data *data, t_list *list, char **env);
 
 //cd.c
-void    errorMsg3(char *builtin, char *msg);
-void    err_exit(char *action, int code);
-char	*env_val(char *key, t_env *env);
-void    ft_cd(t_data *data);
+void    ft_cd(t_data *data, t_list *list);
+void    env_updater(t_data *data, char *key, char *value);
 
 //pwd.c
 void    ft_pwd();
@@ -237,8 +236,8 @@ void    output_setup(t_data *mshell, t_list *lst);
 void    kindergarden_end(pid_t *childs, t_data *mshell);
 void	cmd(t_data *mshell, t_list *lst);
 void	child_process(t_data *mshell, t_list *lst);
-char	*get_path(t_data *mshell, t_list *lst);
-char	*ft_getenv(t_data *mshell, char *evar);
+char	*get_path(t_data *data, t_list *list);
+char	*ft_getenv(t_data *data, char *env_var);
 // void	here_doc(t_data *mshell, t_list *lst);
 // void	here_doc2(t_data *mshell, t_list *lst, int fd, char *input);
 

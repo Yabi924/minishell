@@ -9,11 +9,10 @@
 /*   Updated: 2025/02/15 08:22:05 by wwan-ab-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-/*
-#include "../../include/minishell.h"
 
-//find the valid path based on args(lexem)
-char	*get_path(t_data *mshell, t_list *lst)
+#include "../../include/minishell.h"
+/*
+char	*get_path(t_data *data, t_list *list)
 {
 	char	**env_paths;
 	char	*temp;
@@ -21,11 +20,11 @@ char	*get_path(t_data *mshell, t_list *lst)
 	int		i;
 
 	i = -1;
-	env_paths = ft_split(ft_getenv(mshell, "PATH"), ':');
+	env_paths = ft_split(ft_getenv(data, "PATH"), ':');
 	while (env_paths && env_paths[++i])
 	{
 		temp = ft_strjoin(env_paths[i], "/");
-		path = ft_strjoin(temp, lst->command[0]);
+		path = ft_strjoin(temp, list->command[0]);
 		free(temp);
 		if (access(path, F_OK | X_OK) == 0)
 		{
@@ -37,6 +36,85 @@ char	*get_path(t_data *mshell, t_list *lst)
 	free_arr(env_paths);
 	return (NULL);
 }
+*/
+
+char *get_path(t_data *data, t_list *list)
+{
+    char    **env_paths;
+    char    *temp;
+    char    *path;
+    int     i;
+
+    env_paths = ft_split(ft_getenv(data, "PATH"), ':');
+    if (!env_paths)
+        return (NULL);
+    
+    i = -1;
+    while (env_paths[++i])
+    {
+        temp = ft_strjoin(env_paths[i], "/");
+        path = ft_strjoin(temp, list->command[0]);
+        free(temp);
+        if (access(path, F_OK | X_OK) == 0)
+        {
+            free_arr(env_paths);
+            return (path);
+        }
+        free(path);
+    }
+    free_arr(env_paths);
+    return (NULL);
+}
+
+/*
+char	*ft_getenv(t_data *data, char *env_var)
+{
+	char	*value;
+	int		i;
+
+	i = -1;
+	value = NULL;
+	if (!ft_strncmp(env_val, "?\0", 2))
+		return (ft_itoa(data->cmd_exit_no));
+	while (data->env[++i])
+	{
+		if (!ft_strncmp(data->env[i], env_val, ft_strlen(env_val)) && \
+			data->env[i][ft_strlen(env_val)] == '=')
+			{
+				value = ft_strchr(data->env[i], '=') + 1;
+				break ;
+			}
+	}
+	if (!value)
+		return ("");
+	return (value);
+}
+*/
+char *ft_getenv(t_data *data, char *env_var)
+{
+    char    *value;
+    int     i;
+
+    i = -1;
+    value = NULL;
+    if (!ft_strncmp(env_var, "?\0", 2)) // Fixed variable name
+        return (ft_itoa(data->cmd_exit_no));
+    
+    while (data->env[++i])
+    {
+        if (!ft_strncmp(data->env[i], env_var, ft_strlen(env_var)) && \
+            data->env[i][ft_strlen(env_var)] == '=')
+        {
+            value = ft_strchr(data->env[i], '=') + 1;
+            break;
+        }
+    }
+    return (value ? value : "");
+}
+
+
+/*
+#include "../../include/minishell.h"
 
 char	*ft_getenv(t_data *mshell, char *evar)
 {

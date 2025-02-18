@@ -34,15 +34,15 @@ void    built_in(t_data *data, t_list *list)
         ft_exit(data);
     /*cd*/
     else if (!ft_strncmp(list->command[0], "cd\0", 3))
-        ft_cd(data);
+        ft_cd(data, data->list);
     /*export*/
     else if (!ft_strncmp(list->command[0], "export\0", 7))
         ft_export(data, data->list);
     /*unset*/
     else if (!ft_strncmp(list->command[0], "unset\0", 4))
         ft_unset(data, data->list, data->env);
-    else
-        execve_command(data, data->list);
+    // else
+    //     execve_command(data, data->list);
 }
 
 /*
