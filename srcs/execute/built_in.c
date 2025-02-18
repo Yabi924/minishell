@@ -41,8 +41,8 @@ void    built_in(t_data *data, t_list *list)
     /*unset*/
     else if (!ft_strncmp(list->command[0], "unset\0", 4))
         ft_unset(data, data->list, data->env);
-    // else
-    //     execve_command(data, data->list);
+    else
+        execve_command(data, data->list);
 }
 
 /*

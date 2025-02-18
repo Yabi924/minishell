@@ -208,6 +208,9 @@ void    ft_unset(t_data *data, t_list *list, char **env);
 //cd.c
 void    ft_cd(t_data *data, t_list *list);
 void    env_updater(t_data *data, char *key, char *value);
+void    if_path_is_wrong(char *new_path);
+void    check_dir(char *new_path, char *old_path);
+void    free_cd(char *new_path, char *old_path);
 
 //pwd.c
 void    ft_pwd();
@@ -221,6 +224,10 @@ char    *resolve_path(char *cmd, char **env);
 void	kindergarden(t_data *mshell, t_list *lst, pid_t *childs);
 void    only_built_in(t_data *shell, t_list *list);
 void    execute_fd_init(t_data *shell);
+
+//add_path.c
+char    *ft_getenv(char *s, char **env);
+char    *add_path(t_data *data,  char *command);
 
 //Path to execve
 void    execve_command(t_data *data, t_list *list);
@@ -236,8 +243,8 @@ void    output_setup(t_data *mshell, t_list *lst);
 void    kindergarden_end(pid_t *childs, t_data *mshell);
 void	cmd(t_data *mshell, t_list *lst);
 void	child_process(t_data *mshell, t_list *lst);
-char	*get_path(t_data *data, t_list *list);
-char	*ft_getenv(t_data *data, char *env_var);
+// char	*get_path(t_data *data, t_list *list);
+// char	*ft_getenv(t_data *data, char *env_var);
 // void	here_doc(t_data *mshell, t_list *lst);
 // void	here_doc2(t_data *mshell, t_list *lst, int fd, char *input);
 
