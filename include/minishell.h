@@ -235,6 +235,10 @@ char    *collect_env(t_data *mshell, char *env_var);
 char    *ft_getenv(char *s, char **env);
 char    *add_path(t_data *data,  char *command);
 
+//add_path.c
+char    *ft_getenv(char *s, char **env);
+char    *add_path(t_data *data,  char *command);
+
 //Path to execve
 void    execve_command(t_data *data, t_list *list);
 
@@ -249,8 +253,8 @@ void    output_setup(t_data *mshell, t_list *lst);
 void    kindergarden_end(pid_t *childs, t_data *mshell);
 void	cmd(t_data *mshell, t_list *lst);
 void	child_process(t_data *mshell, t_list *lst);
-char	*get_path(t_data *data, t_list *list);
-char	*ft_getenv(t_data *data, char *env_var);
+// char	*get_path(t_data *data, t_list *list);
+// char	*ft_getenv(t_data *data, char *env_var);
 // void	here_doc(t_data *mshell, t_list *lst);
 // void	here_doc2(t_data *mshell, t_list *lst, int fd, char *input);
 

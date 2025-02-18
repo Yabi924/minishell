@@ -59,4 +59,8 @@ char    *add_path(t_data *data,  char *command)
     if (!temp)
         return (NULL);
     return (temp); 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 06d9a27 (Recreated cd.c file. Got 5 functions in there.)
