@@ -208,7 +208,9 @@ void    ft_unset(t_data *data, t_list *list, char **env);
 //cd.c
 void    ft_cd(t_data *data, t_list *list);
 void    env_updater(t_data *data, char *key, char *value);
-
+void    if_path_is_wrong(char *new_path);
+void    check_dir(char *new_path, char *old_path);
+void    free_cd(char *new_path, char *old_path);
 
 //pwd.c
 void    ft_pwd();
@@ -224,6 +226,7 @@ void    only_built_in(t_data *shell, t_list *list);
 void    execute_fd_init(t_data *shell);
 
 //add_path.c
+char    *ft_getenv(char *s, char **env);
 char    *add_path(t_data *data,  char *command);
 
 //Path to execve

@@ -12,9 +12,6 @@
 
 #include "../../include/minishell.h"
 
-void    ft_cd(t_data *data, t_list *list);
-void    env_updater(t_data *data, char *key, char *value);
-
 void    ft_cd(t_data *data, t_list *list)
 {
     char    path[PATH_VAL];
@@ -22,25 +19,21 @@ void    ft_cd(t_data *data, t_list *list)
     char    *old_path;
 
     if (!list->command[1] || !ft_strncmp(list->command[1], "~", 2))
-        new_path = ft_getenv(data, "HOME");
+        new_path = ft_strdup(ft_getenv("HOME", data->env));
     else if (!ft_strncmp(list->command[1], "-", 2))
-        new_path = ft_getenv(data, "OLDPWD");
+        new_path = ft_strdup(ft_getenv("OLDPWD", data->env));
     else
-        new_path = list->command[1];
-
-    if (!new_path || chdir(new_path) != 0)
-    {
-        perror("minishell: cd");
-        return;
-    }
-
-    old_path = ft_strdup(ft_getenv(data, "PWD"));
-    if (getcwd(path, PATH_VAL))
+        new_path = ft_strdup(list->command[1]);
+    if_path_is_wrong(new_path);
+    old_path = ft_strdup(ft_getenv("PWD", data->env));
+    check_dir(new_path, old_path);
+    if (getcwd(path, sizeof(path)))
     {
         env_updater(data, "PWD", path);
-        env_updater(data, "OLDPWD", old_path);
+        if (old_path)
+            env_updater(data, "OLDPWD", old_path);
     }
-    free(old_path);
+    free_cd(new_path, old_path);
     data->cmd_exit_no = 0;
 }
 
@@ -56,91 +49,40 @@ void    env_updater(t_data *data, char *key, char *value)
     new_entry = ft_strjoin(key, "=");
     temp = ft_strjoin(new_entry, value);
     free(new_entry);
-    i = 0;
     while (data->env[i])
     {
         if (!ft_strncmp(data->env[i], key, ft_strlen(key)) &&
             data->env[i][ft_strlen(key)] == '=')
-            {
-                free(data->env[i]);
-                data->env[i] = temp;
-                return;
-            }
+        {
+            free(data->env[i]);
+            data->env[i] = temp;
+            return;
+        }
         i++;
     }
 }
 
-// void    assign_oldpwd(t_env *env_ll, char *pwd, t_data *mini)
-// {
-//     char    *key;
+void    if_path_is_wrong(char *new_path)
+{
+    if (!new_path)
+    {
+        perror("minishell: cd");
+        return;
+    }
+}
 
-//     while (env_ll != NULL)
-//     {
-//         if (!strcmp(env_ll->key, "OLDPWD"))
-//         {
-//             free(env_ll->value);
-//             env_ll->value = pwd;
-//             return ;
-//         }
-//         env_ll = env_ll->next;
-//     }
-//     key = ft_strdup("OLDPWD");
-//     add_node_end(mini->env_ll, key, pwd, 0);
-// }
+void    check_dir(char *new_path, char *old_path)
+{
+    if (chdir(new_path) != 0)
+    {
+        perror("minishell: cd");
+        free_cd(new_path, old_path);
+        return;
+    }
+}
 
-// void    pwd_update(t_env *env_ll, char *new_pwd, t_data *mini)
-// {
-//     char    *key;
-
-//     while (env_ll != NULL)
-//     {
-//         if (!strcmp(env_ll->key, "PWD"))
-//         {
-//             free(env_ll->value);
-//             env_ll->value = new_pwd;
-//             return ;
-//         }
-//         env_ll = env_ll->next;
-//     }
-//     key = ft_strdup("PWD");
-//     add_node_end(mini->env_ll, key, new_pwd, 0);
-// }
-
-// void    home(t_data *mini)
-// {
-//     char    *new_dir;
-
-//     new_dir = get_env(mini->env_ll, "HOME");
-//     if (!new_dir[0])
-//         ft_printf("bash: cd: HOME not set\n");
-//     chdir(new_dir);
-// }
-
-// void    change_dir(t_data *mini)
-// {
-//     char    *new_dir;
-//     char    *pwd;
-
-//     pwd = getcwd(NULL, 1024);
-//     if (!mini->command_arr[1])
-//         home(mini);
-//     else if (!ft_strncmp(mini->command_arr[1], "-", 2))
-//         chdir(getenv("HOME"));
-//     else if (!ft_strncmp(mini->command_arr[1], "-", 2))
-//     {
-//         new_dir = get_env(mini->env_ll, "OLDPWD");
-//         if (chdir(new_dir) == -1 && !new_dir[0])
-//                 ft_printf("Minishell: cd: OLDPWD not set\n");
-//         else
-//                 ft_printf("%s\n", new_dir);
-//     }
-//     else if (chdir(mini->command_arr[1]) == -1)
-//     {
-//         g_exit_code = 1;
-//         ft_printf("Minishell: cd: %s: No such file or directory\n",
-//                     mini->command_arr[1]);
-//     }
-//     assign_oldpwd(mini->env_ll, pwd, mini);
-//     pwd = getcwd(NULL, 1024);
-//     pwd_update(mini->env_ll, pwd, mini);
-// }
+void    free_cd(char *new_path, char *old_path)
+{
+    free(new_path);
+    free(old_path);
+}
