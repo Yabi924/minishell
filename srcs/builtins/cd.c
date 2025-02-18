@@ -12,128 +12,62 @@
 
 #include "../../include/minishell.h"
 
-// Function to update OLDPWD in the environment
-static void update_oldpwd(t_data *data)
-{
-    char cwd[1024];
-    t_env *current;
+void    ft_cd(t_data *data, t_list *list);
+void    env_updater(t_data *data, char *key, char *value);
 
-    current = data->env_ll;
-    if (getcwd(cwd, sizeof(cwd)) == NULL)
-        err_exit("getcwd", errno);
-    while (current)
+void    ft_cd(t_data *data, t_list *list)
+{
+    char    path[PATH_VAL];
+    char    *new_path;
+    char    *old_path;
+
+    if (!list->command[1] || !ft_strncmp(list->command[1], "~", 2))
+        new_path = ft_getenv(data, "HOME");
+    else if (!ft_strncmp(list->command[1], "-", 2))
+        new_path = ft_getenv(data, "OLDPWD");
+    else
+        new_path = list->command[1];
+
+    if (!new_path || chdir(new_path) != 0)
     {
-        if (strcmp(current->key, "OLDPWD") == 0)
-        {
-            free(current->value);
-            current->value = ft_strdup(cwd);
-            return ;
-        }
-        current = current->next;
+        perror("minishell: cd");
+        return;
     }
+
+    old_path = ft_strdup(ft_getenv(data, "PWD"));
+    if (getcwd(path, PATH_VAL))
+    {
+        env_updater(data, "PWD", path);
+        env_updater(data, "OLDPWD", old_path);
+    }
+    free(old_path);
+    data->cmd_exit_no = 0;
 }
 
-// Function to update PWD in the environment
-static void update_pwd(t_data *data)
+void    env_updater(t_data *data, char *key, char *value)
 {
-    char cwd[1024];
-    t_env *current;
+    int     i;
+    char    *new_entry;
+    char    *temp;
 
-    current = data->env_ll;
-    if (getcwd(cwd, sizeof(cwd)) == NULL)
-        err_exit("getcwd", errno);
-    while (current)
+    i = 0;
+    if (!key || !value)
+        return;
+    new_entry = ft_strjoin(key, "=");
+    temp = ft_strjoin(new_entry, value);
+    free(new_entry);
+    i = 0;
+    while (data->env[i])
     {
-        if (strcmp(current->key, "PWD") == 0)
-        {
-            free(current->value);
-            current->value = ft_strdup(cwd);
-            return ;
-        }
-        current = current->next;
+        if (!ft_strncmp(data->env[i], key, ft_strlen(key)) &&
+            data->env[i][ft_strlen(key)] == '=')
+            {
+                free(data->env[i]);
+                data->env[i] = temp;
+                return;
+            }
+        i++;
     }
-}
-
-// Function to change directory to HOME
-static int cd_home(t_data *data)
-{
-    char *home;
-
-    home = env_val("HOME", data->env_ll);
-    if (!home)
-    {
-        ft_printf("cd: HOME not set\n");
-        return (EXIT_FAILURE);
-    }
-    if (chdir(home) == -1)
-    {
-        perror("cd");
-        return (EXIT_FAILURE);
-    }
-    update_pwd(data);
-    return (EXIT_SUCCESS);
-}
-
-// Main function for the cd command
-void ft_cd(t_data *data)
-{
-    if (!data->list->command[1])  // If no argument is passed, go to HOME directory
-    {
-        if (cd_home(data) == EXIT_FAILURE)
-            return;
-    }
-    else if (strcmp(data->list->command[1], "-") == 0)  // Handle '-' for previous directory
-    {
-        char *oldpwd = env_val("OLDPWD", data->env_ll);
-        if (!oldpwd)
-        {
-            ft_printf("cd: OLDPWD not set\n");
-            return;
-        }
-        if (chdir(oldpwd) == -1)
-        {
-            perror("cd");
-            return;
-        }
-        ft_printf("%s\n", oldpwd);  // Print the directory we're changing to
-        update_oldpwd(data);  // Update OLDPWD after changing directory
-    }
-    else  // Change to the specified directory
-    {
-        if (chdir(data->list->command[1]) == -1)
-        {
-            perror("cd");
-            return;
-        }
-        update_oldpwd(data);  // Update OLDPWD before changing to the new directory
-        update_pwd(data);     // Update PWD after changing to the new directory
-    }
-}
-
-void errorMsg3(char *builtin, char *msg)
-{
-	ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd(builtin, 2);
-	ft_putstr_fd(": ", 2);
-	ft_putstr_fd(msg, 2);
-	ft_putstr_fd("\n", 2);
-}
-
-void err_exit(char *action, int code)
-{
-	errorMsg3(action, strerror(code));
-	exit(EXIT_FAILURE);
-}
-
-char	*env_val(char *key, t_env *env)
-{
-	while (key && env)
-	{
-		if (!strcmp(key, env->key))
-			return (env->value);
-		env = env->next;
-	}
-	return (NULL);
 }
 
 // void    assign_oldpwd(t_env *env_ll, char *pwd, t_data *mini)

@@ -27,7 +27,7 @@ void    execve_command(t_data *data, t_list *list)
 	{
 		//idriss part 
 		//execve
-		// printf("debug:can execute\n");
+		printf("debug:can execute\n");
 	}
 	else 
 	{

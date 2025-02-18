@@ -34,6 +34,7 @@
 # define TRUE 1
 # define FALSE 0
 # define BUFFER 10000
+# define PATH_VAL 4096
 
 //External variable to get the signal
 extern int  g_exit_code;
@@ -205,10 +206,9 @@ char    **del_env(char **env, char *target);
 void    ft_unset(t_data *data, t_list *list, char **env);
 
 //cd.c
-void    errorMsg3(char *builtin, char *msg);
-void    err_exit(char *action, int code);
-char	*env_val(char *key, t_env *env);
-void    ft_cd(t_data *data);
+void    ft_cd(t_data *data, t_list *list);
+void    env_updater(t_data *data, char *key, char *value);
+
 
 //pwd.c
 void    ft_pwd();
