@@ -3,8 +3,8 @@
 
 void    execve_command(t_data *data, t_list *list)
 {
-    pid_t	p_id;
-    char *str;
+    // pid_t	p_id;
+    char *temp;
 
 	// int main(int ac, char **av, char **env)
 
@@ -27,15 +27,19 @@ void    execve_command(t_data *data, t_list *list)
 	{
 		//idriss part 
 		//execve
+		// printf("debug:can execute\n");
 	}
 	else 
 	{
-		while ()
-		{
-			//add path
-			//check command is able to run
-			//if can't to run just show error message
-		}
+		temp = add_path(data, list->command[0]);
+		if (!temp)
+			return ; //err message & free data;
+		if (list->command[0])
+			free(list->command[0]);
+		list->command[0] = ft_strdup(temp);
+		if (temp)
+			free(temp);
+		// pll(list);
 	}
 	//idriss part
 	// execve
