@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:32 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/17 21:15:34 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/18 14:37:14 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void    pll(t_list *list)
 
     while (list)
     {
-        printf("\nlinked list:%d\n", i++);
+        printf("linked list:%d\n", i++);
         print_arr(list->command);
         list = list->next;
     }

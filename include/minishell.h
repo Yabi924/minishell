@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:38 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/17 18:53:30 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/18 14:34:49 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,6 +223,9 @@ void	kindergarden(t_data *mshell, t_list *lst, pid_t *childs);
 void    only_built_in(t_data *shell, t_list *list);
 void    execute_fd_init(t_data *shell);
 
+//add_path.c
+char    *add_path(t_data *data,  char *command);
+
 //Path to execve
 void    execve_command(t_data *data, t_list *list);
 
@@ -238,7 +241,7 @@ void    kindergarden_end(pid_t *childs, t_data *mshell);
 void	cmd(t_data *mshell, t_list *lst);
 void	child_process(t_data *mshell, t_list *lst);
 char	*get_path(t_data *mshell, t_list *lst);
-char	*ft_getenv(t_data *mshell, char *evar);
+// char	*ft_getenv(t_data *mshell, char *evar);
 // void	here_doc(t_data *mshell, t_list *lst);
 // void	here_doc2(t_data *mshell, t_list *lst, int fd, char *input);
 
