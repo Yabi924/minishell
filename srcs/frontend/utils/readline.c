@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 19:00:27 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/19 00:35:49 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/19 00:58:28 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	print_prompt(t_data *data)
 	{
 		ft_putstr_fd("exit\n", 1);
 		tcsetattr(STDIN_FILENO, TCSANOW, &data->ori_terminal);
-		exit(0);//will update to free before exit
+		data->cmd_exit_no = 127;
+		exit(data->cmd_exit_no);//will update to free before exit
 	}
 	if (ppt_input && ppt_input[0])
 		add_history(ppt_input);
