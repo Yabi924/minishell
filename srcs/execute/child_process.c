@@ -22,6 +22,37 @@ void	output_config(t_data *data, t_list *list);
 void	shell_cmd(t_data *data, t_list *list);
 
 /*
+	shell_cmd
+
+	This function executes the actual command in the shell by either running
+	a built-in command or an external executable.
+*/
+void     shell_cmd(t_data *data, t_list *list)
+{
+	char	*path;
+	if (confirm_built_in(list))
+		return ;
+	if (list->command && list->command[0])
+	{
+		path = collect_path(data, list);
+		if (!ft_strncmp(list->command[0], ".", 1) \
+			|| !ft_strncmp(list->command[0], "..", 2))
+			path = NULL;
+		if (!path)
+		{
+			err_msg(data, 127, "Minishell: '%s': command not found\n", \
+					list->command[0]);
+			free(path);
+			return ;
+		}
+		execve(path, list->command, data->env);
+		free(path);
+		data->cmd_exit_no = 1;
+	}
+}
+
+
+/*
 	input_config
 
 	This function configures the input for the command based on redirection
@@ -30,23 +61,39 @@ void	shell_cmd(t_data *data, t_list *list);
 int	input_config(t_data *data, t_list *list)
 {
 	if (list->in_path && list->delimiter == NULL)
+	{
+		//ft_printf("1) FD: %d\n", data->in_fd);
 		data->in_fd = open(list->in_path, O_RDONLY);
+	}
 	else if (list->in_path == NULL && list->delimiter)
+	{
+		//ft_printf("2) FD: %d\n", data->in_fd);
 		data->in_fd = open(".tmp", O_RDONLY);
+	}
 	else if (list->fd[0] != -1 && list->fd[0] != 0)
+	{
+		//ft_printf("3) FD: %d\n", data->in_fd);
 		data->in_fd = list->fd[0];
+	}
 	else
+	{
+		//ft_printf("4) FD: %d\n", data->in_fd);
 		data->in_fd = dup(data->in_first);
+	}
 	if (data->heredoc && data->cmd_exit_no == 42)
+	{
+		//ft_printf("5) FD: %d\n", data->in_fd);
 		return (1);
+	}
 	if (data->in_fd == -1 && !data->heredoc)
 	{
+		//ft_printf("6) FD: %d\n", data->in_fd);
 		perror("Minishell: Infile");
 		return (1);
 	}
 	if (dup2(data->in_fd, 0) == -1 && !data->heredoc)
 	{
-		ft_printf("%d\n", data->in_fd);
+		// ft_printf("7) FD: %d\n", data->in_fd);
 		perror("Error: infile fd");
 		return (1);
 	}
@@ -81,58 +128,6 @@ void	output_config(t_data *data, t_list *list)
 		return ;
 	}
 	close(data->out_fd);
-}
-
-/*
-	This function waits for child processes to finish and handles their exit statuses.
-*/
-void	transit_end(pid_t *children, t_data *mshell)
-{
-	int	status;
-	int	i;
-
-	i = -1;
-	while (children[++i] != -1)
-	{
-		waitpid(children[i], &status, 0);
-		if (WIFSIGNALED(status))
-			mshell->cmd_exit_no = 128 + WTERMSIG(status);
-		else if (WIFEXITED(status))
-		{
-			status = WEXITSTATUS(status);
-			mshell->cmd_exit_no = status;
-		}
-	}
-}
-
-/*
-	shell_cmd
-
-	This function executes the actual command in the shell by either running
-	a built-in command or an external executable.
-*/
-void     shell_cmd(t_data *data, t_list *list)
-{
-	char	*path;
-	if (confirm_built_in(list))
-		return ;
-	if (list->command && list->command[0])
-	{
-		path = collect_path(data, list);
-		if (!ft_strncmp(list->command[0], ".", 1) \
-			|| !ft_strncmp(list->command[0], "..", 2))
-			path = NULL;
-		if (!path)
-		{
-			err_msg(data, 127, "Minishell: '%s': command not found\n", \
-						  list->command[0]);
-			free(path);
-			return ;
-		}
-		execve(path, list->command, data->env);
-		free(path);
-		data->cmd_exit_no = 1;
-	}
 }
 
 /*
