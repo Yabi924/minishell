@@ -11,7 +11,7 @@ void	here_doc2(t_data *mshell, t_list *lst, int fd, char *input)
 		if (!input)
 		{
 			ft_putstr_fd("Minishell: warning: here-document delimited by", 2);
-			//err_msg(mshell, 0, " end-of-file (wanted '%s')\n", lst->delimiter);
+			err_msg(mshell, 0, " end-of-file (wanted '%s')\n", lst->delimiter);
 			break ;
 		}
 		if (!ft_strncmp(input, lst->delimiter, ft_strlen(lst->delimiter + 1)))

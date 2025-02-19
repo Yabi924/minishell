@@ -25,6 +25,8 @@ int	input_handle(t_data *data)
 	{
 		parser(data);
 		built_in(data, data->list); //Launch the built-ins and non built-ins (execve)
+		//if (redirection(data, data->list))
+		//ft_execute(data, data->list);
 	}
 	tcsetattr(STDIN_FILENO, TCSANOW, &data->ori_terminal);
 	free_data(data);
