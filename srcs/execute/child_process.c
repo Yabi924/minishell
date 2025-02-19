@@ -9,116 +9,92 @@
 /*   Updated: 2025/02/15 08:22:05 by wwan-ab-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-/*
+
 #include "../../include/minishell.h"
 
-//find the valid path based on args(lexem)
-char	*get_path(t_data *mshell, t_list *lst)
+/*
+	This file handle the child process.
+*/
+
+void	child_process(t_data *data, t_list *list);
+int		input_config(t_data *data, t_list *list);
+void	output_config(t_data *data, t_list *list);
+void	shell_cmd(t_data *data, t_list *list);
+
+/*
+	input_config
+
+	This function configures the input for the command based on redirection
+	or pipes.
+*/
+int	input_config(t_data *data, t_list *list)
 {
-	char	**env_paths;
-	char	*temp;
-	char	*path;
-	int		i;
-
-	i = -1;
-	env_paths = ft_split(ft_getenv(mshell, "PATH"), ':');
-	while (env_paths && env_paths[++i])
-	{
-		temp = ft_strjoin(env_paths[i], "/");
-		path = ft_strjoin(temp, lst->command[0]);
-		free(temp);
-		if (access(path, F_OK | X_OK) == 0)
-		{
-			free_arr(env_paths);
-			return (path);
-		}
-		free(path);
-	}
-	free_arr(env_paths);
-	return (NULL);
-}
-
-char	*ft_getenv(t_data *mshell, char *evar)
-{
-	char	*value;
-	int		a;
-
-	a = -1;
-	value = NULL;
-	if (!ft_strncmp(evar, "?\0", 2))
-		return (ft_itoa(mshell->cmd_exit_no));
-	while (mshell->env[++a])
-	{
-		if (!ft_strncmp(mshell->env[a], evar, ft_strlen(evar)) && \
-			mshell->env[a][ft_strlen(evar)] == '=')
-		{
-			value = ft_strchr(mshell->env[a], '=') + 1;
-			break ;
-		}
-	}
-	if (!value)
-		return ("");
-	return (value);
-}
-
-int	input_setup(t_data *mshell, t_list *lst)
-{
-	if (lst->in_path && lst->delimiter == NULL)
-		mshell->in_fd = open(lst->in_path, O_RDONLY);
-	else if (lst->in_path == NULL && lst->delimiter)
-		mshell->in_fd = open(".tmp", O_RDONLY);
-	else if (lst->fd[0] != -1 && lst->fd[0] != 0)
-		mshell->in_fd = lst->fd[0];
+	if (list->in_path && list->delimiter == NULL)
+		data->in_fd = open(list->in_path, O_RDONLY);
+	else if (list->in_path == NULL && list->delimiter)
+		data->in_fd = open(".tmp", O_RDONLY);
+	else if (list->fd[0] != -1 && list->fd[0] != 0)
+		data->in_fd = list->fd[0];
 	else
-		mshell->in_fd = dup(mshell->in_first);
-	if (mshell->heredoc && mshell->cmd_exit_no == 42)
+		data->in_fd = dup(data->in_first);
+	if (data->heredoc && data->cmd_exit_no == 42)
 		return (1);
-	if (mshell->in_fd == -1 && !mshell->heredoc)
+	if (data->in_fd == -1 && !data->heredoc)
 	{
 		perror("Minishell: Infile");
 		return (1);
 	}
-	if (dup2(mshell->in_fd, 0) == -1 && !mshell->heredoc)
+	if (dup2(data->in_fd, 0) == -1 && !data->heredoc)
 	{
+		ft_printf("%d\n", data->in_fd);
 		perror("Error: infile fd");
 		return (1);
 	}
-	close(mshell->in_fd);
+	close(data->in_fd);
 	return (0);
 }
 
-void	output_setup(t_data *mshell, t_list *lst)
+/*
+	output_config
+
+	This function configures the output for the command based on redirection
+	or pipes.
+*/
+void	output_config(t_data *data, t_list *list)
 {
-	if (lst->out_path && lst->append == 0)
-		mshell->out_fd = open(lst->out_path, \
-							O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	else if (lst->out_path && lst->append == 1)
-		mshell->out_fd = open(lst->out_path, \
-							O_WRONLY | O_CREAT | O_APPEND, 0644);
-	else if (lst->next)
+	if (list->out_path && list->append == 0)
+		data->out_fd = open(list->out_path, \
+		O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	else if (list->out_path && list->append == 1)
+		data->out_fd = open(list->out_path, \
+		O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	else if (list->next)
 	{
-		mshell->out_fd = lst->next->fd[1];
-		close(lst->next->fd[0]);
+		data->out_fd = list->next->fd[1];
+		close(list->next->fd[0]);
 	}
 	else
-		mshell->out_fd = dup(mshell->out_first);
-	if (dup2(mshell->out_fd, 1) == -1)
+		data->out_fd = dup(data->out_first);
+	if (dup2(data->out_fd, 1) == -1)
 	{
 		perror("Error: outfile fd");
 		return ;
 	}
-	close(mshell->out_fd);
+	close(data->out_fd);
 }
 
-void	kindergarden_end(pid_t *childs, t_data *mshell)
+/*
+	This function waits for child processes to finish and handles their exit statuses.
+*/
+void	transit_end(pid_t *children, t_data *mshell)
 {
 	int	status;
 	int	i;
 
 	i = -1;
-	while (childs[++i] != -1)
+	while (children[++i] != -1)
 	{
-		waitpid(childs[i], &status, 0);
+		waitpid(children[i], &status, 0);
 		if (WIFSIGNALED(status))
 			mshell->cmd_exit_no = 128 + WTERMSIG(status);
 		else if (WIFEXITED(status))
@@ -129,45 +105,55 @@ void	kindergarden_end(pid_t *childs, t_data *mshell)
 	}
 }
 
-void	cmd(t_data *mshell, t_list *lst)
+/*
+	shell_cmd
+
+	This function executes the actual command in the shell by either running
+	a built-in command or an external executable.
+*/
+void     shell_cmd(t_data *data, t_list *list)
 {
 	char	*path;
-
-	if (confirm_built_in(lst))
+	if (confirm_built_in(list))
 		return ;
-	if (lst->command && lst->command[0])
+	if (list->command && list->command[0])
 	{
-		path = get_path(mshell, lst);
-		if (!ft_strncmp(lst->command[0], ".", 1) \
-			|| !ft_strncmp(lst->command[0], "..", 2))
+		path = collect_path(data, list);
+		if (!ft_strncmp(list->command[0], ".", 1) \
+			|| !ft_strncmp(list->command[0], "..", 2))
 			path = NULL;
 		if (!path)
 		{
-			err_msg(mshell, 127, "Minishell: '%s': command not found\n", \
-					lst->command[0]);
+			err_msg(data, 127, "Minishell: '%s': command not found\n", \
+						  list->command[0]);
 			free(path);
 			return ;
 		}
-		execve(path, lst->command, mshell->env);
+		execve(path, list->command, data->env);
 		free(path);
-		mshell->cmd_exit_no = 1;
+		data->cmd_exit_no = 1;
 	}
 }
 
-void	child_process(t_data *mshell, t_list *lst)
+/*
+	child_process
+
+	This function is executed in a child process created by fork().
+	It handles input/output redirection
+*/
+void	child_process(t_data *data, t_list *list)
 {
-	if (input_setup(mshell, lst) == 0)
+	if (input_config(data, list) == 0)
 	{
-		if (mshell->heredoc)
-			exit(mshell->cmd_exit_no);
-		output_setup(mshell, lst);
+		if (data->heredoc)
+			exit(data->cmd_exit_no);
+		output_config(data, list);
 		ft_signal(1);
-		if (confirm_built_in(lst))
-			built_in(mshell, lst);
-		cmd(mshell, lst);
+		if (confirm_built_in(list))
+			built_in(data, list);
+		shell_cmd(data, list);
 	}
 	else
-		mshell->cmd_exit_no = 1;
-	exit(mshell->cmd_exit_no);
+		data->cmd_exit_no = 1;
+	exit(data->cmd_exit_no);
 }
-*/

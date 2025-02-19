@@ -21,10 +21,10 @@ void    built_in(t_data *data, t_list *list)
         return ;
     }
     /*echo*/
-    else if (!ft_strncmp(list->command[0], "echo", 4))
+    else if (!ft_strncmp(list->command[0], "echo\0", 5))
         ft_echo(data);
     /*pwd*/
-    else if (!ft_strncmp(list->command[0], "pwd", 3))
+    else if (!ft_strncmp(list->command[0], "pwd\0", 4))
         ft_pwd();
     /*env*/
     else if (!ft_strncmp(list->command[0], "env\0", 4))
@@ -47,32 +47,34 @@ void    built_in(t_data *data, t_list *list)
 
 /*
     Confirm built in
+
+    To check if the built in command is there in prompt
 */
 
-// int    confirm_built_in(t_list *list)
-// {
-//     if (!list->command[0])
-//         return (0);
-//     /*echo*/
-//     else if (!ft_strncmp(list->command[0], "echo\0", 5))
-//         return (1);
-//     /*cd*/
-//     else if (!ft_strncmp(list->command[0], "cd\0", 3))
-//         return (1);
-//     /*pwd*/
-//     else if (!ft_strncmp(list->command[0], "pwd\0", 4))
-//         return (1);
-//     /*export*/
-//     else if (!ft_strncmp(list->command[0], "export\0", 7))
-//          return (1);
-//     /*unset*/
-//     else if (!ft_strncmp(list->command[0], "unset\0", 4))
-//         return (1);
-//     /*env*/
-//     else if (!ft_strncmp(list->command[0], "env\0", 4))
-//         return (1);
-//     /*exit*/
-//     else if (!ft_strncmp(list->command[0], "exit\0", 5))
-//         return (1);
-//     return (0);
-// }
+int    confirm_built_in(t_list *list)
+{
+    if (!list->command[0])
+        return (0);
+    /*echo*/
+    else if (!ft_strncmp(list->command[0], "echo\0", 5))
+        return (1);
+    /*cd*/
+    else if (!ft_strncmp(list->command[0], "cd\0", 3))
+        return (1);
+    /*pwd*/
+    else if (!ft_strncmp(list->command[0], "pwd\0", 4))
+        return (1);
+    /*export*/
+    else if (!ft_strncmp(list->command[0], "export\0", 7))
+         return (1);
+    /*unset*/
+    else if (!ft_strncmp(list->command[0], "unset\0", 4))
+        return (1);
+    /*env*/
+    else if (!ft_strncmp(list->command[0], "env\0", 4))
+        return (1);
+    /*exit*/
+    else if (!ft_strncmp(list->command[0], "exit\0", 5))
+        return (1);
+    return (0);
+}
