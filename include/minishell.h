@@ -220,6 +220,7 @@ void    ft_pwd();
 */
 //executable.c
 void    transit(t_data *data, t_list *list, pid_t *children);
+void	transit_end(pid_t *children, t_data *mshell);
 void    only_built_in(t_data *data, t_list *list);
 void    execute_fd_init(t_data *data);
 void    ft_execute(t_data *data, t_list *list);
@@ -231,7 +232,10 @@ void	child_process(t_data *data, t_list *list);
 int     input_config(t_data *data, t_list *list);
 void    output_config(t_data *data, t_list *list);
 void	shell_cmd(t_data *data, t_list *list);
-void    transit_end(pid_t *children, t_data *mshell);
+
+/*
+    get_path.c
+*/
 char    *collect_path(t_data *data, t_list *list);
 char    *collect_env(t_data *mshell, char *env_var);
 

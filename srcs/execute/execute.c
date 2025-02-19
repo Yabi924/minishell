@@ -16,6 +16,7 @@ void    transit(t_data *data, t_list *list, pid_t *children);
 void    only_built_in(t_data *data, t_list *list);
 void    execute_fd_init(t_data *data);
 void    ft_execute(t_data *data, t_list *list);
+void	transit_end(pid_t *children, t_data *mshell);
 
 void    transit(t_data *data, t_list *list, pid_t *children)
 {
@@ -25,7 +26,12 @@ void    transit(t_data *data, t_list *list, pid_t *children)
     while (list)
     {
         if (list->next)
+        {
+            // list->output = 1;
+            // list->next->input = 1;
             pipe(list->next->fd);
+            // list->fd[1] = list->next->fd[1];
+        }
         if (list->delimiter)
             here_doc(data, list);
         children[++i] = fork();
@@ -44,6 +50,28 @@ void    transit(t_data *data, t_list *list, pid_t *children)
         }
     }
     transit_end(children, data);
+}
+
+/*
+	This function waits for child processes to finish and handles their exit statuses.
+*/
+void	transit_end(pid_t *children, t_data *mshell)
+{
+	int	status;
+	int	i;
+
+	i = -1;
+	while (children[++i] != -1)
+	{
+		waitpid(children[i], &status, 0);
+		if (WIFSIGNALED(status))
+			mshell->cmd_exit_no = 128 + WTERMSIG(status);
+		else if (WIFEXITED(status))
+		{
+			status = WEXITSTATUS(status);
+			mshell->cmd_exit_no = status;
+		}
+	}
 }
 
 void    only_built_in(t_data *data, t_list *list)
