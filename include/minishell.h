@@ -229,6 +229,10 @@ void    execute_fd_init(t_data *shell);
 char    *ft_getenv(char *s, char **env);
 char    *add_path(t_data *data,  char *command);
 
+//add_path.c
+char    *ft_getenv(char *s, char **env);
+char    *add_path(t_data *data,  char *command);
+
 //Path to execve
 void    execve_command(t_data *data, t_list *list);
 
