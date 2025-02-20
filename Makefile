@@ -110,7 +110,7 @@ fclean: clean
 
 re: fclean all
 
-r:
+r: $(NAME)
 	clear
 	valgrind --leak-check=full --track-origins=yes ./minishell
 

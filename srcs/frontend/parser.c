@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 21:55:18 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/20 15:19:17 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/20 17:25:35 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,11 @@ void	parser(t_data *data)
 	init_split(data);
 	data->command_arr = split(&data->split, data->new_input);
 	reset_split(&data->split);
+	if (data->new_input)
+	{
+		free(data->new_input);
+		data->new_input = NULL;
+	}
 	// print_arr(data->command_arr);
 	tokenization(data, &data->list);
 }

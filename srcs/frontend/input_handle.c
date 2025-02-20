@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:44 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/20 16:53:50 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/20 17:31:55 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	input_handle(t_data *data)
 	else
 	{
 		parser(data);
-		//built_in(data, data->list); //Launch the built-ins and non built-ins (execve)
+		// built_in(data, data->list); //Launch the built-ins and non built-ins (execve)
 		//if (redirection(data, data->list))
 		ft_execute(data, data->list);
 	}
