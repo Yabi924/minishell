@@ -34,8 +34,7 @@ s_execute =	$(PATH_EXECUTE)built_in.c \
 			$(PATH_EXECUTE)execute.c \
 			$(PATH_EXECUTE)execve_path.c \
 			$(PATH_EXECUTE)add_path.c \
-			#$(PATH_EXECUTE)child_process.c \
-			$(PATH_EXECUTE)add_path.c \
+			$(PATH_EXECUTE)child_process.c \
 			$(PATH_EXECUTE)get_path.c \
 
 s_ctrl = $(PATH_CTRL)

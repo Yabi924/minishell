@@ -52,32 +52,3 @@
 // 	//idriss part
 // 	// execve
 	
-
-// 	// if (access(list->command[0], F_OK | X_OK) == 0)
-// 	// {
-// 	// 	p_id = fork();
-// 	// 	if (p_id == 0)
-// 	// 	{
-// 	// 		malloc
-// 	// 		exit()
-// 	// 		ft_signal(1);
-// 	// 		       // "usr/bin/" + ls         open("./path/folder/map.ber")
-// 	// 		execve(list->command[0], list->command, data->env);
-// 	// 		ft_printf("Hello1");
-
-// 	// 	}
-// 	// 	else if (p_id)
-// 	// 	{
-// 	// 		waitpid(p_id, &data->cmd_exit_no, 0);
-// 	// 		data->cmd_exit_no = WEXITSTATUS(data->cmd_exit_no);
-// 	// 		ft_printf("Hello2");
-// 	// 	}
-// 	// }
-// 	// else
-// 	// {
-// 	// 	ft_putstr_fd("Minishell: ", 2);
-// 	// 	perror(list->command[0]);
-// 	// 	data->cmd_exit_no = 127;
-// 	// 	return ;
-// 	// }
-// }
