@@ -49,8 +49,9 @@ s_pipe = $(PATH_Pipe)pipe.c \
 
 s_redirection = $(PATH_Redirection)
 
-s_rdrt = $(PATH_Redirection)redirection.c \
-		 $(PATH_Redirection)redirection2.c \
+s_rdrt = $(PATH_Redirection)redirect_checker.c \
+		 $(PATH_Redirection)command_updater.c \
+		 $(PATH_Redirection)redirection.c \
 		 $(PATH_Redirection)heredoc.c \
 
 s_env = $(PATH_env)dollar_sign.c \
