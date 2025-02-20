@@ -33,7 +33,7 @@ void    transit(t_data *data, t_list *list, pid_t *children)
             // list->fd[1] = list->next->fd[1];
         }
         if (list->delimiter)
-            here_doc(data, list);
+            heredoc(data, list);
         children[++i] = fork();
         if (children[i] == 0)
         {
@@ -86,6 +86,7 @@ void    only_built_in(t_data *data, t_list *list)
     output_config(data, list);
     built_in(data, list);
 }
+
 void    execute_fd_init(t_data *data)
 {
     data->in_first = dup(0);
