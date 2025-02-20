@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:12:26 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/17 22:05:14 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/20 15:18:53 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static int	count(char *s)
 		else
 			i++;
 	}
+	// printf("debug: count>%d\n", count + 1);
 	return (count + 1);
 }
 
@@ -71,7 +72,7 @@ void	singel_quotes(t_split *split, char *input)
 
 void	end(t_split *split, char **arr, char *input)
 {
-	if (!input[split->i] || input[split->i] == ' ')
+	if (!input[split->i] || (input[split->i] == ' ' && input[split->i + 1] != ' '))
 		split->end++;
 	if (split->temp)
 		arr[split->j] = ft_strjoin_free(arr[split->j], split->temp);
