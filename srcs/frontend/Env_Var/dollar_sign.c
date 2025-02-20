@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 18:58:54 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/17 19:40:21 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/20 16:41:58 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init_dollar(t_data *data)
 {
-	data->dollar.env = copy_env(data->env);
+	data->dollar.env = copy_env(data->env, 0);
 	data->dollar.input = ft_strdup(data->new_input);
 	data->dollar.new = ft_calloc(1, 1);
 	if (data->first_run_init_dollar)
