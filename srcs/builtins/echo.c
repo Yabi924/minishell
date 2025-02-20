@@ -28,13 +28,13 @@ char	*retrieve_line(char **data)
 	char	*line;
 	int		i;
 
-	i = 0;
+	i = -1;
 	line = ft_strdup("");
 	while (data[++i])
 	{
-		if (!ft_strncmp(data[i], "-n", 2))
-			continue ;
-		else if (check(data[i]) == 1)
+		// if (data[i][0] == '-' && check(&data[i][1]))
+		// 	continue ;
+		if (check(data[i]) == 1)
 			break ;
 		else if (data[i] != 0)
 		{
@@ -53,22 +53,52 @@ char	*retrieve_line(char **data)
 
 void	ft_echo(t_data *data)
 {
-	char	*temp;
+	//char	*temp;
 	char	*line;
+	int newline;
+	int i;
+	int j;
+	int flag = 0; 
 
+	i = 0;
+	newline = 1;
 	if (!data->list->command[1])
 	{
 		write(1, "\n", 1);
 		return ;
 	}
-	line = retrieve_line(data->list->command);
-	if (ft_strncmp(data->list->command[1], "-n", 2))
+
+	while (data->list->command[++i]) 
 	{
-		temp = strjoin_helper(line, "\n", 1, 0);
-		line = ft_strdup(temp);
-		free(temp);
-	}
+        j = 0;
+        if (data->list->command[i][0] == '-' && data->list->command[i][1]) 
+		{
+            while (data->list->command[i][++j])
+			{
+                if (data->list->command[i][j] != 'n')
+				{
+                    flag = 1;
+                    break;
+                }
+            }
+        } 
+		else 
+            break;
+        if (flag)
+            break;
+        newline = 0;
+    }
+	
+	line = retrieve_line(&data->list->command[i]);
 	write(1, line, ft_strlen(line));
 	free(line);
-	data->cmd_exit_no = 0;
+	if (newline)
+		write(1, "\n", 1);
+
+	/*
+		New method:
+	*/
+	
+	
+	//data->cmd_exit_no = 0;
 }
