@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:32 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/17 21:15:34 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/20 16:47:53 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,29 @@
 
 int	g_exit_code = 0;
 
-char	**copy_env(char **env)
+char	**copy_env(char **env, int f)
 {
 	int		i;
 	char	**new_env;
+	char	*temp;
 
 	i = -1;
 	new_env = (char **)malloc((ft_arrlen(env) + 2) * sizeof(char *));
 	if (!new_env)
 		return (NULL);
 	while (env[++i])
-		new_env[i] = ft_strdup(env[i]);
-	new_env[i++] = ft_strdup("?=0");
+	{
+		if (is_env("SHLVL", env[i]) && f)
+		{
+			temp = ft_itoa(ft_atoi(env[i] + 6) + 1);
+			new_env[i] = ft_strjoin("SHLVL=", temp);
+			free(temp);
+		}
+		else
+			new_env[i] = ft_strdup(env[i]);
+	}
+	if (f)
+		new_env[i++] = ft_strdup("?=0");
 	new_env[i] = NULL;
 	return (new_env);
 }
@@ -36,14 +47,12 @@ void	update_env(t_data *data)
 	char	*exit_code;
 	char	*no;
 
-	i = 0;
+	i = -1;
 	no = ft_itoa(data->cmd_exit_no);
 	if (!no)
 		return ;
 	exit_code = ft_strjoin("?=", no);
-	if (!exit_code)
-		return ;
-	while (data->env[i])
+	while (data->env[++i])
 	{
 		if (is_env("?", data->env[i]))
 		{
@@ -51,15 +60,14 @@ void	update_env(t_data *data)
 			data->env[i] = ft_strdup(exit_code);
 			free(exit_code);
 		}
-		i++;
 	}
+	if (no)
+		free(no);
 }
 
 void	init_data(t_data *data, char **env)
 {
-	data->env = copy_env(env);
-	// if (!data->env)
-	//error malloc
+	data->env = copy_env(env, 1);
 	data->first_run_init_dollar = 0;
 	data->cmd_exit_no = 0;
 	data->list = NULL;
@@ -91,7 +99,7 @@ void    print_arr(char **s)
 {
     int i = -1;
     while (s[++i])
-        printf("i:%d str:%s\n", i + 1, s[i]);
+        printf("debug: i:%d str:%s\n", i + 1, s[i]);
 }
 
 void    pll(t_list *list)
@@ -100,7 +108,7 @@ void    pll(t_list *list)
 
     while (list)
     {
-        printf("\nlinked list:%d\n", i++);
+        printf("debug: linked list:%d\n", i++);
         print_arr(list->command);
         list = list->next;
     }

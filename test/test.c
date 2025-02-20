@@ -2,46 +2,62 @@
 #include <stdlib.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-#include "../include/minishell.h"
+#include <string.h>
 
+int	is_target(char c, char *target)
+{
+	int	i;
 
-//test readline function
-//compile: cc test.c -I/usr/include/readline -lreadline
+	i = -1;
+	while (target[++i])
+	{
+		if (c == target[i])
+			return (1);
+	}
+	return (0);
+}
 
+int	is_env(char *s, char *env)
+{
+	int	i;
+	int	j;
+	int	k;
 
-// int main() {
-//     char *input;
+	i = 0;
+	j = 0;
+	k = 0;
+	while (s[i] && s[i] != ' ' && !is_target(s[i], "'\"") && s[i] != '$')
+		i++;
+	while (env[j] && env[j] != '=')
+		j++;
+	while (s[k] && env[k] && s[k] == env[k] && (s[k] != ' ' || \
+		!is_target(s[k], "'\"")))
+		k++;
+	if (env[k] == '=' && k == i)
+		return (1);
+	return (0);
+}
 
-//     while (1) {
-//         // Display prompt and read input
-//         input = readline("shell> ");
+char    *ft_getenv(char *s, char **env)
+{
+    int i;
+    int p;
 
-//         if (!input) { // Exit on EOF (Ctrl+D)
-//             printf("\nExiting shell.\n");
-//             break;
-//         }
-//         if (*input) { // Add non-empty input to history
-//             add_history(input);
-//         }
-//         printf("You entered: %s\n", input);
-//         free(input); // Free dynamically allocated memory
-//     }
+    i = -1;
+    p = 0;
+    while (s[p] && (s[p] != '"' || s[p] != '\'' || s[p] != '$' || s[p] != ' '))
+        p++;
+    printf("%d\n", p);
+    while (env[++i])
+        if (is_env(s, env[i]))
+            return (strdup(env[i] + p + 1));
+    return NULL;
+}
 
-//     return 0;
-// }
-
-// int main()
-// {
-//     char *s1 = "12345#12345";
-
-//     int i = skip_unprint(0, s1);
-//     int j = 0;
-//     while (s1[i + j])
-//     {
-//         if (s1[i + j] == '#')
-//             break ;
-//         j++;
-//     }
-//     printf("%s\n", ft_substr(s1, i, i + j));
-//     return 0;
-// }
+int main(int a, char **b, char **env)
+{
+    char *enn = ft_getenv("PATH", env);
+    printf("%s\n", enn);
+	free(enn);
+    return 0;
+}

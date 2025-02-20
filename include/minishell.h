@@ -243,10 +243,6 @@ void    output_setup(t_data *mshell, t_list *lst);
 void    kindergarden_end(pid_t *childs, t_data *mshell);
 void	cmd(t_data *mshell, t_list *lst);
 void	child_process(t_data *mshell, t_list *lst);
-// char	*get_path(t_data *data, t_list *list);
-// char	*ft_getenv(t_data *data, char *env_var);
-// void	here_doc(t_data *mshell, t_list *lst);
-// void	here_doc2(t_data *mshell, t_list *lst, int fd, char *input);
 
 //directory.c
 void	pwd_update(t_env *env_ll, char *new_pwd, t_data *mini);

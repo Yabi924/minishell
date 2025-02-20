@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 00:40:04 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/14 14:54:30 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/20 16:56:17 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	free_arr(char **arr)
 		free(arr);
 	arr = NULL;
 }
+
+// void	free_linked_list_item()
 
 void	free_linked_list(t_list **list)
 {

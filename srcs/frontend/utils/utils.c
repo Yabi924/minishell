@@ -6,29 +6,11 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:57 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/17 21:20:42 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/20 16:49:04 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
-
-// void    input_handler(const char *input, char **env)
-// {
-//     (void)env;
-//     ft_printf("%s\n", input);
-// }
-
-// int ft_quotes(int i, char *str)
-// {
-//     if (!str[i] || str[i] != '"')
-//         return (-1);
-//     i++;
-//     while (str[i] && str[i] != '"')
-//         i++;
-//     if (!str[i])
-//         return (-1);
-//     return (i + 1);
-// }
 
 int	unprint_index(int i, char *str)
 {

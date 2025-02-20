@@ -31,6 +31,8 @@ typedef struct s_list
     char            *in_path;
     char            *out_path;
     int				fd[2];
+    int             label_1;
+    int             label_2;
     int				input;
     int				output;
     int             append;
