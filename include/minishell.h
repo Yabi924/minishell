@@ -253,23 +253,20 @@ void	pwd_update(t_env *env_ll, char *new_pwd, t_data *mini);
 void    home(t_data *mini);
 
 //redirection.c
-void	here_doc2(t_data *mshell, t_list *lst, int fd, char *input);
-void	here_doc(t_data *mshell, t_list *lst);
-void	redirect_setup2(t_list *lst, int i, int status);
-void	redirect_setup(t_list *lst, int i, int status);
-int     redirection(t_data *mshell, t_list *lst);
-void	command_update(t_list **lst, int i);
+void    redirect_config(t_list *list, int i, int status);
+void    redirect_config2(t_list *list, int i, int status);
+int     redirection(t_data *data, t_list *list);
 
-//redirection2.c
+//heredoc.c
+void    heredoc(t_data *data, t_list *list);
+void    heredoc2(t_data *data, t_list *list, int fd, char *input);
+
+//redirect_checker.c
 int     check_if_redirect(t_list *lst, int i);
 int     check_redirect_syntax(t_data *mshell, t_list *lst, int i);
 
-//heredoc.c
-int     heredoc_check(t_data *mini);
-void    heredoc_run(t_data *mini, char *str);
-int     heredoc2(t_data *mini, int x);
-char    **mal_dup(t_data *mini);
-int     is_redir(char *str);
+//command_updater.c
+void    command_updater(t_list **list, int i);
 
 /*
     Error Message: Tell user what goes wrong
