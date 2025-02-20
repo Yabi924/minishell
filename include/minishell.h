@@ -219,11 +219,11 @@ void    ft_pwd();
     Executable
 */
 //executable.c
-void    ft_execute(t_data *shell, t_list *lst);
+void    ft_execute(t_data *data, t_list *list);
 char    *resolve_path(char *cmd, char **env);
-void	kindergarden(t_data *mshell, t_list *lst, pid_t *childs);
-void    only_built_in(t_data *shell, t_list *list);
-void    execute_fd_init(t_data *shell);
+void	transit(t_data *data, t_list *list, pid_t *children);
+void    only_built_in(t_data *data, t_list *list);
+void    execute_fd_init(t_data *data);
 
 //add_path.c
 char    *ft_getenv(char *s, char **env);
@@ -238,15 +238,12 @@ void    built_in(t_data *data, t_list *list);
 int     confirm_built_in(t_list *list);
 
 //child_process.c
-int     input_setup(t_data *mshell, t_list *lst);
-void    output_setup(t_data *mshell, t_list *lst);
-void    kindergarden_end(pid_t *childs, t_data *mshell);
-void	cmd(t_data *mshell, t_list *lst);
-void	child_process(t_data *mshell, t_list *lst);
-// char	*get_path(t_data *data, t_list *list);
-// char	*ft_getenv(t_data *data, char *env_var);
-// void	here_doc(t_data *mshell, t_list *lst);
-// void	here_doc2(t_data *mshell, t_list *lst, int fd, char *input);
+char	*get_path(t_data *data, t_list *list);
+int     input_config(t_data *data, t_list *list);
+void    output_config(t_data *data, t_list *list);
+void    transit_end(pid_t *children, t_data *data);
+void	command(t_data *data, t_list *list);
+void	child_process(t_data *data, t_list *list);
 
 //directory.c
 void	pwd_update(t_env *env_ll, char *new_pwd, t_data *mini);
