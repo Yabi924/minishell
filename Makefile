@@ -32,9 +32,9 @@ s_builtin = $(PATH_BUILTIN)echo.c \
 
 s_execute =	$(PATH_EXECUTE)built_in.c \
 			$(PATH_EXECUTE)execute.c \
-			$(PATH_EXECUTE)child_process.c \
 			$(PATH_EXECUTE)execve_path.c \
 			$(PATH_EXECUTE)add_path.c \
+			$(PATH_EXECUTE)child_process.c \
 			$(PATH_EXECUTE)get_path.c \
 
 s_ctrl = $(PATH_CTRL)
@@ -48,8 +48,9 @@ s_pipe = $(PATH_Pipe)pipe.c \
 
 s_redirection = $(PATH_Redirection)
 
-s_rdrt = $(PATH_Redirection)redirection.c \
-		 $(PATH_Redirection)redirection2.c \
+s_rdrt = $(PATH_Redirection)redirect_checker.c \
+		 $(PATH_Redirection)command_updater.c \
+		 $(PATH_Redirection)redirection.c \
 		 $(PATH_Redirection)heredoc.c \
 
 s_env = $(PATH_env)dollar_sign.c \

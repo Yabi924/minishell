@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:38 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/20 16:49:35 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/17 18:53:30 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,14 @@ typedef struct s_data
 extern t_data g_minishell;
 
 //main
-// char    **copy_env(char **env, int f);
+char    **copy_env(char **env);
+
+//readline.c
+void    print_prompt(t_data *data);
+
+//lexer.c
+int     lexer(char *input);
+char    *strjoin_helper(char *str1, char *str2, int free1, int free2);
 
 //parser.c
 void    parser(t_data *data);
@@ -139,6 +146,7 @@ int     is_env(char *s, char *env);
 int     is_target(char c, char *target);
 char    *ft_strjoin_free(char *s1, char *s2);
 int     skip_quotes(char *s, int positoin, char target);
+int     unprint_index(int i, char *str);
 void    skip_unprint(t_data *data);
 int     ft_arrlen(char **arr);
 
@@ -163,7 +171,7 @@ char    **env_2d(t_env *env);
     main function:
     main.c
 */
-char	**copy_env(char **env, int f);
+char	**copy_env(char **env);
 void	update_env(t_data *data);
 void	init_data(t_data *data, char **env);
 void    init_list(t_list *list);
@@ -173,7 +181,7 @@ void    init_list(t_list *list);
     input_handle.c
 */
 int    input_handle(t_data *data);
-char    *strjoin_helper(char *str1, char *str2, int free1, int free2);
+//int    input_handle(t_data *data);
 
 /*
     Built in functions: Without list
@@ -211,25 +219,11 @@ void    ft_pwd();
     Executable
 */
 //executable.c
-void    transit(t_data *data, t_list *list, pid_t *children);
-void	transit_end(pid_t *children, t_data *mshell);
-void    only_built_in(t_data *data, t_list *list);
-void    execute_fd_init(t_data *data);
-void    ft_execute(t_data *data, t_list *list);
-
-/*
-    child_process.c
-*/
-void	child_process(t_data *data, t_list *list);
-int     input_config(t_data *data, t_list *list);
-void    output_config(t_data *data, t_list *list);
-void	shell_cmd(t_data *data, t_list *list);
-
-/*
-    get_path.c
-*/
-char    *collect_path(t_data *data, t_list *list);
-char    *collect_env(t_data *mshell, char *env_var);
+void    ft_execute(t_data *shell, t_list *lst);
+char    *resolve_path(char *cmd, char **env);
+void	kindergarden(t_data *mshell, t_list *lst, pid_t *childs);
+void    only_built_in(t_data *shell, t_list *list);
+void    execute_fd_init(t_data *shell);
 
 //add_path.c
 char    *ft_getenv(char *s, char **env);
@@ -243,28 +237,32 @@ void    execve_command(t_data *data, t_list *list);
 void    built_in(t_data *data, t_list *list);
 int     confirm_built_in(t_list *list);
 
+//child_process.c
+int     input_setup(t_data *mshell, t_list *lst);
+void    output_setup(t_data *mshell, t_list *lst);
+void    kindergarden_end(pid_t *childs, t_data *mshell);
+void	cmd(t_data *mshell, t_list *lst);
+void	child_process(t_data *mshell, t_list *lst);
+
 //directory.c
 void	pwd_update(t_env *env_ll, char *new_pwd, t_data *mini);
 void    home(t_data *mini);
 
 //redirection.c
-void	here_doc2(t_data *mshell, t_list *lst, int fd, char *input);
-void	here_doc(t_data *mshell, t_list *lst);
-void	redirect_setup2(t_list *lst, int i, int status);
-void	redirect_setup(t_list *lst, int i, int status);
-int     redirection(t_data *mshell, t_list *lst);
-void	command_update(t_list **lst, int i);
+void    redirect_config(t_list *list, int i, int status);
+void    redirect_config2(t_list *list, int i, int status);
+int     redirection(t_data *data, t_list *list);
 
-//redirection2.c
+//heredoc.c
+void    heredoc(t_data *data, t_list *list);
+void    heredoc2(t_data *data, t_list *list, int fd, char *input);
+
+//redirect_checker.c
 int     check_if_redirect(t_list *lst, int i);
 int     check_redirect_syntax(t_data *mshell, t_list *lst, int i);
 
-//heredoc.c
-int     heredoc_check(t_data *mini);
-void    heredoc_run(t_data *mini, char *str);
-int     heredoc2(t_data *mini, int x);
-char    **mal_dup(t_data *mini);
-int     is_redir(char *str);
+//command_updater.c
+void    command_updater(t_list **list, int i);
 
 /*
     Error Message: Tell user what goes wrong
