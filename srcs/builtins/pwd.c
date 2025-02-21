@@ -6,19 +6,17 @@
 /*   By: wwan-ab- wwan-ab-@student.42kl.edu.my      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 12:42:02 by wwan-ab-          #+#    #+#             */
-/*   Updated: 2025/02/15 12:42:05 by wwan-ab-         ###   ########.fr       */
+/*   Updated: 2025/02/21 15:29:42 by wwan-ab-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../../include/minishell.h"
 
-void    ft_pwd()
+void	ft_pwd(void)
 {
-    // ft_printf("%s\n", data->cwd);
-    // data->cmd_exit_no = 0;
-    char    *pwd;
-    pwd = getcwd(NULL, 1024);
-    ft_printf("%s\n", pwd);
-    free(pwd);
+	char	*pwd;
+
+	pwd = getcwd(NULL, 1024);
+	ft_printf("%s\n", pwd);
+	free(pwd);
 }
