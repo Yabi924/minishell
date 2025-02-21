@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:32 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/20 16:47:53 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:04:23 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	init_data(t_data *data, char **env)
 	data->cmd_exit_no = 0;
 	data->list = NULL;
 	data->command_arr = NULL;
+	data->heredoc = -1;
 	tcgetattr(STDIN_FILENO, &data->ori_terminal);
 	data->mod_terminal = data->ori_terminal;
 	data->mod_terminal.c_lflag &= ~ECHOCTL;
