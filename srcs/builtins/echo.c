@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:23:07 by wwan-ab-          #+#    #+#             */
-/*   Updated: 2025/02/21 11:39:42 by wwan-ab-         ###   ########.fr       */
+/*   Updated: 2025/02/21 15:15:42 by wwan-ab-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,11 @@ void	ft_echo_process2(t_data *data, char *line, int fd, int newline)
 	if (data->list->out_path)
 	{
 		if (data->list->append)
-			fd = open(data->list->out_path, O_WRONLY | O_CREAT | O_APPEND, 0644);
+			fd = open(data->list->out_path, \
+					O_WRONLY | O_CREAT | O_APPEND, 0644);
 		else
-			fd = open(data->list->out_path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+			fd = open(data->list->out_path, \
+					O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (fd == -1)
 		{
 			err_msg(data, 1, "Failed to open file for redirection.\n", \

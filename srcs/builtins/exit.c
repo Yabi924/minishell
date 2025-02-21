@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exit.c                                          :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wwan-ab- wwan-ab-@student.42kl.edu.my      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:23:27 by wwan-ab-          #+#    #+#             */
-/*   Updated: 2025/01/08 20:23:29 by wwan-ab-         ###   ########.fr       */
+/*   Updated: 2025/02/21 15:28:43 by wwan-ab-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void    ft_exit(t_data *data)
+void	ft_exit(t_data *data)
 {
-    // int i;
-
-    // i = -1;
-    // ft_printf("");
-    ft_printf("exit\n");
-    free_data(data);
-    exit(0);
+	ft_printf("exit\n");
+	free_data(data);
+	exit(0);
 }
 
+/*
 void    builtin_exit(t_data *shell, t_list *list)
 {
     int i;
@@ -49,3 +46,4 @@ void    builtin_exit(t_data *shell, t_list *list)
         shell->cmd_exit_no = 0;
     exit(shell->cmd_exit_no);
 }
+*/
