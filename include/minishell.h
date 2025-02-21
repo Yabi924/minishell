@@ -197,6 +197,8 @@ void    ft_env(t_data *data);
 int     check(char *data);
 char	*retrieve_line(char **data);
 void	ft_echo(t_data *data);
+void    ft_echo_process1(t_data *data, int *i, int *newline);
+void    ft_echo_process2(t_data *data, char *line, int fd, int newline);
 
 //export.c
 void    ft_export(t_data *data, t_list *list);
@@ -266,8 +268,8 @@ void    heredoc(t_data *data, t_list *list);
 void    heredoc2(t_data *data, t_list *list, int fd, char *input);
 
 //redirect_checker.c
-int     check_if_redirect(t_list *lst, int i);
-int     check_redirect_syntax(t_data *mshell, t_list *lst, int i);
+int     check_if_redirect(t_list *list, int i);
+int     check_redirect_syntax(t_data *data, t_list *list, int i);
 
 //command_updater.c
 void    command_updater(t_list **list, int i);
