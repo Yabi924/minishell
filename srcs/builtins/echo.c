@@ -96,7 +96,10 @@ void	ft_echo_process2(t_data *data, char *line, int fd, int newline)
 {
 	if (data->list->out_path)
 	{
-		fd = open(data->list->out_path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (data->list->append)
+			fd = open(data->list->out_path, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		else
+			fd = open(data->list->out_path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (fd == -1)
 		{
 			err_msg(data, 1, "Failed to open file for redirection.\n", \
