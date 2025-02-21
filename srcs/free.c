@@ -28,19 +28,23 @@ void	free_arr(char **arr)
 
 void	free_linked_list_item(t_list *lst)
 {
-	if (lst->command){
+	if (lst->command)
+	{
 		free_arr(lst->command);
 		lst->command = NULL;
 	}
-	if (lst->delimiter){
+	if (lst->delimiter)
+	{
 		free(lst->delimiter);
 		lst->delimiter = NULL;
 	}
-	if (lst->in_path){
+	if (lst->in_path)
+	{
 		free(lst->in_path);
 		lst->in_path = NULL;
 	}
-	if (lst->out_path){
+	if (lst->out_path)
+	{
 		free(lst->out_path);
 		lst->out_path = NULL;
 	}
