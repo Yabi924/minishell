@@ -37,8 +37,8 @@ static int	count(char *s)
 
 void	copy(t_split *split, char *input)
 {
-	int i;
-	int f;
+	int	i;
+	int	f;
 
 	i = 0;
 	f = 0;
@@ -59,8 +59,8 @@ void	copy(t_split *split, char *input)
 
 void	singel_quotes(t_split *split, char *input)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	split->i++;
 	while (input[split->i + i] && !is_target(input[split->i + i], "'"))
@@ -72,7 +72,8 @@ void	singel_quotes(t_split *split, char *input)
 
 void	end(t_split *split, char **arr, char *input)
 {
-	if (!input[split->i] || (input[split->i] == ' ' && input[split->i + 1] != ' '))
+	if (!input[split->i] || (input[split->i] == ' ' && \
+		input[split->i + 1] != ' '))
 		split->end++;
 	if (split->temp)
 		arr[split->j] = ft_strjoin_free(arr[split->j], split->temp);
@@ -88,7 +89,7 @@ void	end(t_split *split, char **arr, char *input)
 
 char	**split(t_split *split, char *input)
 {
-	char **arr;
+	char	**arr;
 
 	arr = ft_calloc(count(input) + 1, sizeof(char *));
 	while (input[split->i])
