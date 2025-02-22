@@ -14,7 +14,7 @@
 
 void	built_in(t_data *data, t_list *list)
 {
-	if (list == NULL || list->command == NULL \
+	if (list == NULL || list->command == NULL
 			|| list->command[0] == NULL)
 		return ;
 	else if (!ft_strncmp(list->command[0], "echo\0", 5))
@@ -31,7 +31,7 @@ void	built_in(t_data *data, t_list *list)
 		ft_export(data, data->list);
 	else if (!ft_strncmp(list->command[0], "unset\0", 4))
 		ft_unset(data, data->list, data->env);
-	else if (!ft_strncmp(list->command[0], "./", 2) || \
+	else if (!ft_strncmp(list->command[0], "./", 2) ||
 			!ft_strncmp(list->command[0], "/", 1))
 		execve_command(data, data->list);
 }

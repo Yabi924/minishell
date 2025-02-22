@@ -39,7 +39,9 @@ void	parser(t_data *data)
 		dollar_sign(data);
 	init_split(data);
 	data->command_arr = split(&data->split, data->new_input);
+
 	reset_split(&data->split);
+	
 	if (data->new_input)
 	{
 		free(data->new_input);

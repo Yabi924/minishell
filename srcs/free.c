@@ -20,7 +20,10 @@ void	free_arr(char **arr)
 	if (!arr)
 		return ;
 	while (arr[++i])
-		free(arr[i]);
+	{
+		if (arr[i])
+			free(arr[i]);
+	}
 	if (arr)
 		free(arr);
 	arr = NULL;

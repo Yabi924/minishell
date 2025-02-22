@@ -22,6 +22,7 @@ void	print_prompt(t_data *data)
 	ppt = ft_strjoin("Minishell: ", cwd);
 	ppt = ft_strjoin_free(ppt, " > ");
 	ppt_input = readline(ppt);
+
 	if (!ppt_input)
 	{
 		ft_putstr_fd("exit\n", 1);
@@ -54,16 +55,19 @@ int	lexer(char *input)
 
 int	input_handle(t_data *data)
 {
+	data->heredoc = -1;
+	data->new_input = NULL;
+	data->command_arr = NULL;
 	print_prompt(data);
 	skip_unprint(data);
 	if (lexer(data->input))
 		ft_putstr_fd("Syntax error\n", 2);
 	else
-	{
+	{	
 		parser(data);
 		//built_in(data, data->list); //Launch the built-ins and non built-ins (execve)
 		if (redirection(data, data->list))
-		ft_execute(data, data->list);
+			ft_execute(data, data->list);
 	}
 	tcsetattr(STDIN_FILENO, TCSANOW, &data->ori_terminal);
 	free_data(data);
