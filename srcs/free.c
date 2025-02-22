@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 00:40:04 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/20 17:41:54 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/22 08:18:50 by wwan-ab-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,24 +28,26 @@ void	free_arr(char **arr)
 
 void	free_linked_list_item(t_list *lst)
 {
-	if (lst->command){
+	if (lst->command)
+	{
 		free_arr(lst->command);
 		lst->command = NULL;
 	}
-	if (lst->delimiter){
+	if (lst->delimiter)
+	{
 		free(lst->delimiter);
 		lst->delimiter = NULL;
 	}
-	if (lst->in_path){
+	if (lst->in_path)
+	{
 		free(lst->in_path);
 		lst->in_path = NULL;
 	}
-	if (lst->out_path){
+	if (lst->out_path)
+	{
 		free(lst->out_path);
 		lst->out_path = NULL;
 	}
-	// if (!lst->command && !lst->delimiter && !lst->in_path && !lst->out_path)
-	// 	printf("debug free linked list complete\n");
 }
 
 void	free_linked_list(t_list **list)
@@ -86,3 +88,7 @@ void	free_data(t_data *data)
 	else
 		free_linked_list(&data->list);
 }
+/*
+	if (!lst->command && !lst->delimiter && !lst->in_path && !lst->out_path)
+		ft_printf("debug free linked list complete\n");
+*/

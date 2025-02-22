@@ -225,7 +225,7 @@ void    transit(t_data *data, t_list *list, pid_t *children);
 void    only_built_in(t_data *data, t_list *list);
 void    execute_fd_init(t_data *data);
 void    ft_execute(t_data *data, t_list *list);
-void	transit_end(pid_t *children, t_data *mshell);
+void	transit_end(pid_t *children, t_data *data);
 
 //child_process.c
 char	*collect_env(t_data *data, char *env_var);
@@ -248,6 +248,7 @@ char    *add_path(t_data *data,  char *command);
 
 //Path to execve
 void    execve_command(t_data *data, t_list *list);
+void    child_parent(t_data *data, t_list *list);
 
 //built_in.c
 // void    built_in(t_data *data);
