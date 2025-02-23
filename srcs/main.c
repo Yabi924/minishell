@@ -71,6 +71,7 @@ void	init_data(t_data *data, char **env)
 	data->first_run_init_dollar = 0;
 	data->cmd_exit_no = 0;
 	data->list = NULL;
+	data->new_input = NULL;
 	data->command_arr = NULL;
 	tcgetattr(STDIN_FILENO, &data->ori_terminal);
 	data->mod_terminal = data->ori_terminal;

@@ -17,7 +17,7 @@ void	free_arr(char **arr)
 	int	i;
 
 	i = -1;
-	if (!arr)
+	if (!arr || !arr[0])
 		return ;
 	while (arr[++i])
 	{

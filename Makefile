@@ -65,11 +65,10 @@ s_utils = $(PATH_utils)utils.c \
 		$(PATH_utils)add_space.c
 
 s_input_handle = $(PATH_fn)input_handle.c \
-		$(PATH_fn)parser.c \
-		$(PATH_fn)init.c
+				 $(PATH_fn)parser.c \
 
 s_signal = $(PATH_signal)signal.c \
-		   $(PATH_signal)get_stat.c
+		   $(PATH_signal)signal2.c
 
 s_error = $(PATH_error)error_msg_1.c \
 
@@ -93,7 +92,7 @@ $(NAME): $(OBJS)
 	@make -C libft/ --no-print-directory
 	@make bonus -C libft/ --no-print-directory
 	@gcc $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS)
-	@echo Hi $(NAME)
+	@echo $(NAME) is good to go.
 #	@make clean --no-print-directory
 #	@make clean -C libft/ --no-print-directory
 

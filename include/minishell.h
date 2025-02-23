@@ -292,7 +292,6 @@ void    run(t_data *mini, t_data *data);
 
 //pipe_utils2.c
 
-
 //run_exe.c
 int     exit_num(char **in);
 void    command_handle(t_data *mini, int exit_if_zero);
@@ -303,34 +302,16 @@ void    array_dup(t_data *mini);
 void    print_arr(char **s);
 void    pll(t_list *list);
 
-//get_stat.c and signal.c:
-/*
-    Why use signal?
-    Signals help the operating system to communicate with processes and vice-versa. 
-    Signals are also generated when processes don’t function properly or try to access prohibited memory. 
-    Different signals are mapped to different numbers which are referred to as signal values. 
-    The Linux OS implements about 30 standard signals.
-
-    Source: geeksforgeeks
-
-
-
-    In minishell project, we just use 3 standard signals:
-    1) Ctrl + C: SIGINT (Signal Interrupt)
-    2) Ctrl + *: SIGQUIT (Signal Quit)
-    3) Ctrl + D: EOF (End of File) 
-*/
-int     get_stat(int stat);
-
 //signal.c
-void    quit_3(int sigquit);
-void    quit_subshell(int sigint);
-void    signal_int(int sigint);
-void    hd_action(int sigint);
 void    ft_signal(int flag);
 void    flag_0();
 void    flag_1();
 void    flag_2();
 
+//signal2.c
+void    quit_3(int sigquit);
+void    quit_subshell(int sigint);
+void    signal_int(int sigint);
+void    hd_action(int sigint);
 
 #endif
