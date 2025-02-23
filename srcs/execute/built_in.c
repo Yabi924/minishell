@@ -38,7 +38,8 @@ void	built_in(t_data *data, t_list *list)
 
 int	confirm_built_in(t_list *list)
 {
-	if (!list->command[0])
+	if (list == NULL || list->command == NULL
+			|| list->command[0] == NULL)
 		return (0);
 	else if (!ft_strncmp(list->command[0], "echo\0", 5))
 		return (1);
@@ -53,6 +54,9 @@ int	confirm_built_in(t_list *list)
 	else if (!ft_strncmp(list->command[0], "env\0", 4))
 		return (1);
 	else if (!ft_strncmp(list->command[0], "exit\0", 5))
+		return (1);
+	else if (!ft_strncmp(list->command[0], "./", 2) ||
+			!ft_strncmp(list->command[0], "/", 1))
 		return (1);
 	return (0);
 }

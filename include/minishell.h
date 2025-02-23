@@ -282,15 +282,6 @@ void    command_updater(t_list **list, int i);
 void	err_msg(t_data *mshell, int exit_status, char *msg, char *arg);
 
 //pipe.c
-//void    cmd(t_data *mini, t_data *data, int exit_if_zero);
-void    run_dup(int *tmp_read, t_data *mini, t_data *data, t_data *first);
-void    run_heredoc(t_data *mini, t_data *data);
-void    run_pipes(t_data *mini, t_data *data, t_data *first);
-void    run(t_data *mini, t_data *data);
-
-//pipe_utils.c
-
-//pipe_utils2.c
 
 //run_exe.c
 int     exit_num(char **in);

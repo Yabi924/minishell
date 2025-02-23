@@ -24,12 +24,12 @@ int	input_config(t_data *data, t_list *list)
 		data->in_fd = dup(data->in_first);
 	if (data->heredoc && data->cmd_exit_no == 42)
 		return (1);
-	if (data->in_fd == -1 && data->heredoc == -1)
+	if (data->in_fd == -1 && !data->heredoc)
 	{
 		perror("Minishell: Infile");
 		return (1);
 	}
-	if (dup2(data->in_fd, 0) == -1 && data->heredoc == -1)
+	if (dup2(data->in_fd, 0) == -1 && !data->heredoc)
 	{
 		perror("Error: infile fd");
 		return (1);
@@ -90,7 +90,7 @@ void	child_process(t_data *data, t_list *list)
 {
 	if (input_config(data, list) == 0)
 	{
-		if (data->heredoc != -1)
+		if (data->heredoc)
 			exit(data->cmd_exit_no);
 		output_config(data, list);
 		ft_signal(1);

@@ -67,7 +67,7 @@ void	only_built_in(t_data *data, t_list *list)
 	status = input_config(data, list);
 	if (status)
 		return ;
-	if (data->heredoc != -1)
+	if (data->heredoc)
 		return ;
 	output_config(data, list);
 	built_in(data, list);
