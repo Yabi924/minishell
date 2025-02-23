@@ -14,8 +14,7 @@
 
 void	built_in(t_data *data, t_list *list)
 {
-	if (list == NULL || list->command == NULL
-			|| list->command[0] == NULL)
+	if (list->command[0] == NULL)
 		return ;
 	else if (!ft_strncmp(list->command[0], "echo\0", 5))
 		ft_echo(data);
@@ -24,7 +23,7 @@ void	built_in(t_data *data, t_list *list)
 	else if (!ft_strncmp(list->command[0], "env\0", 4))
 		ft_env(data);
 	else if (!ft_strncmp(list->command[0], "exit\0", 5))
-		ft_exit(data);
+		ft_exit(data, data->list);
 	else if (!ft_strncmp(list->command[0], "cd\0", 3))
 		ft_cd(data, data->list);
 	else if (!ft_strncmp(list->command[0], "export\0", 7))

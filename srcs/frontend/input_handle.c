@@ -53,24 +53,28 @@ int	lexer(char *input)
 	return (0);
 }
 
-int	input_handle(t_data *data)
+int    input_handle(t_data *data)
 {
 	data->heredoc = 0;
 	data->flag = 1;
-	print_prompt(data);
-	skip_unprint(data);
-	if (lexer(data->input))
-		ft_putstr_fd("Syntax error\n", 2);
-	else
-	{	
-		parser(data);
-		//built_in(data, data->list); //Launch the built-ins and non built-ins (execve)
-		if (redirection(data, data->list))
-			ft_execute(data, data->list);
-	}
-	tcsetattr(STDIN_FILENO, TCSANOW, &data->ori_terminal);
-	free_data(data);
-	return (0);
+    print_prompt(data);
+    skip_unprint(data);
+    if (lexer(data->input))
+    {
+        free(data->input);
+        data->input = NULL;
+        data->cmd_exit_no = 127;
+        ft_putstr_fd("Syntax error\n", 2);
+    }
+    else
+    {
+        parser(data);
+        if (redirection(data, data->list))
+            ft_execute(data, data->list);
+        tcsetattr(STDIN_FILENO, TCSANOW, &data->ori_terminal);
+        free_data(data);
+    }
+    return (0);
 }
 
 char	*strjoin_helper(char *str1, char *str2, int free1, int free2)

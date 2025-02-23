@@ -1,5 +1,5 @@
 #flags
-CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address,undefined
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address,undefined
 
 #program name
 NAME = minishell
@@ -41,11 +41,6 @@ s_ctrl = $(PATH_CTRL)
 
 s_his = $(PATH_History)
 
-s_pipe = $(PATH_Pipe)pipe.c \
-		 $(PATH_Pipe)pipe_utils.c \
-		 $(PATH_Pipe)pipe_utils2.c \
-		 $(PATH_Pipe)env_2d.c \
-
 s_redirection = $(PATH_Redirection)
 
 s_rdrt = $(PATH_Redirection)redirect_checker.c \
@@ -78,7 +73,7 @@ main= ./srcs/main.c \
 	#  ./srcs/str_ll.c \
 	#   ./srcs/hell_env.c
 
-SRCS = $(main) $(s_utils) $(s_input_handle) $(s_token) $(s_env) $(s_signal) $(s_execute) $(s_error) $(s_rdrt) $(s_builtin) #$(s_pipe) $(s_rdrt) #$(s_ctrl) $(s_his) $(s_quotes) $(s_env)
+SRCS = $(main) $(s_utils) $(s_input_handle) $(s_token) $(s_env) $(s_signal) $(s_execute) $(s_error) $(s_rdrt) $(s_builtin) #$(s_ctrl) $(s_his) $(s_quotes) $(s_env)
 
 #objs
 OBJS = $(SRCS:.c=.o)
@@ -92,6 +87,7 @@ $(NAME): $(OBJS)
 	@make -C libft/ --no-print-directory
 	@make bonus -C libft/ --no-print-directory
 	@gcc $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS)
+	@echo Compiling $(NAME)...
 	@echo $(NAME) is good to go.
 #	@make clean --no-print-directory
 #	@make clean -C libft/ --no-print-directory

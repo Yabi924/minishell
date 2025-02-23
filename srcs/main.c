@@ -58,9 +58,11 @@ void	update_env(t_data *data)
 		{
 			free(data->env[i]);
 			data->env[i] = ft_strdup(exit_code);
-			free(exit_code);
+			//free(exit_code);
 		}
+		//free(exit_code);
 	}
+	free(exit_code);
 	if (no)
 		free(no);
 }

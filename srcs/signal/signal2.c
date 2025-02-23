@@ -22,7 +22,7 @@ void    quit_3(int sigquit)
 void    quit_subshell(int sigint)
 {
     (void)sigint;
-    ft_printf("\n");
+    ft_printf("^C\n");
 }
 
 void    signal_int(int sigint)

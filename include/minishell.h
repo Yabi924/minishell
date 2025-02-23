@@ -187,9 +187,8 @@ int    input_handle(t_data *data);
     Built in functions: Without list
 */
 //exit.c
-void    ft_exit(t_data *data);
-//void    builtin_exit(t_data *shell, t_list *list);
-
+void    ft_exit(t_data *data, t_list *list);
+//void    ft_exit(t_data *data);
 //env.c
 void    ft_env(t_data *data);
 

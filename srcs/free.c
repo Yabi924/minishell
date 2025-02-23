@@ -12,18 +12,31 @@
 
 #include "../include/minishell.h"
 
+// void	free_arr(char **arr)
+// {
+// 	int	i;
+
+// 	i = -1;
+// 	if (!arr || !arr[0])
+// 		return ;
+// 	while (arr[++i])
+// 	{
+// 		if (arr[i])
+// 			free(arr[i]);
+// 	}
+// 	if (arr)
+// 		free(arr);
+// 	arr = NULL;
+// }
 void	free_arr(char **arr)
 {
 	int	i;
 
 	i = -1;
-	if (!arr || !arr[0])
+	if (!arr)
 		return ;
 	while (arr[++i])
-	{
-		if (arr[i])
-			free(arr[i]);
-	}
+		free(arr[i]);
 	if (arr)
 		free(arr);
 	arr = NULL;
@@ -75,12 +88,14 @@ void	free_data(t_data *data)
 	free_arr(data->command_arr);
 	if (data->input)
 	{
-		free(data->input);
+		// if (data->input[0])
+			free(data->input);
 		data->input = NULL;
 	}
 	if (data->new_input)
 	{
-		free(data->new_input);
+		if (data->new_input[0])
+			free(data->new_input);
 		data->new_input = NULL;
 	}
 	if (ft_lstsize(data->list) == 1)
