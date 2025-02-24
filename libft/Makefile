@@ -37,7 +37,7 @@ bonus: $(BONUS) $(OBJ_BONUS)
 
 $(NAME): $(OBJ)
 	@ar rcs $(NAME) $(OBJ)
-	@echo Hi $(NAME)
+	@echo Compiling Libft...
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@

@@ -108,7 +108,7 @@ typedef struct s_data
 extern t_data g_minishell;
 
 //main
-char    **copy_env(char **env);
+char	**copy_env(char **env, int f);
 
 //readline.c
 void    print_prompt(t_data *data);
@@ -171,7 +171,7 @@ char    **env_2d(t_env *env);
     main function:
     main.c
 */
-char	**copy_env(char **env);
+// char	**copy_env(char **env);
 void	update_env(t_data *data);
 void	init_data(t_data *data, char **env);
 void    init_list(t_list *list);
@@ -187,9 +187,8 @@ int    input_handle(t_data *data);
     Built in functions: Without list
 */
 //exit.c
-void    ft_exit(t_data *data);
-//void    builtin_exit(t_data *shell, t_list *list);
-
+void    ft_exit(t_data *data, t_list *list);
+//void    ft_exit(t_data *data);
 //env.c
 void    ft_env(t_data *data);
 
@@ -197,6 +196,8 @@ void    ft_env(t_data *data);
 int     check(char *data);
 char	*retrieve_line(char **data);
 void	ft_echo(t_data *data);
+void    ft_echo_process1(t_data *data, int *i, int *newline);
+void    ft_echo_process2(t_data *data, char *line, int fd, int newline);
 
 //export.c
 void    ft_export(t_data *data, t_list *list);
@@ -219,11 +220,26 @@ void    ft_pwd();
     Executable
 */
 //executable.c
-void    ft_execute(t_data *data, t_list *list);
-char    *resolve_path(char *cmd, char **env);
-void	transit(t_data *data, t_list *list, pid_t *children);
+void    transit(t_data *data, t_list *list, pid_t *children);
 void    only_built_in(t_data *data, t_list *list);
 void    execute_fd_init(t_data *data);
+void    ft_execute(t_data *data, t_list *list);
+void	transit_end(pid_t *children, t_data *data);
+
+//child_process.c
+char	*collect_env(t_data *data, char *env_var);
+int     input_config(t_data *data, t_list *list);
+void	output_config(t_data *data, t_list *list);
+void	command(t_data *data, t_list *list);
+void	child_process(t_data *data, t_list *list);
+
+//get_path.c
+char    *collect_path(t_data *data, t_list *list);
+char    *collect_env(t_data *data, char *env_var);
+
+//add_path.c
+char    *ft_getenv(char *s, char **env);
+char    *add_path(t_data *data,  char *command);
 
 //add_path.c
 char    *ft_getenv(char *s, char **env);
@@ -231,6 +247,7 @@ char    *add_path(t_data *data,  char *command);
 
 //Path to execve
 void    execve_command(t_data *data, t_list *list);
+void    child_parent(t_data *data, t_list *list);
 
 //built_in.c
 // void    built_in(t_data *data);
@@ -259,8 +276,8 @@ void    heredoc(t_data *data, t_list *list);
 void    heredoc2(t_data *data, t_list *list, int fd, char *input);
 
 //redirect_checker.c
-int     check_if_redirect(t_list *lst, int i);
-int     check_redirect_syntax(t_data *mshell, t_list *lst, int i);
+int     check_if_redirect(t_list *list, int i);
+int     check_redirect_syntax(t_data *data, t_list *list, int i);
 
 //command_updater.c
 void    command_updater(t_list **list, int i);
@@ -272,16 +289,6 @@ void    command_updater(t_list **list, int i);
 void	err_msg(t_data *mshell, int exit_status, char *msg, char *arg);
 
 //pipe.c
-//void    cmd(t_data *mini, t_data *data, int exit_if_zero);
-void    run_dup(int *tmp_read, t_data *mini, t_data *data, t_data *first);
-void    run_heredoc(t_data *mini, t_data *data);
-void    run_pipes(t_data *mini, t_data *data, t_data *first);
-void    run(t_data *mini, t_data *data);
-
-//pipe_utils.c
-
-//pipe_utils2.c
-
 
 //run_exe.c
 int     exit_num(char **in);
@@ -293,34 +300,16 @@ void    array_dup(t_data *mini);
 void    print_arr(char **s);
 void    pll(t_list *list);
 
-//get_stat.c and signal.c:
-/*
-    Why use signal?
-    Signals help the operating system to communicate with processes and vice-versa. 
-    Signals are also generated when processes don’t function properly or try to access prohibited memory. 
-    Different signals are mapped to different numbers which are referred to as signal values. 
-    The Linux OS implements about 30 standard signals.
-
-    Source: geeksforgeeks
-
-
-
-    In minishell project, we just use 3 standard signals:
-    1) Ctrl + C: SIGINT (Signal Interrupt)
-    2) Ctrl + *: SIGQUIT (Signal Quit)
-    3) Ctrl + D: EOF (End of File) 
-*/
-int     get_stat(int stat);
-
 //signal.c
-void    quit_3(int sigquit);
-void    quit_subshell(int sigint);
-void    signal_int(int sigint);
-void    hd_action(int sigint);
 void    ft_signal(int flag);
 void    flag_0();
 void    flag_1();
 void    flag_2();
 
+//signal2.c
+void    quit_3(int sigquit);
+void    quit_subshell(int sigint);
+void    signal_int(int sigint);
+void    hd_action(int sigint);
 
 #endif

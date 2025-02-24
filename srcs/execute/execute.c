@@ -1,17 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executable.c                                       :+:      :+:    :+:   */
+/*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wwan-ab- wwan-ab-@student.42kl.edu.my      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 08:26:27 by wwan-ab-          #+#    #+#             */
-/*   Updated: 2025/02/15 08:26:30 by wwan-ab-         ###   ########.fr       */
+/*   Updated: 2025/02/22 08:42:32 by wwan-ab-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+#include "../../include/minishell.h"
 
+void	transit(t_data *data, t_list *list, pid_t *children)
+{
+	int	i;
 void	transit(t_data *data, t_list *list, pid_t *children)
 {
 	int	i;

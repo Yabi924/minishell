@@ -1,7 +1,16 @@
-#include "../../include/minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wwan-ab- wwan-ab-@student.42kl.edu.my      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/20 22:16:40 by wwan-ab-          #+#    #+#             */
+/*   Updated: 2025/02/22 13:18:48 by wwan-ab-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void	heredoc(t_data *data, t_list *list);
-void	heredoc2(t_data *data, t_list *list, int fd, char *input);
+#include "../../include/minishell.h"
 
 void	heredoc(t_data *data, t_list *list)
 {
@@ -56,4 +65,3 @@ void	heredoc2(t_data *data, t_list *list, int fd, char *input)
 	close(fd);
 	exit (data->cmd_exit_no);
 }
-

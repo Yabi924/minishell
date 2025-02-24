@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 02:57:34 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/12 19:44:08 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/20 17:11:04 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ typedef struct s_list
     char            *in_path;
     char            *out_path;
     int				fd[2];
+    int             label_1;
+    int             label_2;
     int				input;
     int				output;
     int             append;
@@ -88,7 +90,7 @@ t_list	*ft_lstnew(char **command);
 int		ft_lstsize(t_list *lst);
 t_list	*ft_lstlast(t_list *lst);
 void	ft_lstadd_back(t_list **lst, t_list *new);
-void	ft_lstdelone(t_list *lst, void (*del)(char **));
+void	ft_lstdelone(t_list *lst, void (*del)(t_list *));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 
 //get next line

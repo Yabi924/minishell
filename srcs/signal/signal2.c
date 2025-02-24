@@ -1,42 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   signal2.c                                         :+:      :+:    :+:    */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/25 18:53:57 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/14 14:57:19 by yyan-bin         ###   ########.fr       */
+/*   Created: 2025/01/08 18:16:08 by wwan-ab-          #+#    #+#             */
+/*   Updated: 2025/01/18 17:17:53 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	lexer(char *input)
+void    quit_3(int sigquit)
 {
-	if (check_quotes(input))
-	{
-		ft_printf("quotes\n");
-		return (1);
-	}
-	if (check_pipe(input))
-	{
-		ft_printf("pipe\n");
-		return (1);
-	}
-	return (0);
+    (void)sigquit;
+    ft_printf("^""\\""Quit (core dumped)\n");
+    g_exit_code = 131;
 }
 
-char	*strjoin_helper(char *str1, char *str2, int free1, int free2)
+void    quit_subshell(int sigint)
 {
-	char	*ret;
+    (void)sigint;
+    ft_printf("^C\n");
+}
 
-	if (!str1 || !str2)
-		return (NULL);
-	ret = ft_strjoin(str1, str2);
-	if (free1)
-		free(str1);
-	if (free2)
-		free(str2);
-	return (ret);
+void    signal_int(int sigint)
+{
+    (void)sigint;
+    ft_printf("\n");
+    rl_replace_line("", 0);
+    rl_on_new_line();
+    rl_redisplay();
+    g_exit_code = 130;
+}
+
+void    hd_action(int sigint)
+{
+    (void)sigint;
+    unlink(".tmp");
+    exit(42);
 }

@@ -6,17 +6,17 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:46:41 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/01/12 19:43:34 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/20 17:10:12 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(char **))
+void	ft_lstdelone(t_list *lst, void (*del)(t_list *))
 {
 	if (lst && del)
 	{
-		del(lst->command);
+		del(lst);
 		free(lst);
 	}
 }

@@ -15,22 +15,24 @@
 int	check_quotes(char *s)
 {
 	int	i;
-	int	count;
-	int	count2;
+	int status;
 
 	i = -1;
-	count = 0;
-	count2 = 0;
+	status = 0;
 	while (s[++i])
 	{
-		if (s[i] && s[i] == '"')
-			count++;
-		if (s[i] && s[i] == '\'')
-			count2++;
+		if (s[i] == '"' && status == 0)
+			status = 1;
+		else if (s[i] == '"' && status == 1)
+			status = 0;
+		else if (s[i] == '\'' && status == 0)
+			status = 2;
+		else if (s[i] == '\'' && status == 2)
+			status = 0;
 	}
-	if (count % 2 != 0 || count2 % 2 != 0)
-		return (1);
-	return (0);
+	if (!status)
+		return (0);
+	return (1);
 }
 
 int	check_redrct_pipe(char *s)
