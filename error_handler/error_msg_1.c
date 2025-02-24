@@ -12,7 +12,6 @@
 
 #include "../include/minishell.h"
 
-//Test
 void	err_msg(t_data *mshell, int exit_status, char *msg, char *arg)
 {
 	int	i;

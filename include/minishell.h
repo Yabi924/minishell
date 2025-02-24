@@ -28,6 +28,7 @@
 # include "../libft/ft_printf.h"
 
 //All MACROS
+
 # define SPACE_MINI ' '
 # define TAB_MINI '\t'
 # define NEW_LINE_MINI '\n'
@@ -193,33 +194,32 @@ void    ft_exit(t_data *data, t_list *list);
 void    ft_env(t_data *data);
 
 //echo.c
+
 int     check(char *data);
-char	*retrieve_line(char **data);
+char    *retrieve_line(char **data);
 void	ft_echo(t_data *data);
 void    ft_echo_process1(t_data *data, int *i, int *newline);
 void    ft_echo_process2(t_data *data, char *line, int fd, int newline);
 
 //export.c
+
 void    ft_export(t_data *data, t_list *list);
 
 //unset.c
+
 char    **del_env(char **env, char *target);
 void    ft_unset(t_data *data, t_list *list, char **env);
 
 //cd.c
+
 void    ft_cd(t_data *data, t_list *list);
-void    env_updater(t_data *data, char *key, char *value);
-void    if_path_is_wrong(char *new_path);
-void    check_dir(char *new_path, char *old_path);
-void    free_cd(char *new_path, char *old_path);
 
 //pwd.c
-void    ft_pwd();
 
-/*
-    Executable
-*/
+void    ft_pwd(void);
+
 //executable.c
+
 void    transit(t_data *data, t_list *list, pid_t *children);
 void    only_built_in(t_data *data, t_list *list);
 void    execute_fd_init(t_data *data);
@@ -227,6 +227,7 @@ void    ft_execute(t_data *data, t_list *list);
 void	transit_end(pid_t *children, t_data *data);
 
 //child_process.c
+
 char	*collect_env(t_data *data, char *env_var);
 int     input_config(t_data *data, t_list *list);
 void	output_config(t_data *data, t_list *list);
@@ -234,6 +235,7 @@ void	command(t_data *data, t_list *list);
 void	child_process(t_data *data, t_list *list);
 
 //get_path.c
+
 char    *collect_path(t_data *data, t_list *list);
 char    *collect_env(t_data *data, char *env_var);
 

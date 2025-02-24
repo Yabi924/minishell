@@ -20,15 +20,13 @@ t_list	*ft_lstnew(char **content)
 	if (!new)
 		return (NULL);
 	new->command = content;
-	new->input = -1;
-	new->output = -1;
+	new->append = 0;
 	new->delimiter = NULL;
-	new->append = -1;
 	new->in_path = NULL;
 	new->out_path = NULL;
-	new->next = NULL;
 	new->fd[0] = -1;
 	new->fd[1] = -1;
+	new->next = NULL;
 	return (new);
 }
 

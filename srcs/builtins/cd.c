@@ -14,75 +14,25 @@
 
 void	ft_cd(t_data *data, t_list *list)
 {
-	char	path[PATH_VAL];
-	char	*new_path;
-	char	*old_path;
+	char	*path;
 
 	if (!list->command[1] || !ft_strncmp(list->command[1], "~", 2))
-		new_path = ft_strdup(ft_getenv("HOME", data->env));
-	else if (!ft_strncmp(list->command[1], "-", 2))
-		new_path = ft_strdup(ft_getenv("OLDPWD", data->env));
-	else
-		new_path = ft_strdup(list->command[1]);
-	if_path_is_wrong(new_path);
-	old_path = ft_strdup(ft_getenv("PWD", data->env));
-	check_dir(new_path, old_path);
-	if (getcwd(path, sizeof(path)))
 	{
-		env_updater(data, "PWD", path);
-		if (old_path)
-			env_updater(data, "OLDPWD", old_path);
-	}
-	free_cd(new_path, old_path);
-	data->cmd_exit_no = 0;
-}
-
-void	env_updater(t_data *data, char *key, char *value)
-{
-	int		i;
-	char	*new_entry;
-	char	*temp;
-
-	i = 0;
-	if (!key || !value)
-		return ;
-	new_entry = ft_strjoin(key, "=");
-	temp = ft_strjoin(new_entry, value);
-	free(new_entry);
-	while (data->env[i])
-	{
-		if (!ft_strncmp(data->env[i], key, ft_strlen(key))
-			&& data->env[i][ft_strlen(key)] == '=')
+		path = collect_env(data, "HOME");
+		if (path == NULL)
 		{
-			free(data->env[i]);
-			data->env[i] = temp;
+			err_msg(data, 1, "Minishell: cd: HOME not set\n", NULL);
 			return ;
 		}
-		i++;
 	}
-}
-
-void	if_path_is_wrong(char *new_path)
-{
-	if (!new_path)
+	else
+		path = list->command[1];
+	if (chdir(path) == -1)
 	{
-		perror("minishell: cd");
+		err_msg(data, 1, "Minishell: cd: %s: No such file or directory\n", path);
 		return ;
 	}
-}
-
-void	check_dir(char *new_path, char *old_path)
-{
-	if (chdir(new_path) != 0)
-	{
-		perror("minishell: cd");
-		free_cd(new_path, old_path);
-		return ;
-	}
-}
-
-void	free_cd(char *new_path, char *old_path)
-{
-	free(new_path);
-	free(old_path);
+	if (!getcwd(data->cwd, PATH_VAL))
+		err_msg(data, 1, "Minishell: cd: Error updating cwd\n", NULL);
+	data->cmd_exit_no = 0;
 }

@@ -18,14 +18,14 @@ void	built_in(t_data *data, t_list *list)
 		return ;
 	else if (!ft_strncmp(list->command[0], "echo\0", 5))
 		ft_echo(data);
+	else if (!ft_strncmp(list->command[0], "cd\0", 3))
+		ft_cd(data, data->list);
 	else if (!ft_strncmp(list->command[0], "pwd\0", 4))
 		ft_pwd();
 	else if (!ft_strncmp(list->command[0], "env\0", 4))
 		ft_env(data);
 	else if (!ft_strncmp(list->command[0], "exit\0", 5))
 		ft_exit(data, data->list);
-	else if (!ft_strncmp(list->command[0], "cd\0", 3))
-		ft_cd(data, data->list);
 	else if (!ft_strncmp(list->command[0], "export\0", 7))
 		ft_export(data, data->list);
 	else if (!ft_strncmp(list->command[0], "unset\0", 4))
