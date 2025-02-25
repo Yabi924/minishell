@@ -28,6 +28,7 @@ s_builtin = $(PATH_BUILTIN)echo.c \
 			$(PATH_BUILTIN)exit.c \
 			$(PATH_BUILTIN)cd.c \
 			$(PATH_BUILTIN)export.c \
+			$(PATH_BUILTIN)export2.c \
 			$(PATH_BUILTIN)unset.c \
 
 s_execute =	$(PATH_EXECUTE)built_in.c \

@@ -12,13 +12,6 @@
 
 #include "../../include/minishell.h"
 
-// void	ft_exit(t_data *data)
-// {
-// 	ft_printf("exit\n");
-// 	free_data(data);
-// 	exit(0);
-// }
-
 void    ft_exit(t_data *data, t_list *list)
 {
     int i;

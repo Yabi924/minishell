@@ -204,6 +204,15 @@ void    ft_echo_process2(t_data *data, char *line, int fd, int newline);
 //export.c
 
 void    ft_export(t_data *data, t_list *list);
+void	print_export(t_data *data);
+int     del_same_env(t_data *data, char *target);
+char    **add_env(t_data *data, char *set);
+int     check_input(char *command);
+
+//export2.c
+
+void    arrange_env(char **env, int size);
+int     ft_strpos(const char *haystack, const char *needle);
 
 //unset.c
 
