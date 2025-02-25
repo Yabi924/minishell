@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 19:45:30 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/21 15:23:33 by wwan-ab-         ###   ########.fr       */
+/*   Updated: 2025/02/25 20:55:50 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	check_input(char *command)
 	i = -1;
 	f = 0;
 	if (command[0] == '=')
-		return (1);
+		return (-1);
 	while (command[++i])
 		if (command[i] == '=')
 			f = 1;
@@ -64,25 +64,36 @@ int	del_same_env(t_data *data, char *target)
 		if (is_env(temp, data->env[i]))
 		{
 			data->env = del_env(data->env, temp);
-			free(temp);
-			return (0);
+			break ;
 		}
 	}
+	free(temp);
 	return (0);
 }
 
 void	ft_export(t_data *data, t_list *list)
 {
+	int i;
+	int f;
+
+	i = -1;
 	if (!list->command[0] || !list->command[1])
 		return ;
-	if (check_input(list->command[1]))
+	while (list->command[++i])
 	{
-		printf("minishell : export: `%s': not a valid identifier\n", \
-				list->command[1]);
-		return ;
+		f = check_input(list->command[i]);
+		if (f == -1)
+		{
+			printf("minishell : export: `%s': not a valid identifier\n", \
+				list->command[i]);
+			data->cmd_exit_no = 1;
+		}
+		else if (f == 0)
+		{
+			if (del_same_env(data, list->command[i]))
+				return ;
+			data->env = add_env(data, list->command[i]);
+		}
 	}
-	if (del_same_env(data, list->command[1]))
-		return ;
-	data->env = add_env(data, list->command[1]);
 	data->cmd_exit_no = 0;
 }
