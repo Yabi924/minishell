@@ -90,13 +90,10 @@ typedef struct s_data
     int     term_out;
     int     *ll_len;
     pid_t   fork;
-    int     stdin; //Test case
-    int     stdout; //Test case
     int     flag;
     int     quote;
     int     heredoc_zero_if_valid;
     t_env   *env_ll;
-    char    **environ; //Test case
     struct  termios ori_terminal;
     struct  termios mod_terminal;
     t_list  *list;
@@ -104,9 +101,6 @@ typedef struct s_data
     t_split split;
     int     first_run_init_dollar;
 }   t_data;
-
-//Temporary global variable
-extern t_data g_minishell;
 
 //main
 char	**copy_env(char **env, int f);
@@ -195,7 +189,7 @@ void    ft_env(t_data *data);
 
 //echo.c
 
-int     check(char *data);
+int     check_redirect_sign(char *data);
 char    *retrieve_line(char **data);
 void	ft_echo(t_data *data);
 void    ft_echo_process1(t_data *data, int *i, int *newline);
@@ -206,7 +200,7 @@ void    ft_echo_process2(t_data *data, char *line, int fd, int newline);
 void    ft_export(t_data *data, t_list *list);
 void	print_export(t_data *data);
 int     del_same_env(t_data *data, char *target);
-char    **add_env(t_data *data, char *set);
+char	**add_env(t_data *data, char *set);
 int     check_input(char *command);
 
 //export2.c

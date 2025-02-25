@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
  
-void    arrange_env(char **env, int size)
+void    arrange_env(char **export_env, int size)
 {
     char    *temp;
     int     i;
@@ -24,11 +24,11 @@ void    arrange_env(char **env, int size)
         j = -1;
         while (++j < (size - 1) - i)
         {
-            if (ft_strncmp(env[j], env[j + 1], BUFFER) > 0)
+            if (ft_strncmp(export_env[j], export_env[j + 1], BUFFER) > 0)
             {
-                temp = env[j];
-                env[j] = env[j + 1];
-                env[j + 1] = temp;
+                temp = export_env[j];
+                export_env[j] = export_env[j + 1];
+                export_env[j + 1] = temp;
             }
         }
     }

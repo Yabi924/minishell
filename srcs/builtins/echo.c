@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
 
-int	check(char *data)
+int	check_redirect_sign(char *data)
 {
 	if (!ft_strncmp(data, "<", 2)
 		|| !ft_strncmp(data, "<<", 3)
@@ -32,7 +32,7 @@ char	*retrieve_line(char **data)
 	line = ft_strdup("");
 	while (data[++i])
 	{
-		if (check(data[i]) == 1)
+		if (check_redirect_sign(data[i]) == 1)
 			break ;
 		else if (data[i] != 0)
 		{

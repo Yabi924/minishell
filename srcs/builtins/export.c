@@ -19,10 +19,8 @@ int	check_input(char *command)
 
 	i = -1;
 	f = 0;
-	if (!command)
-		return (1);
 	if (command[0] == '=')
-		return (1);
+		return (-1);
 	while (command[++i])
 		if (command[i] == '=')
 			f = 1;
@@ -66,10 +64,8 @@ int	del_same_env(t_data *data, char *target)
 		if (is_env(temp, data->env[i]))
 		{
 			data->env = del_env(data->env, temp);
-			//free(temp);
-			return (0);
+			break ;
 		}
-		// free(temp);
 	}
 	free(temp);
 	return (0);
@@ -77,24 +73,29 @@ int	del_same_env(t_data *data, char *target)
 
 void	ft_export(t_data *data, t_list *list)
 {
+	int i;
+	int f;
+
+	i = -1;
+	if (!list->command[0])
+		return ;
 	if (!list->command[1])
-	{
 		print_export(data);
-		return ;
-	}
-	if (check_input(list->command[1]))
+	while (list->command[++i])
 	{
-		ft_printf("minishell : export: `%s': not a valid identifier\n", \
-				list->command[1]);
-		return ;
-	}
-	if (del_same_env(data, list->command[1]))
-		return ;
-	data->env = add_env(data, list->command[1]);
-	if (!data->env)
-	{
-		ft_printf("minishell: memory allocation error\n");
-		return ;
+		f = check_input(list->command[i]);
+		if (f == -1)
+		{
+			ft_printf("minishell : export: `%s': not a valid identifier\n", \
+				list->command[i]);
+			data->cmd_exit_no = 1;
+		}
+		else if (f == 0)
+		{
+			if (del_same_env(data, list->command[i]))
+				return ;
+			data->env = add_env(data, list->command[i]);
+		}
 	}
 	data->cmd_exit_no = 0;
 }
@@ -104,7 +105,7 @@ void	print_export(t_data *data)
 	int		i;
 	int		sign;
 	int		size;
-	char		*temp;
+	char	*temp;
 
 	i = -1;
 	while (data->env[++i])
@@ -125,6 +126,5 @@ void	print_export(t_data *data)
 		else
 			ft_printf("declare -x %s\n", data->env[i]);
 	}
-	//free(temp);
 	data->cmd_exit_no = 0;
 }

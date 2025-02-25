@@ -21,7 +21,7 @@ void	ft_env(t_data *data)
 		return ;
 	if (data->list->command[1])
 	{
-		ft_printf("env: '%s': No such file or directory\n", \
+		err_msg(data, 127, "env: '%s': No such file or directory\n", \
 				data->list->command[1]);
 		return ;
 	}
