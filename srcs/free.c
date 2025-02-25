@@ -12,22 +12,6 @@
 
 #include "../include/minishell.h"
 
-// void	free_arr(char **arr)
-// {
-// 	int	i;
-
-// 	i = -1;
-// 	if (!arr || !arr[0])
-// 		return ;
-// 	while (arr[++i])
-// 	{
-// 		if (arr[i])
-// 			free(arr[i]);
-// 	}
-// 	if (arr)
-// 		free(arr);
-// 	arr = NULL;
-// }
 void	free_arr(char **arr)
 {
 	int	i;

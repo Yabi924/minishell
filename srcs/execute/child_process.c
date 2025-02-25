@@ -72,7 +72,10 @@ void	command(t_data *data, t_list *list)
 		path = collect_path(data, list);
 		if (!ft_strncmp(list->command[0], ".", 1) \
 			|| !ft_strncmp(list->command[0], "..", 2))
-			path = NULL;
+			{
+				free(path);
+				path = NULL;
+			}
 		if (!path)
 		{
 			err_msg(data, 127, "Minishell: '%s': command not found\n", \

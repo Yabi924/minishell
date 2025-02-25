@@ -30,7 +30,7 @@ void	built_in(t_data *data, t_list *list)
 		ft_export(data, data->list);
 	else if (!ft_strncmp(list->command[0], "unset\0", 4))
 		ft_unset(data, data->list, data->env);
-	else if (!ft_strncmp(list->command[0], "./", 2) ||
+	else if (!ft_strncmp(list->command[0], "./", 2) || \
 			!ft_strncmp(list->command[0], "/", 1))
 		execve_command(data, data->list);
 }
@@ -54,7 +54,7 @@ int	confirm_built_in(t_list *list)
 		return (1);
 	else if (!ft_strncmp(list->command[0], "exit\0", 5))
 		return (1);
-	else if (!ft_strncmp(list->command[0], "./", 2) ||
+	else if (!ft_strncmp(list->command[0], "./", 2) || \
 			!ft_strncmp(list->command[0], "/", 1))
 		return (1);
 	return (0);
