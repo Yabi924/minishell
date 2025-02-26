@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:32 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/24 19:05:27 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/26 15:26:06 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,11 @@ void	update_env(t_data *data)
 		{
 			free(data->env[i]);
 			data->env[i] = ft_strdup(exit_code);
-			free(exit_code);
+			break ;
 		}
 	}
+	if (exit_code)
+		free(exit_code);
 	if (no)
 		free(no);
 }
