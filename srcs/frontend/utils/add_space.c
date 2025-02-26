@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 14:04:18 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/20 18:11:27 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/26 23:44:27 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,18 @@ static int	count_len(char *s, int p)
 
 	i = 0;
 	count = 0;
+
+	if (!s || p < 0 || !s[p])
+		return (0);
 	while (s[p + i] && !is_target(s[p + i], "\'\""))
 	{
 		if (s[p + i] && \
 			(s[p + i] == '|' || s[p + i] == '<' || s[p + i] == '>'))
 		{
-			if (s[p + i] && (s[p + i - 1] != ' ' && s[p + i - 1] != '<' \
+			if (p + i > 0 && (s[p + i - 1] != ' ' && s[p + i - 1] != '<' \
 				&& s[p + i - 1] != '>'))
 				count++;
-			if (s[p + i] && (s[p + i + 1] != ' ' && s[p + i + 1] != '<') \
+			if (s[p + i + 1] && (s[p + i + 1] != ' ' && s[p + i + 1] != '<') \
 				&& s[p + i + 1] != '>')
 				count++;
 		}
@@ -62,7 +65,7 @@ static int	count_len(char *s, int p)
 
 static void	copy_wold_help(char *s, char *temp, int p, int *j)
 {
-	if (s[p - 1] && s[p - 1] != ' ' && !is_target(s[p - 1], "<>"))
+	if (p > 0 && s[p - 1] != ' ' && !is_target(s[p - 1], "<>"))
 		temp[(*j)++] = ' ';
 	temp[(*j)++] = s[p];
 	if (s[p + 1] && s[p + 1] != ' ' && !is_target(s[p + 1], "<>"))
