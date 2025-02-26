@@ -96,9 +96,6 @@ typedef struct s_data
     int     first_run_init_dollar;
 }   t_data;
 
-//main
-char	**copy_env(char **env, int f);
-
 //readline.c
 void    print_prompt(t_data *data);
 
@@ -141,6 +138,9 @@ int     skip_quotes(char *s, int positoin, char target);
 int     unprint_index(int i, char *str);
 void    skip_unprint(t_data *data);
 int     ft_arrlen(char **arr);
+
+//env_handle.c
+char	**copy_env(char **env, int f);
 
 //free.c
 // void    free_data(t_data *data);

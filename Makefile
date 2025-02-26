@@ -1,5 +1,5 @@
 #flags
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address,undefined
+CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address,undefined
 
 #program name
 NAME = minishell
@@ -50,7 +50,8 @@ s_rdrt = $(PATH_Redirection)redirect_checker.c \
 		 $(PATH_Redirection)heredoc.c \
 
 s_env = $(PATH_env)dollar_sign.c \
-		$(PATH_env)count.c
+		$(PATH_env)count.c\
+		$(PATH_env)env_handle.c
 
 s_token = $(PATH_token)tokenization.c \
 		$(PATH_token)split.c

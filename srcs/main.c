@@ -6,40 +6,13 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:32 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/22 08:12:28 by wwan-ab-         ###   ########.fr       */
+/*   Updated: 2025/02/26 21:18:29 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 int	g_exit_code = 0;
-
-char	**copy_env(char **env, int f)
-{
-	int		i;
-	char	**new_env;
-	char	*temp;
-
-	i = -1;
-	new_env = (char **)malloc((ft_arrlen(env) + 2) * sizeof(char *));
-	if (!new_env)
-		return (NULL);
-	while (env[++i])
-	{
-		if (is_env("SHLVL", env[i]) && f)
-		{
-			temp = ft_itoa(ft_atoi(env[i] + 6) + 1);
-			new_env[i] = ft_strjoin("SHLVL=", temp);
-			free(temp);
-		}
-		else
-			new_env[i] = ft_strdup(env[i]);
-	}
-	if (f)
-		new_env[i++] = ft_strdup("?=0");
-	new_env[i] = NULL;
-	return (new_env);
-}
 
 void	update_env(t_data *data)
 {
@@ -87,6 +60,8 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	t_data	data;
 
+	if (argc != 1 || argv[1])
+		return (1);
 	init_data(&data, env);
 	while (1)
 	{
@@ -98,7 +73,6 @@ int	main(int argc, char **argv, char **env)
 	return (0);
 }
 
-/*
 void    print_arr(char **s)
 {
     int i = -1;
@@ -117,4 +91,3 @@ void    pll(t_list *list)
         list = list->next;
     }
 }
-*/
