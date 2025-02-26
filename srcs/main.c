@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:32 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/26 15:26:06 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/26 20:57:14 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,51 @@
 
 int	g_exit_code = 0;
 
-char	**copy_env(char **env, int f)
-{
-	int		i;
-	char	**new_env;
-	char	*temp;
+// char	**count_env(char **env, int f, int *p_i)
+// {
+// 	char	**new_env;
+// 	int i;
 
-	i = -1;
-	new_env = (char **)malloc((ft_arrlen(env) + 2) * sizeof(char *));
-	if (!new_env)
-		return (NULL);
-	while (env[++i])
-	{
-		if (is_env("SHLVL", env[i]) && f)
-		{
-			temp = ft_itoa(ft_atoi(env[i] + 6) + 1);
-			new_env[i] = ft_strjoin("SHLVL=", temp);
-			free(temp);
-		}
-		else
-			new_env[i] = ft_strdup(env[i]);
-	}
-	if (f)
-		new_env[i++] = ft_strdup("?=0");
-	new_env[i] = NULL;
-	return (new_env);
-}
+// 	i = -1;
+// 	while (env[++i])
+// 		if (is_env("SHLVL", env[i]))
+// 			break ;
+// 	if (!env[i] && f)
+// 	{
+// 		new_env = (char **)malloc((ft_arrlen(env) + 3) * sizeof(char *));
+// 		new_env[++(*p_i)] = ft_strdup("SHLVL=1");
+// 	}
+// 	else
+// 		new_env = (char **)malloc((ft_arrlen(env) + 2) * sizeof(char *));
+// 	return (new_env);
+// }
+
+// char	**copy_env(char **env, int f)
+// {
+// 	int		i;
+// 	char	**new_env;
+// 	char	*temp;
+
+// 	i = -1;
+// 	new_env = count_env(env, f, &i);
+// 	if (!new_env)
+// 		return (NULL);
+// 	while (env[++i])
+// 	{
+// 		if (is_env("SHLVL", env[i]) && f)
+// 		{
+// 			temp = ft_itoa(ft_atoi(env[i] + 6) + 1);
+// 			new_env[i] = ft_strjoin("SHLVL=", temp);
+// 			free(temp);
+// 		}
+// 		else
+// 			new_env[i] = ft_strdup(env[i]);
+// 	}
+// 	if (f)
+// 		new_env[i++] = ft_strdup("?=0");
+// 	new_env[i] = NULL;
+// 	return (new_env);
+// }
 
 void	update_env(t_data *data)
 {
