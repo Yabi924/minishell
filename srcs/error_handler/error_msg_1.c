@@ -10,18 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
-void	err_msg(t_data *mshell, int exit_status, char *msg, char *arg)
+void	err_msg(t_data *mshell, int exit_status, char *msg, char *args)
 {
 	int	i;
 
 	i = -1;
 	while (msg[++i])
 	{
-		if (msg[i] == '%' && msg[i + 1] == 's' && arg)
+		if (msg[i] == '%' && msg[i + 1] == 's' && args)
 		{
-			ft_putstr_fd(arg, 2);
+			ft_putstr_fd(args, 2);
 			++i;
 			continue ;
 		}

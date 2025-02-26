@@ -56,7 +56,6 @@ int	lexer(char *input)
 int    input_handle(t_data *data)
 {
 	data->heredoc = 0;
-	data->flag = 1;
     print_prompt(data);
     skip_unprint(data);
     if (lexer(data->input))

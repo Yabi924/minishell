@@ -47,6 +47,5 @@ void	parser(t_data *data)
 		free(data->new_input);
 		data->new_input = NULL;
 	}
-	// print_arr(data->command_arr);
 	tokenization(data, &data->list);
 }

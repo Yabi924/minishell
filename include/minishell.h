@@ -77,20 +77,14 @@ typedef struct s_data
     char    **input_arr;
     char    *input;
     char    *new_input;
-    char    **token;
     int     cmd_exit_no;
     int     heredoc;
-    int     err_stat;
     int     fd[2];
     int     in_first;
     int     out_first;
     int     in_fd;
     int     out_fd;
-    int     term_in;
-    int     term_out;
     int     *ll_len;
-    pid_t   fork;
-    int     flag;
     int     quote;
     int     heredoc_zero_if_valid;
     t_env   *env_ll;
@@ -131,13 +125,16 @@ void    add_space(t_data *data);
 int     copy_quotes(char **new_input, char *input, int position, char target);
 
 //dollar_sign.c
+
 void    dollar_sign(t_data *data);
 
 //count.c
+
 int     calculate_len(char *s, char **env);
 int     is_env(char *s, char *env);
 
 //utils.c
+
 int     is_target(char c, char *target);
 char    *ft_strjoin_free(char *s1, char *s2);
 int     skip_quotes(char *s, int positoin, char target);
@@ -157,10 +154,6 @@ int list_dir(t_data *mini, char *path);
 char    *path_array(t_data *mini, char *from_env);
 char    **command_make(t_data *mini);
 void    not_builtin(t_data *mini, char **cmd);
-
-//env_2d.c
-int     count2(t_env *env);
-char    **env_2d(t_env *env);
 
 /*
     main function:
@@ -260,6 +253,7 @@ void    built_in(t_data *data, t_list *list);
 int     confirm_built_in(t_list *list);
 
 //child_process.c
+
 char	*get_path(t_data *data, t_list *list);
 int     input_config(t_data *data, t_list *list);
 void    output_config(t_data *data, t_list *list);
@@ -268,53 +262,60 @@ void	command(t_data *data, t_list *list);
 void	child_process(t_data *data, t_list *list);
 
 //directory.c
+
 void	pwd_update(t_env *env_ll, char *new_pwd, t_data *mini);
 void    home(t_data *mini);
 
 //redirection.c
+
 void    redirect_config(t_list *list, int i, int status);
 void    redirect_config2(t_list *list, int i, int status);
 int     redirection(t_data *data, t_list *list);
 
 //heredoc.c
+
 void    heredoc(t_data *data, t_list *list);
 void    heredoc2(t_data *data, t_list *list, int fd, char *input);
 
 //redirect_checker.c
+
 int     check_if_redirect(t_list *list, int i);
 int     check_redirect_syntax(t_data *data, t_list *list, int i);
 
 //command_updater.c
+
 void    command_updater(t_list **list, int i);
 
-/*
-    Error Message: Tell user what goes wrong
-    error_msg_1.c
-*/
-void	err_msg(t_data *mshell, int exit_status, char *msg, char *arg);
+//error_msg_1.c
 
-//pipe.c
+void	err_msg(t_data *mshell, int exit_status, char *msg, char *args);
 
 //run_exe.c
+
 int     exit_num(char **in);
 void    command_handle(t_data *mini, int exit_if_zero);
 int     builtin_check(t_data *mini);
 void    array_dup(t_data *mini);
 
-//test
-void    print_arr(char **s);
-void    pll(t_list *list);
-
 //signal.c
+
 void    ft_signal(int flag);
 void    flag_0();
 void    flag_1();
 void    flag_2();
 
 //signal2.c
+
 void    quit_3(int sigquit);
 void    quit_subshell(int sigint);
 void    signal_int(int sigint);
 void    hd_action(int sigint);
+
+//test
+
+/*
+void    print_arr(char **s);
+void    pll(t_list *list);
+*/
 
 #endif

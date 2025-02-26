@@ -7,7 +7,6 @@ NAME = minishell
 #src path
 PATH_SRCS = ./srcs/
 PATH_fn = $(PATH_SRCS)frontend/
-PATH_error = ./error_handler/
 
 #function path
 PATH_BUILTIN = $(PATH_SRCS)builtins/
@@ -20,6 +19,7 @@ PATH_env = $(PATH_fn)Env_Var/
 PATH_token = $(PATH_fn)token/
 PATH_utils = $(PATH_fn)utils/
 PATH_signal = $(PATH_SRCS)signal/
+PATH_error = $(PATH_SRCS)error_handler/
 
 #src
 s_builtin = $(PATH_BUILTIN)echo.c \
