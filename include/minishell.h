@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:38 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/17 18:53:30 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/26 20:57:21 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,6 @@ typedef struct s_data
 //Temporary global variable
 extern t_data g_minishell;
 
-//main
-char	**copy_env(char **env, int f);
-
 //readline.c
 void    print_prompt(t_data *data);
 
@@ -141,6 +138,9 @@ void    dollar_sign(t_data *data);
 //count.c
 int     calculate_len(char *s, char **env);
 int     is_env(char *s, char *env);
+
+//env_handle.c
+char	**copy_env(char **env, int f);
 
 //utils.c
 int     is_target(char c, char *target);
