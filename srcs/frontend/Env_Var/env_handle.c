@@ -12,9 +12,9 @@
 
 #include "../../../include/minishell.h"
 
-int shlvl(char **env, int f)
+int	shlvl(char **env, int f)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	if (!f)
@@ -25,10 +25,10 @@ int shlvl(char **env, int f)
 	return (0);
 }
 
-char *copy_env_help(char *env, int f)
+char	*copy_env_help(char *env, int f)
 {
-	char *temp;
-	char *new_env;
+	char	*temp;
+	char	*new_env;
 
 	if (is_env("SHLVL", env) && f)
 	{

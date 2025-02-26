@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 17:51:58 by wwan-ab-          #+#    #+#             */
-/*   Updated: 2025/01/18 17:17:53 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/26 21:38:08 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,60 +50,30 @@ void    heredoc(int signal_no)
 }
 */
 
-void    quit_3(int sigquit)
+void	ft_signal(int flag)
 {
-    (void)sigquit;
-    ft_printf("Quit (core dumped)\n");
-    g_exit_code = 131;
+	if (flag == 0)
+		flag_0();
+	else if (flag == 1)
+		flag_1();
+	else if (flag == 2)
+		flag_2();
 }
 
-void    quit_subshell(int sigint)
+void	flag_0(void)
 {
-    (void)sigint;
-    ft_printf("\n");
+	signal(SIGINT, signal_int);
+	signal(SIGQUIT, SIG_IGN);
 }
 
-void    signal_int(int sigint)
+void	flag_1(void)
 {
-    (void)sigint;
-    ft_printf("\n");
-    rl_replace_line("", 0);
-    rl_on_new_line();
-    rl_redisplay();
-    g_exit_code = 130;
+	signal(SIGINT, quit_subshell);
+	signal(SIGQUIT, quit_3);
 }
 
-void    hd_action(int sigint)
+void	flag_2(void)
 {
-    (void)sigint;
-    unlink(".tmp");
-    exit(42);
-}
-
-void    ft_signal(int flag)
-{
-    if (flag == 0)
-        flag_0();
-    else if (flag == 1)
-        flag_1();
-    else if (flag == 2)
-        flag_2();
-}
-
-void    flag_0()
-{
-    signal(SIGINT, signal_int);
-    signal(SIGQUIT, SIG_IGN);
-}
-
-void    flag_1()
-{
-    signal(SIGINT, quit_subshell);
-    signal(SIGQUIT, quit_3);
-}
-
-void    flag_2()
-{
-    signal(SIGINT, hd_action);
-    signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, hd_action);
+	signal(SIGQUIT, SIG_IGN);
 }
