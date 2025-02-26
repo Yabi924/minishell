@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 19:45:30 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/21 15:23:33 by wwan-ab-         ###   ########.fr       */
+/*   Updated: 2025/02/27 02:41:49 by wwan-ab-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ int	del_same_env(t_data *data, char *target)
 
 void	ft_export(t_data *data, t_list *list)
 {
-	int i;
-	int f;
+	int	i;
+	int	f;
 
 	i = -1;
 	if (!list->command[0])

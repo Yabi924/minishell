@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 02:57:34 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/20 17:11:04 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/27 02:08:16 by wwan-ab-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,26 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <stdio.h>
-# include <limits.h>
- 
+# include <limits.h> 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
 
 typedef struct s_list
 {
-    char			**command;
-    char            *delimiter;
-    char            *in_path;
-    char            *out_path;
-    int				fd[2];
-    int             label_1;
-    int             label_2;
-    int				input;
-    int				output;
-    int             append;
+	char			**command;
+	char			*delimiter;
+	char			*in_path;
+	char			*out_path;
+	int				fd[2];
+	int				label_1;
+	int				label_2;
+	int				input;
+	int				output;
+	int				append;
 	struct s_list	*next;
-    void            *content;
-}		t_list;
+	void			*content;
+}	t_list;
 
 //check
 int		ft_isalpha(int c);

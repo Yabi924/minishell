@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 00:40:04 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/22 08:18:50 by wwan-ab-         ###   ########.fr       */
+/*   Updated: 2025/02/27 02:02:38 by wwan-ab-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,7 @@ void	free_data(t_data *data)
 	free_arr(data->command_arr);
 	if (data->input)
 	{
-		// if (data->input[0])
-			free(data->input);
+		free(data->input);
 		data->input = NULL;
 	}
 	if (data->new_input)

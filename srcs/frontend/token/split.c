@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:12:26 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/20 15:18:53 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/27 02:53:33 by wwan-ab-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,13 @@ static int	count(char *s)
 		else
 			i++;
 	}
-	// printf("debug: count>%d\n", count + 1);
 	return (count + 1);
 }
 
 void	copy(t_split *split, char *input)
 {
-	int i;
-	int f;
+	int	i;
+	int	f;
 
 	i = 0;
 	f = 0;
@@ -59,8 +58,8 @@ void	copy(t_split *split, char *input)
 
 void	singel_quotes(t_split *split, char *input)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	split->i++;
 	while (input[split->i + i] && !is_target(input[split->i + i], "'"))
@@ -72,7 +71,8 @@ void	singel_quotes(t_split *split, char *input)
 
 void	end(t_split *split, char **arr, char *input)
 {
-	if (!input[split->i] || (input[split->i] == ' ' && input[split->i + 1] != ' '))
+	if (!input[split->i] || (input[split->i] == ' ' \
+				&& input[split->i + 1] != ' '))
 		split->end++;
 	if (split->temp)
 		arr[split->j] = ft_strjoin_free(arr[split->j], split->temp);
@@ -88,7 +88,7 @@ void	end(t_split *split, char **arr, char *input)
 
 char	**split(t_split *split, char *input)
 {
-	char **arr;
+	char	**arr;
 
 	arr = ft_calloc(count(input) + 1, sizeof(char *));
 	while (input[split->i])

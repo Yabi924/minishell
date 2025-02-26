@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 19:27:01 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/14 15:15:34 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/27 02:56:25 by wwan-ab-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	check_quotes(char *s)
 {
 	int	i;
-	int status;
+	int	status;
 
 	i = -1;
 	status = 0;

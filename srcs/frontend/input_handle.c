@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:44 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/20 20:28:09 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/27 02:50:47 by wwan-ab-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,12 @@ void	print_prompt(t_data *data)
 	ppt = ft_strjoin("Minishell: ", cwd);
 	ppt = ft_strjoin_free(ppt, " > ");
 	ppt_input = readline(ppt);
-
 	if (!ppt_input)
 	{
 		ft_putstr_fd("exit\n", 1);
 		tcsetattr(STDIN_FILENO, TCSANOW, &data->ori_terminal);
 		data->cmd_exit_no = 127;
-		exit(data->cmd_exit_no);//will update to free before exit
+		exit(data->cmd_exit_no);
 	}
 	if (ppt_input && ppt_input[0])
 		add_history(ppt_input);
@@ -53,27 +52,27 @@ int	lexer(char *input)
 	return (0);
 }
 
-int    input_handle(t_data *data)
+int	input_handle(t_data *data)
 {
 	data->heredoc = 0;
-    print_prompt(data);
-    skip_unprint(data);
-    if (lexer(data->input))
-    {
-        free(data->input);
-        data->input = NULL;
-        data->cmd_exit_no = 127;
-        ft_putstr_fd("Syntax error\n", 2);
-    }
-    else
-    {
-        parser(data);
-        if (redirection(data, data->list))
-            ft_execute(data, data->list);
-        tcsetattr(STDIN_FILENO, TCSANOW, &data->ori_terminal);
-        free_data(data);
-    }
-    return (0);
+	print_prompt(data);
+	skip_unprint(data);
+	if (lexer(data->input))
+	{
+		free(data->input);
+		data->input = NULL;
+		data->cmd_exit_no = 127;
+		ft_putstr_fd("Syntax error\n", 2);
+	}
+	else
+	{
+		parser(data);
+		if (redirection(data, data->list))
+			ft_execute(data, data->list);
+		tcsetattr(STDIN_FILENO, TCSANOW, &data->ori_terminal);
+		free_data(data);
+	}
+	return (0);
 }
 
 char	*strjoin_helper(char *str1, char *str2, int free1, int free2)

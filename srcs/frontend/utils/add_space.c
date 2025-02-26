@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 14:04:18 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/20 18:11:27 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/27 02:56:10 by wwan-ab-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	copy_quotes(char **new_input, char *input, int position, char target)
 		free(temp);
 	return (len);
 }
-/*
+
 static int	count_len(char *s, int p)
 {
 	int	i;
@@ -43,74 +43,29 @@ static int	count_len(char *s, int p)
 
 	i = 0;
 	count = 0;
-	while (s[p + i] && !is_target(s[p + i], "\'\""))
-	{
-		if (s[p + i] && \
-			(s[p + i] == '|' || s[p + i] == '<' || s[p + i] == '>'))
-		{
-			if (s[p + i] && (s[p + i - 1] != ' ' && s[p + i - 1] != '<' \
-				&& s[p + i - 1] != '>'))
-				count++;
-			if (s[p + i] && (s[p + i + 1] != ' ' && s[p + i + 1] != '<') \
-				&& s[p + i + 1] != '>')
-				count++;
-		}
-		i++;
-	}
-	return (i + count);
-}
-*/
-static int	count_len(char *s, int p)
-{
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-
-	// Ensure that the string s is not null and p is within bounds
 	if (!s || p < 0 || s[p] == '\0')
 		return (0);
-
-	// Loop through the string starting from position p
 	while (s[p + i] && !is_target(s[p + i], "\'\""))
 	{
-		// Check for special characters and their surrounding context
 		if (s[p + i] == '|' || s[p + i] == '<' || s[p + i] == '>')
 		{
-			// Check if the previous character is within bounds
-			if (p + i > 0 && (s[p + i - 1] != ' ' && s[p + i - 1] != '<' && s[p + i - 1] != '>'))
+			if (p + i > 0 && (s[p + i - 1] != ' ' && s[p + i - 1] != '<' \
+						&& s[p + i - 1] != '>'))
 				count++;
-
-			// Check if the next character is within bounds
-			if (s[p + i + 1] && (s[p + i + 1] != ' ' && s[p + i + 1] != '<' && s[p + i + 1] != '>'))
+			if (s[p + i + 1] && (s[p + i + 1] != ' ' && s[p + i + 1] != '<' \
+						&& s[p + i + 1] != '>'))
 				count++;
 		}
 		i++;
 	}
-
 	return (i + count);
 }
-
 
 static void	copy_wold_help(char *s, char *temp, int p, int *j)
 {
-	/*
-	if (s[p - 1] && s[p - 1] != ' ' && !is_target(s[p - 1], "<>"))
-		temp[(*j)++] = ' ';
-	temp[(*j)++] = s[p];
-	if (s[p + 1] && s[p + 1] != ' ' && !is_target(s[p + 1], "<>"))
-		temp[(*j)++] = ' ';
-	*/
-
-	// Check if p - 1 is within bounds before accessing s[p - 1]
 	if (p > 0 && s[p - 1] != ' ' && !is_target(s[p - 1], "<>"))
 		temp[(*j)++] = ' ';
-
-	// Always copy the current character s[p]
 	temp[(*j)++] = s[p];
-
-	// Check if p + 1 is within bounds before accessing s[p + 1]
 	if (s[p + 1] && s[p + 1] != ' ' && !is_target(s[p + 1], "<>"))
 		temp[(*j)++] = ' ';
 }

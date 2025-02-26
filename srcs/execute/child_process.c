@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 08:22:00 by wwan-ab-          #+#    #+#             */
-/*   Updated: 2025/02/22 08:35:26 by wwan-ab-         ###   ########.fr       */
+/*   Updated: 2025/02/27 02:45:09 by wwan-ab-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,10 @@ void	command(t_data *data, t_list *list)
 		path = collect_path(data, list);
 		if (!ft_strncmp(list->command[0], ".", 1) \
 			|| !ft_strncmp(list->command[0], "..", 2))
-			{
-				free(path);
-				path = NULL;
-			}
+		{
+			free(path);
+			path = NULL;
+		}
 		if (!path)
 		{
 			err_msg(data, 127, "Minishell: '%s': command not found\n", \
@@ -105,4 +105,3 @@ void	child_process(t_data *data, t_list *list)
 		data->cmd_exit_no = 1;
 	exit(data->cmd_exit_no);
 }
-

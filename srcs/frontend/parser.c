@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 21:55:18 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/20 17:25:35 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/27 02:51:06 by wwan-ab-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,7 @@ void	parser(t_data *data)
 		dollar_sign(data);
 	init_split(data);
 	data->command_arr = split(&data->split, data->new_input);
-
 	reset_split(&data->split);
-	
 	if (data->new_input)
 	{
 		free(data->new_input);

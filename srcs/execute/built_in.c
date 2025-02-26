@@ -6,7 +6,7 @@
 /*   By: wwan-ab- wwan-ab-@student.42kl.edu.my      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 19:14:48 by wwan-ab-          #+#    #+#             */
-/*   Updated: 2025/02/22 08:33:49 by wwan-ab-         ###   ########.fr       */
+/*   Updated: 2025/02/27 02:45:36 by wwan-ab-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	built_in(t_data *data, t_list *list)
 int	confirm_built_in(t_list *list)
 {
 	if (list == NULL || list->command == NULL
-			|| list->command[0] == NULL)
+		|| list->command[0] == NULL)
 		return (0);
 	else if (!ft_strncmp(list->command[0], "echo\0", 5))
 		return (1);

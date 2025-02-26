@@ -6,15 +6,15 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 20:55:42 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/26 21:02:33 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/27 02:52:04 by wwan-ab-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-int shlvl(char **env, int f)
+int	shlvl(char **env, int f)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	if (!f)
@@ -25,10 +25,10 @@ int shlvl(char **env, int f)
 	return (0);
 }
 
-char *copy_env_help(char *env, int f)
+char	*copy_env_help(char *env, int f)
 {
-	char *temp;
-	char *new_env;
+	char	*temp;
+	char	*new_env;
 
 	if (is_env("SHLVL", env) && f)
 	{
