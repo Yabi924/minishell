@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:32 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/26 21:18:29 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/26 22:46:08 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	init_data(t_data *data, char **env)
 	data->list = NULL;
 	data->command_arr = NULL;
 	data->heredoc = 0;
+	data->new_input = NULL;
 	tcgetattr(STDIN_FILENO, &data->ori_terminal);
 	data->mod_terminal = data->ori_terminal;
 	data->mod_terminal.c_lflag &= ~ECHOCTL;
@@ -73,21 +74,21 @@ int	main(int argc, char **argv, char **env)
 	return (0);
 }
 
-void    print_arr(char **s)
-{
-    int i = -1;
-    while (s[++i])
-        printf("debug: i:%d str:%s\n", i + 1, s[i]);
-}
+// void    print_arr(char **s)
+// {
+//     int i = -1;
+//     while (s[++i])
+//         printf("debug: i:%d str:%s\n", i + 1, s[i]);
+// }
 
-void    pll(t_list *list)
-{
-    int i = 0;
+// void    pll(t_list *list)
+// {
+//     int i = 0;
 
-    while (list)
-    {
-        printf("debug: linked list:%d\n", i++);
-        print_arr(list->command);
-        list = list->next;
-    }
-}
+//     while (list)
+//     {
+//         printf("debug: linked list:%d\n", i++);
+//         print_arr(list->command);
+//         list = list->next;
+//     }
+// }

@@ -6,7 +6,7 @@
 #    By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/08 02:58:16 by yyan-bin          #+#    #+#              #
-#    Updated: 2025/01/11 00:33:26 by yyan-bin         ###   ########.fr        #
+#    Updated: 2025/02/26 22:37:19 by yyan-bin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,8 +36,8 @@ bonus: $(BONUS) $(OBJ_BONUS)
 	@ar rcs $(NAME) $(OBJ_BONUS)
 
 $(NAME): $(OBJ)
+	@echo Compling libft...
 	@ar rcs $(NAME) $(OBJ)
-	@echo Hi $(NAME)
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@

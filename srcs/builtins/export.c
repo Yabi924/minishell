@@ -6,11 +6,42 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 19:45:30 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/25 20:55:50 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/26 22:54:25 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+
+void	print_export(t_data *data)
+{
+	int		i;
+	int		sign;
+	int		size;
+	char	*temp;
+
+	i = -1;
+	while (data->env[++i])
+		;
+	size = i;
+	i = -1;
+	arrange_env(data->env, size);
+	while (data->env[++i])
+	{
+		if (ft_strchr(data->env[i], '='))
+		{
+			sign = ft_strpos(data->env[i], "=");
+			temp = ft_substr(data->env[i], 0, sign);
+			ft_printf("declare -x %s=\"%s\"\n", temp, \
+						ft_strchr(data->env[i], '=') + 1);
+			free(temp);
+		}
+		else
+			ft_printf("declare -x %s\n", data->env[i]);
+	}
+	data->cmd_exit_no = 0;
+}
+
 
 int	check_input(char *command)
 {
@@ -77,8 +108,10 @@ void	ft_export(t_data *data, t_list *list)
 	int f;
 
 	i = -1;
-	if (!list->command[0] || !list->command[1])
+	if (!list->command[0])
 		return ;
+	if (!list->command[1])
+		print_export(data);
 	while (list->command[++i])
 	{
 		f = check_input(list->command[i]);

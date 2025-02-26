@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:38 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/26 20:57:21 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/26 22:52:46 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,8 +187,7 @@ int    input_handle(t_data *data);
     Built in functions: Without list
 */
 //exit.c
-void    ft_exit(t_data *data);
-//void    builtin_exit(t_data *shell, t_list *list);
+void    ft_exit(t_data *data, t_list *list);
 
 //env.c
 void    ft_env(t_data *data);
@@ -202,6 +201,10 @@ void    ft_echo_process2(t_data *data, char *line, int fd, int newline);
 
 //export.c
 void    ft_export(t_data *data, t_list *list);
+
+//export2.c
+void    arrange_env(char **export_env, int size);
+int     ft_strpos(const char *haystack, const char *needle);
 
 //unset.c
 char    **del_env(char **env, char *target);
