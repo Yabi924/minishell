@@ -27,7 +27,7 @@ void	print_prompt(t_data *data)
 		ft_putstr_fd("exit\n", 1);
 		tcsetattr(STDIN_FILENO, TCSANOW, &data->ori_terminal);
 		data->cmd_exit_no = 127;
-		exit(data->cmd_exit_no);//will update to free before exit
+		exit(data->cmd_exit_no);
 	}
 	if (ppt_input && ppt_input[0])
 		add_history(ppt_input);
@@ -66,10 +66,8 @@ int	input_handle(t_data *data)
 	else
 	{
 		parser(data);
-		// built_in(data, data->list); //Launch the built-ins and non built-ins (execve)
 		if (redirection(data, data->list))
 			ft_execute(data, data->list);
-		// tcsetattr(STDIN_FILENO, TCSANOW, &data->ori_terminal);
 		free_data(data);
 	}
 	return (0);

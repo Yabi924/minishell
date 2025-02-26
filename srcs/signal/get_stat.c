@@ -19,20 +19,19 @@
     - This function is used to get the exit_code for a child_process.
 */
 
-int get_stat(int stat)
+int	get_stat(int stat)
 {
-    int exit_code;
+	int	exit_code;
 
-    if (WIFSIGNALED(stat))
-    {
-        exit_code = WTERMSIG(stat);
-        if (exit_code == SIGINT) //Refer to signal interrupt
-            g_exit_code = TRUE;
-        return (exit_code + 128);
-    }
-    if (WIFEXITED(stat))
-        return (WEXITSTATUS(stat));
-    return (1);
+	if (WIFSIGNALED(stat))
+	{
+		exit_code = WTERMSIG(stat);
+		if (exit_code == SIGINT)
+			return (exit_code + 128);
+	}
+	if (WIFEXITED(stat))
+		return (WEXITSTATUS(stat));
+	return (1);
 }
 
 /*
@@ -40,8 +39,10 @@ int get_stat(int stat)
 
     Summary:
 
-    - The function get_stat() checks if the child process terminated normally or due to a signal.
-    - If terminated by a signal, it handles special cases (e.g., SIGINT with signal number 2) and 
+    - The function get_stat() checks if the child process 
+    	terminated normally or due to a signal.
+    - If terminated by a signal, it handles special cases 
+    	(e.g., SIGINT with signal number 2) and 
     adjusts the exit code by adding 128 to the signal number.
     
     - If the process terminated normally, it simply returns the exit status.    

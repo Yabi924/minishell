@@ -31,7 +31,6 @@ static int	count(char *s)
 		else
 			i++;
 	}
-	// printf("debug: count>%d\n", count + 1);
 	return (count + 1);
 }
 

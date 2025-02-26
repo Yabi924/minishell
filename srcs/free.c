@@ -48,8 +48,6 @@ void	free_linked_list_item(t_list *lst)
 		free(lst->out_path);
 		lst->out_path = NULL;
 	}
-	// if (!lst->command && !lst->delimiter && !lst->in_path && !lst->out_path)
-	// 	printf("debug free linked list complete\n");
 }
 
 void	free_linked_list(t_list **list)
