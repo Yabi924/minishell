@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:23:27 by wwan-ab-          #+#    #+#             */
-/*   Updated: 2025/02/26 22:47:22 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/27 15:51:24 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,5 @@ void    ft_exit(t_data *data, t_list *list)
     }
     else if (list->command[1] && list->command[2])
         err_msg(data, 1, "Minishell: exit: too many arguments\n", NULL);
-    else
-        data->cmd_exit_no = 0;
     exit(data->cmd_exit_no);
 }

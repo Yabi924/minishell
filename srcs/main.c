@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:32 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/26 22:46:08 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/27 15:36:58 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ int	main(int argc, char **argv, char **env)
 	init_data(&data, env);
 	while (1)
 	{
-		update_env(&data);
 		ft_signal(0);
 		input_handle(&data);
 		tcsetattr(STDIN_FILENO, TCSANOW, &data.mod_terminal);
