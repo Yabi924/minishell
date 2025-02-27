@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 19:14:48 by wwan-ab-          #+#    #+#             */
-/*   Updated: 2025/02/26 22:39:40 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/27 16:21:14 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,17 @@ void	built_in(t_data *data, t_list *list)
 	else if (!ft_strncmp(list->command[0], "cd\0", 3))
 		ft_cd(data, data->list);
 	else if (!ft_strncmp(list->command[0], "pwd\0", 4))
+	{
 		ft_pwd();
+		data->cmd_exit_no = 0;	
+	}
 	else if (!ft_strncmp(list->command[0], "env\0", 4))
 		ft_env(data);
 	else if (!ft_strncmp(list->command[0], "exit\0", 5))
 		ft_exit(data, data->list);
 	else if (!ft_strncmp(list->command[0], "export\0", 7))
 		ft_export(data, data->list);
-	else if (!ft_strncmp(list->command[0], "unset\0", 4))
+	else if (!ft_strncmp(list->command[0], "unset\0", 6))
 		ft_unset(data, data->list, data->env);
 	else if (!ft_strncmp(list->command[0], "./", 2) || \
 			!ft_strncmp(list->command[0], "/", 1))

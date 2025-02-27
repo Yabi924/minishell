@@ -6,13 +6,22 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:32 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/27 15:36:58 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/27 15:58:46 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 int	g_exit_code = 0;
+
+void	update_exit_code(t_data *data)
+{
+	if (g_exit_code)
+	{
+		data->cmd_exit_no = g_exit_code;
+		g_exit_code = 0;
+	}
+}
 
 void	update_env(t_data *data)
 {
@@ -57,16 +66,19 @@ void	init_data(t_data *data, char **env)
 
 int	main(int argc, char **argv, char **env)
 {
-	(void)argc;
-	(void)argv;
 	t_data	data;
 
+	(void)argc;
+	(void)argv;
 	if (argc != 1 || argv[1])
 		return (1);
 	init_data(&data, env);
 	while (1)
 	{
 		ft_signal(0);
+		print_prompt(&data);
+		update_exit_code(&data);
+		update_env(&data);
 		input_handle(&data);
 		tcsetattr(STDIN_FILENO, TCSANOW, &data.mod_terminal);
 	}
