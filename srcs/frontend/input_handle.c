@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:02:44 by yyan-bin          #+#    #+#             */
-/*   Updated: 2025/02/23 18:36:18 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/27 16:22:33 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	print_prompt(t_data *data)
 	{
 		ft_putstr_fd("exit\n", 1);
 		tcsetattr(STDIN_FILENO, TCSANOW, &data->ori_terminal);
-		data->cmd_exit_no = 127;
-		exit(data->cmd_exit_no);
+		g_exit_code = 0;
+		exit(g_exit_code);
 	}
 	if (ppt_input && ppt_input[0])
 		add_history(ppt_input);
@@ -40,21 +40,14 @@ void	print_prompt(t_data *data)
 int	lexer(char *input)
 {
 	if (check_quotes(input))
-	{
-		ft_putstr_fd("debug: quotes\n", 2);
 		return (1);
-	}
 	if (check_pipe(input))
-	{
-		ft_putstr_fd("debug: pipe\n", 2);
 		return (1);
-	}
 	return (0);
 }
 
 int	input_handle(t_data *data)
 {
-	print_prompt(data);
 	skip_unprint(data);
 	if (lexer(data->input))
 	{

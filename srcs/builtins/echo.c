@@ -6,7 +6,7 @@
 /*   By: yyan-bin <yyan-bin@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:23:07 by wwan-ab-          #+#    #+#             */
-/*   Updated: 2025/02/26 22:47:00 by yyan-bin         ###   ########.fr       */
+/*   Updated: 2025/02/27 15:41:08 by yyan-bin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	ft_echo(t_data *data)
 	ft_echo_process1(data, &i, &newline);
 	line = retrieve_line(&data->list->command[i]);
 	ft_echo_process2(data, line, fd, newline);
+	data->cmd_exit_no = 0;
 }
 
 void	ft_echo_process1(t_data *data, int *i, int *newline)

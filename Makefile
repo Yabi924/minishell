@@ -1,5 +1,5 @@
 #flags
-CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address,undefined
+CFLAGS = -Wall -Wextra -Werror
 
 #program name
 NAME = minishell
@@ -87,8 +87,6 @@ $(NAME): $(OBJS)
 	@make bonus -C libft/ --no-print-directory
 	@gcc $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS)
 	@echo $(NAME) good to go.
-#	@make clean --no-print-directory
-#	@make clean -C libft/ --no-print-directory
 
 %.o: %.c
 	@gcc $(CFLAGS) -c $< -o $@
@@ -105,7 +103,7 @@ fclean: clean
 re: fclean all
 
 r: $(NAME)
-	clear
+# clear
 	valgrind --leak-check=full --track-origins=yes ./minishell
 
 rr: re r
